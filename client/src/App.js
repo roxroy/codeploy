@@ -81,6 +81,7 @@ class App extends Component {
       jobs: ["job1", "job2", "job3"]
     };
     this.viewJobs = this.viewJobs.bind(this);
+    this.viewResources = this.viewResources.bind(this);
   }
 
   componentDidMount() {
@@ -111,11 +112,17 @@ class App extends Component {
     });
   }
 
+  viewResources() {
+    this.setState({
+        viewingJobs: false
+    });
+  }
+
   render() {
     const isViewingJobs = this.state.viewingJobs;
     return (
       <div className="App">
-        <Navbar loggedIn={this.state.loggedIn} viewJobs={this.viewJobs} />
+        <Navbar loggedIn={this.state.loggedIn} viewJobs={this.viewJobs} viewResources={this.viewResources} />
         {isViewingJobs ? (
             <div>
             <p className="App-intro">
@@ -156,7 +163,7 @@ class Navbar extends React.Component {
               <div className="container-fluid">
                 <Search />
                 <h1 className="title">Codeploy</h1>
-                <Menu loggedIn={this.props.loggedIn} viewJobs={this.props.viewJobs} />
+                <Menu loggedIn={this.props.loggedIn} viewJobs={this.props.viewJobs} viewResources={this.props.viewResources} />
               </div>
             </div>
           );
@@ -215,6 +222,7 @@ class Menu extends React.Component {
         >
         <button className="close" onClick={this.closeModal}>X</button>
           <div className="loggedin-buttons">
+            <ResourcesButton viewResources={this.props.viewResources} />
             <MyJobsButton viewJobs={this.props.viewJobs} />
             <AddResourceButton />
             <LogOutButton loggedIn={isLoggedIn} />
@@ -251,6 +259,25 @@ class HandleAuth extends React.Component {
         <button className="modal-button">Log in with Github</button>
         <button className="modal-button">Log in with Slack</button>
       </div>
+    );
+  }
+}
+
+class ResourcesButton extends React.Component {
+  constructor(props) {
+    super(props);
+      this.viewResources = this.viewResources.bind(this);
+  }
+
+  viewResources() {
+      this.props.viewResources();
+  }
+
+  render(){
+    return(
+    <div>
+      <button className="modal-button" onClick={this.viewResources}>Resources</button>
+    </div>
     );
   }
 }
