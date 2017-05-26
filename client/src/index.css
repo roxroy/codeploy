@@ -3,3 +3,65 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.App {
+  text-align: center;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  width: 100%;
+  display: block;
+  border: none;
+  -webkit-box-shadow: 7px 6px 5px 0px rgba(31,25,24,0.32);
+  -moz-box-shadow: 7px 6px 5px 0px rgba(31,25,24,0.32);
+  box-shadow: 7px 6px 5px 0px rgba(31,25,24,0.32);
+}
+
+.navbar .title {
+  display: inline-block;
+  text-align: center;
+  padding-bottom: 7px;
+  font-size: 1.7em;
+  color: white;
+}
+
+.navbar a {
+  display: inline-block;
+  padding-top: 16px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 24px;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+a.search-icon {
+  float: left;
+}
+
+a.menu-icon {
+  float: right;
+}
+
+i.fa.fa-bars::before {
+  float: right;
+}
+.null {
+  display: inline-block;
+  float: right;
+  padding: 0;
+  margin: 0;
+}
+.content {
+  margin-top: 20px;
+}
+
+.modal-button {
+  background: transparent;
+  color: white;
+  border: none;
+}
