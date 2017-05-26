@@ -19,10 +19,13 @@ body {
   box-shadow: 7px 6px 5px 0px rgba(31,25,24,0.32);
 }
 
+button {
+  cursor: pointer;
+}
+
 .navbar .title {
   display: inline-block;
   text-align: center;
-  padding-bottom: 7px;
   font-size: 1.7em;
   color: white;
 }
