@@ -1,0 +1,37 @@
+{
+  "name": "codepdix",
+  "version": "1.0.0",
+  "description": "Codeploy of resources for individuals job seeking and learning web development.",
+  "engines": {
+    "node": "6.9.x"
+  },
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "babel-node server/index.js",
+    "client": "babel-node client/start.js",
+    "heroku-postbuild": "cd client/ && npm install --only=dev && npm install && npm run build"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
+  "dependencies": {
+    "babel-cli": "6.14.0",
+    "babel-core": "6.14.0",
+    "express": "^4.14.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/roxroy/codeploy.git"
+  },
+  "keywords": [
+    "mongodb",
+    "express",
+    "react",
+    "node"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^3.4.0"
+  }
+}
