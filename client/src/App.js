@@ -1,14 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Modal from 'react-modal';
+const Navbar = require('./Navbar');
+const SortButton = require('./SortButton');
+const Resources = require('./Resources');
+const ResourceRow = require('./ResourceRow');
+const MyJobs = require('./MyJobs');
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: null,
-      fetching: true
+      fetching: true,
+      viewingJobs: false,
+      resources: null,
+      loggedIn: true,
+      username: null,
+      jobs: ["job1", "job2", "job3"]
     };
+    this.viewJobs = this.viewJobs.bind(this);
+    this.viewResources = this.viewResources.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   componentDidMount() {
@@ -20,39 +32,77 @@ class App extends Component {
         return response.json();
       })
       .then(json => {
+        console.log(json.message);
         this.setState({
-          message: json.message,
+          resources: json.message,
           fetching: false
         });
       }).catch(e => {
         this.setState({
-          message: `API call failed: ${e}`,
+          resources: `API call failed: ${e}`,
           fetching: false
         });
       })
   }
 
+  viewJobs() {
+    this.setState({
+        viewingJobs: true
+    });
+  }
+
+  viewResources() {
+    this.setState({
+        viewingJobs: false
+    });
+  }
+
+  logOut() {
+    this.setState({
+        loggedIn: false
+    });
+  }
+
   render() {
+    const isViewingJobs = this.state.viewingJobs;
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          {'This is '}
-          <a href="https://github.com/mars/heroku-cra-node">
-            {'create-react-app with a custom Node/Express server'}
-          </a><br/>
-        </p>
-        <p className="App-intro">
-          {this.state.fetching
-            ? 'Fetching message from API'
-            : this.state.message}
-        </p>
+        <Navbar loggedIn={this.state.loggedIn} viewJobs={this.viewJobs} viewResources={this.viewResources} logOut={this.logOut} />
+        {isViewingJobs ? (
+            <div>
+            <p className="App-intro">
+              {this.state.fetching
+                ? 'Fetching message from API'
+                : this.state.resources}
+            </p>
+            <MyJobs jobs={this.state.jobs} />
+            </div>
+          ) : (
+            <div>
+            <p className="App-intro">
+              {this.state.fetching
+                ? 'Fetching message from API'
+                : this.state.resources}
+            </p>
+            <SortButton resources={this.state.resources} />
+            <Resources resources={this.state.resources} />
+            </div>
+          )
+        }
       </div>
     );
   }
 }
+      
+/*class ResourceModal extends React.Component {
+  render() {
+    return (
+    <div>
+      
+    </div>
+    );
+  }
+}*/
 
-export default App;
+
+module.exports = App;
