@@ -74,11 +74,13 @@ class App extends Component {
     super(props);
     this.state = {
       fetching: true,
+      viewingJobs: false,
       resources: null,
       loggedIn: true,
       username: null,
-      jobs: null
+      jobs: ["job1", "job2", "job3"]
     };
+    this.viewJobs = this.viewJobs.bind(this);
   }
 
   componentDidMount() {
@@ -90,6 +92,7 @@ class App extends Component {
         return response.json();
       })
       .then(json => {
+        console.log(json.message);
         this.setState({
           resources: json.message,
           fetching: false
@@ -102,17 +105,38 @@ class App extends Component {
       })
   }
 
+  viewJobs() {
+    this.setState({
+        viewingJobs: true
+    });
+  }
+
   render() {
+    const isViewingJobs = this.state.viewingJobs;
     return (
       <div className="App">
-        <Navbar loggedIn={this.state.loggedIn} />
-        <p className="App-intro">
-          {this.state.fetching
-            ? 'Fetching message from API'
-            : this.state.resources}
-        </p>
-        <SortButton resources={this.state.resources} />
-        <Resources resources={this.state.resources} />
+        <Navbar loggedIn={this.state.loggedIn} viewJobs={this.viewJobs} />
+        {isViewingJobs ? (
+            <div>
+            <p className="App-intro">
+              {this.state.fetching
+                ? 'Fetching message from API'
+                : this.state.resources}
+            </p>
+            <MyJobs jobs={this.state.jobs} />
+            </div>
+          ) : (
+            <div>
+            <p className="App-intro">
+              {this.state.fetching
+                ? 'Fetching message from API'
+                : this.state.resources}
+            </p>
+            <SortButton resources={this.state.resources} />
+            <Resources resources={this.state.resources} />
+            </div>
+          )
+        }
       </div>
     );
   }
@@ -132,7 +156,7 @@ class Navbar extends React.Component {
               <div className="container-fluid">
                 <Search />
                 <h1 className="title">Codeploy</h1>
-                <Menu loggedIn={this.props.loggedIn} />
+                <Menu loggedIn={this.props.loggedIn} viewJobs={this.props.viewJobs} />
               </div>
             </div>
           );
@@ -191,9 +215,9 @@ class Menu extends React.Component {
         >
         <button className="close" onClick={this.closeModal}>X</button>
           <div className="loggedin-buttons">
-            <MyJobs />
-            <AddResource />
-            <LogOut loggedIn={isLoggedIn} />
+            <MyJobsButton viewJobs={this.props.viewJobs} />
+            <AddResourceButton />
+            <LogOutButton loggedIn={isLoggedIn} />
           </div>
         </Modal>
     } else if (!isLoggedIn && openModal) {
@@ -231,17 +255,26 @@ class HandleAuth extends React.Component {
   }
 }
 
-class MyJobs extends React.Component {
+class MyJobsButton extends React.Component {
+  constructor(props) {
+    super(props);
+      this.viewJobs = this.viewJobs.bind(this);
+  }
+
+  viewJobs() {
+      this.props.viewJobs();
+  }
+
   render(){
     return(
     <div>
-      <button className="modal-button">My Jobs</button>
+      <button className="modal-button" onClick={this.viewJobs}>My Jobs</button>
     </div>
     );
   }
 }
       
-class AddResource extends React.Component {
+class AddResourceButton extends React.Component {
   render(){
     return(
     <div>
@@ -251,7 +284,7 @@ class AddResource extends React.Component {
   }
 }
 
-class LogOut extends React.Component {
+class LogOutButton extends React.Component {
   render() {
     return (
       <div>
@@ -279,6 +312,7 @@ class Resources extends React.Component {
     return (
       <div>
       {/*this.props.resources.map((row, i) => <ResourceRow key={i} index={i} />)*/}
+      {this.props.resources}
       </div>
     );
   }
@@ -289,6 +323,26 @@ class ResourceRow extends React.Component {
     return (
       <div>
         {/*<ResourceModal />*/}
+      </div>
+    );
+  }
+}
+
+class MyJobs extends React.Component {
+  render() {
+    return (
+      <div>
+        {this.props.jobs.map((row, i) => <EachJob key={i} index={i} />)}
+      </div>
+    );
+  }
+}
+
+class EachJob extends React.Component {
+  render() {
+    return (
+      <div>
+        <h4>Job:</h4>
       </div>
     );
   }
