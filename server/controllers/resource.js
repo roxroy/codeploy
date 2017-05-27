@@ -48,12 +48,14 @@ module.exports.remove = (req, res) => {
 	Resource.find({ id: '55' }, function(err, resource) {
 	  if (err) throw err;
 
-	 resource.remove(function(err) {
-    if (err) throw err;
+	 	resource.remove(function(err) {
+	    if (err) throw err;
 
-    console.log('Resource successfully deleted!');
+	    console.log('Resource successfully deleted!');
+	  });
 	});
 };
+
 
 module.exports.index = (req, res) => {
   res.set('Content-Type', 'application/json');
