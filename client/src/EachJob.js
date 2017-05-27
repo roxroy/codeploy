@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class EachJob extends React.Component {
+class EachJob extends Component {
   render() {
     return (
       <div>

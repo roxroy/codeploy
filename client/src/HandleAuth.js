@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class HandleAuth extends React.Component {
+class HandleAuth extends Component {
   render() {
     return (
       <div className="auth-buttons">

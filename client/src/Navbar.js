@@ -3,7 +3,7 @@ import './App.css';
 const Menu = require('./Menu');
 const Search = require('./Search');
 
-class Navbar extends React.Component {
+class Navbar extends Component {
   constructor (props) {
     super(props);
     

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 const EachJob = require('./EachJob');
 
-class MyJobs extends React.Component {
+class MyJobs extends Component {
   render() {
     return (
       <div>

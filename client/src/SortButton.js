@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SortButton extends React.Component {
+class SortButton extends Component {
       render() {
       return (
         <div>
