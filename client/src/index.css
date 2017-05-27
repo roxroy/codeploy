@@ -42,10 +42,22 @@ button {
   background-color: #000;
 }
 
-a.search-icon {
+.search-container {
   float: left;
+  padding-bottom: 5px;
 }
-
+.search-container input {
+  width: 0px;
+  opacity: 0;
+  margin: 17px 10px;
+  padding: 3px;
+  transition: all .5s ease;
+  position:absolute;
+}
+.search-container input.expanded {
+  width: 200px;
+  opacity: 1;
+}
 a.menu-icon {
   float: right;
 }
