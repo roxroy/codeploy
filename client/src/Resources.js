@@ -9,11 +9,8 @@ when clicked on td, opens modal with more information about respective resource
 */
 
 class Resources extends Component {
-  /*constructor(props){
-    super(props);
-  }*/
   render() {
-    //  dummy data, delete to test fetching
+    // dummy data, delete to test fetching
     const resources = [{"image":"https://www.sololearn.com/Icons/Courses/1024.png","name": "name1", "date":"01/dd/yy", "rating":"1/5", "golds": "1"},
                     {"image":"https://www.sololearn.com/Icons/Courses/1024.png", "name": "name2", "date":"02/dd/yy", "rating":"2/5", "golds": "2"},
                     {"image":"https://www.sololearn.com/Icons/Courses/1024.png", "name": "name3", "date":"03/dd/yy", "rating":"3/5", "golds": "3"}];

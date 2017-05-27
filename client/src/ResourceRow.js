@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 
 class ResourceRow extends Component {
   render() {
+    let row = this.props.row;
     return (
       <tr>
         {/*<ResourceModal />*/}
-        <td style={{"text-align": "center"}}><img src={this.props.row.image} alt="resource-icon"/></td>
-        <td>{this.props.row.name}</td>
-        <td>{this.props.row.date}</td>
-        <td>{this.props.row.rating}</td>
-        <td>{this.props.row.golds}</td>
+        <td><img src={row.image} alt="resource-icon"/></td>
+        <td>{row.name}</td>
+        <td>{row.date}</td>
+        <td>{row.rating}</td>
+        <td>{row.golds}</td>
       </tr>
     );
   }

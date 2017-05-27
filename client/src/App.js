@@ -15,9 +15,9 @@ class App extends Component {
       resources: null,
       loggedIn: true,
       username: null,
-      jobs: [{"jobposition": "position1", "companyname": "name1", "date":"01/dd/yy"},
-        {"jobposition": "position2", "companyname": "name2", "date":"02/dd/yy"},
-        {"jobposition": "position3", "companyname": "name3", "date":"03/dd/yy"}]
+      jobs: [{"jobPosition": "position1", "companyName": "name1", "dateApplied":"01/dd/yy"},
+        {"jobPosition": "position2", "companyName": "name2", "dateApplied":"02/dd/yy"},
+        {"jobPosition": "position3", "companyName": "name3", "dateApplied":"03/dd/yy"}]
     };
     this.viewJobs = this.viewJobs.bind(this);
     this.viewResources = this.viewResources.bind(this);
