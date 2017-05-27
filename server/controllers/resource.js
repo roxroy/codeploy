@@ -1,3 +1,4 @@
+let Resource = require('../models/resource');
 
 module.exports.all = (req, res) => {
 };

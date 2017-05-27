@@ -1,3 +1,4 @@
+let Jobs = require('../models/job');
 
 module.exports.all = (req, res) => {
 };

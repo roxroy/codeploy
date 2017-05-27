@@ -3,9 +3,9 @@ const path = require('path');
 const app = express();
 let mongoose = require('mongoose');
 
-let userRoutes = require('./routes/users'),
-	  resourceRoutes = require('./routes/resources'),
-	  jobRoutes = require('./routes/jobs');
+let userCtrl = require('./controllers/user'),
+	  resourceCtrl = require('./controllers/resource'),
+	  jobCtrl = require('./controllers/job');
 
 const PORT = process.env.PORT || 3001;
 
@@ -16,17 +16,17 @@ mongoose.connect(dbUri);
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-app.get('/api', resourceRoutes.index);
+app.get('/api', resourceCtrl.index);
 
-app.get('/api/resources/', resourceRoutes.all);
-app.get('/api/resources/:id', resourceRoutes.one);
-app.post('/api/resources', resourceRoutes.new);
-app.put('/api/resources/:id', resourceRoutes.update);
+app.get('/api/resources/', resourceCtrl.all);
+app.get('/api/resources/:id', resourceCtrl.one);
+app.post('/api/resources', resourceCtrl.new);
+app.post('/api/resources/:id', resourceCtrl.update);
 
-app.get('/api/jobs/', jobRoutes.all);
-app.get('/api/jobs/:id', jobRoutes.one);
-app.post('/api/jobs', routes.new);
-app.put('/api/jobs/:id', routes.update);
+app.get('/api/jobs/', jobCtrl.all);
+app.get('/api/jobs/:id', jobCtrl.one);
+app.post('/api/jobs', jobCtrl.new);
+app.post('/api/jobs/:id', jobCtrl.update);
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {

@@ -1,3 +1,4 @@
+let Users = require('../models/user');
 
 module.exports.all = (req, res) => {
 };
