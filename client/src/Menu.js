@@ -50,7 +50,7 @@ const centerModal = {
   }
 };
 
-class Menu extends React.Component {
+class Menu extends Component {
   constructor(props) {
     super(props);
 

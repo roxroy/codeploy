@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
 const EachJob = require('./EachJob');
 
-class MyJobs extends React.Component {
+/*
+TODO:
+when clicked on th, sorts respective column
+when clicked on td, opens modal with job info and a list of related resources
+*/
+
+class MyJobs extends Component {
   render() {
     return (
-      <div>
-        {this.props.jobs.map((row, i) => <EachJob key={i} index={i} />)}
+      <div className="job-list-container">
+        <table>
+          <tbody>
+            <tr>
+              <th>Job Position</th>
+              <th>Company Name</th>
+              <th>Date Applied</th>
+            </tr>
+            {this.props.jobs.map((row, i) => <EachJob row={row} key={i} />)}
+          </tbody>
+        </table>
       </div>
     );
   }

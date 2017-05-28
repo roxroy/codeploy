@@ -4,7 +4,6 @@ import Modal from 'react-modal';
 const Navbar = require('./Navbar');
 const SortButton = require('./SortButton');
 const Resources = require('./Resources');
-const ResourceRow = require('./ResourceRow');
 const MyJobs = require('./MyJobs');
 
 class App extends Component {
@@ -16,7 +15,9 @@ class App extends Component {
       resources: null,
       loggedIn: true,
       username: null,
-      jobs: ["job1", "job2", "job3"]
+      jobs: [{"jobPosition": "position1", "companyName": "name1", "dateApplied":"01/dd/yy"},
+        {"jobPosition": "position2", "companyName": "name2", "dateApplied":"02/dd/yy"},
+        {"jobPosition": "position3", "companyName": "name3", "dateApplied":"03/dd/yy"}]
     };
     this.viewJobs = this.viewJobs.bind(this);
     this.viewResources = this.viewResources.bind(this);

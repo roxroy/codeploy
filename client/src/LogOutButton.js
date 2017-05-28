@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class LogOutButton extends React.Component {
+class LogOutButton extends Component {
   constructor(props) {
     super(props);
     this.logOut = this.logOut.bind(this);
