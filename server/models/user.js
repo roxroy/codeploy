@@ -3,6 +3,8 @@ let Schema = mongoose.Schema;
 
 let userSchema = new Schema({
   id: String,
+  token: String,
+  provider: String,
   username: String,
   displayName: String,
   created_at: Date,

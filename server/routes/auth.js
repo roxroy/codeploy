@@ -23,7 +23,8 @@ router.get('/github/callback',
 );
 
 router.get('/logout', function(req, res) {
-  console.log('passport.logout', req.user);
+  let user = req.user;
+  console.log('passport.logout', user);
   req.logout();
   res.status(200).json({
     status: 'logout successful!'
@@ -39,10 +40,26 @@ var isAuthenticated = function(req,res,next){
       })
 }
 
-router.get('/isauth', isAuthenticated, function(req, res){
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    // req.user is available for use here
+    return next(); }
+
+  // denied. redirect to login
+  res.redirect('/')
+}
+
+router.get('/isauth', function(req, res){
+console.log('isauth user.data ', req.user, req.isAuthenticated() );
+  if (req.isAuthenticated()) {
     res.status(200).json({
         status: 'Login successful!'
     });
+  } else {
+    res.status(401).json({
+        status: 'User not authenticated'
+    });
+  }
 });
 
 module.exports = router;

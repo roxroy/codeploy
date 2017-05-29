@@ -20,7 +20,6 @@ module.exports = function () {
 		callbackURL: process.env.callbackURL + '/github/callback'
 	},
 	function (token, refreshToken, profile, done) {
-		console.log('GitHubStrategy called');
 		process.nextTick(function () {
 			User.findOne({ 'id': profile.id }, function (err, user) {
 				if (err) {
@@ -31,6 +30,8 @@ module.exports = function () {
 					return done(null, user);
 				} else {
 					let newUser = new User();
+					newUser.token = token;
+					newUser.provider = 'github';
 
 					newUser.id = profile.id;
 					newUser.username = profile.username;
@@ -41,7 +42,7 @@ module.exports = function () {
 							throw err;
 						}
 
-						return done(null, newUser.id);
+						return done(null, newUser);
 					});
 				}
 			});

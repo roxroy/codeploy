@@ -22,10 +22,11 @@ class App extends Component {
     this.viewJobs = this.viewJobs.bind(this);
     this.viewResources = this.viewResources.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.isAuth = this.isAuth.bind(this);
   }
 
-  componentDidMount() {
-    fetch('/isauth')
+  isAuth() {
+    fetch('/isauth', { method: 'GET', credentials: 'include'})
       .then(response => {
         console.log('isauth  response', response);
         if (!response.ok) {
@@ -44,7 +45,10 @@ class App extends Component {
           loggedIn: false
         });
       });
+  }
 
+  componentDidMount() {
+    this.isAuth();
     fetch('/api')
       .then(response => {
         if (!response.ok) {
@@ -79,7 +83,7 @@ class App extends Component {
   }
 
   logOut() {
-    fetch('/logout')
+    fetch('/logout', { method: 'GET', credentials: 'include'})
       .then(json => {
         console.log('logout state', json);
         this.setState({
@@ -117,7 +121,7 @@ class App extends Component {
         <div>
         <a href="/github">Use Github </a> 
         <button onClick={this.logOut}>logout</button>
-         {this.loggedIn ? "Yes" : "No" }
+        <span>logged in state: {this.state.loggedIn ? " In " : " Out "}</span>
         </div>
       </div>
     );
