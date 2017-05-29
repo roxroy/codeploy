@@ -13,7 +13,7 @@ class App extends Component {
       fetching: true,
       viewingJobs: false,
       resources: null,
-      loggedIn: true,
+      loggedIn: false,
       username: null,
       jobs: [{"jobPosition": "position1", "companyName": "name1", "dateApplied":"01/dd/yy"},
         {"jobPosition": "position2", "companyName": "name2", "dateApplied":"02/dd/yy"},
@@ -25,6 +25,26 @@ class App extends Component {
   }
 
   componentDidMount() {
+    fetch('/isauth')
+      .then(response => {
+        console.log('isauth  response', response);
+        if (!response.ok) {
+          throw new Error('not logged in');
+        }
+        return response.json();
+      })
+      .then(json => {
+        console.log('login state', json);
+        this.setState({
+          loggedIn: true
+        });
+      }).catch(e => {
+        console.log('login isauth error', e);
+        this.setState({
+          loggedIn: false
+        });
+      });
+
     fetch('/api')
       .then(response => {
         if (!response.ok) {
@@ -59,9 +79,13 @@ class App extends Component {
   }
 
   logOut() {
-    this.setState({
-        loggedIn: false
-    });
+    fetch('/logout')
+      .then(json => {
+        console.log('logout state', json);
+        this.setState({
+          loggedIn: false
+        });
+      })    
   }
 
   render() {
@@ -90,6 +114,11 @@ class App extends Component {
             </div>
           )
         }
+        <div>
+        <a href="/github">Use Github </a> 
+        <button onClick={this.logOut}>logout</button>
+         {this.loggedIn ? "Yes" : "No" }
+        </div>
       </div>
     );
   }

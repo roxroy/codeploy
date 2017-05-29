@@ -8,9 +8,6 @@
   "scripts": {
     "start": "nodemon --use-strict server/index.js",
     "bundle": "webpack",
-    "start1": "concurrently \"npm run server\" \"npm run client\"",
-    "server1": "babel-node server/index.js",
-    "client1": "babel-node client/start.js",
     "heroku-postbuild": "cd client/ && npm install --only=dev && npm install && npm run build"
   },
   "cacheDirectories": [
@@ -20,8 +17,14 @@
   "dependencies": {
     "babel-cli": "6.14.0",
     "babel-core": "6.14.0",
+    "dotenv": "^4.0.0",
     "express": "^4.14.1",
-    "mongoose": "^4.10.2"
+    "express-session": "^1.15.3",
+    "mongoose": "^4.10.2",
+    "passport": "^0.3.2",
+    "passport-github2": "^0.1.10",
+    "passport-session": "^1.0.2",
+    "passport-slack": "0.0.7"
   },
   "repository": {
     "type": "git",

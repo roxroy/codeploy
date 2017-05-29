@@ -2,9 +2,9 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let userSchema = new Schema({
+  id: String,
   username: String,
-  slack_id: String,
-  github_id: String,
+  displayName: String,
   created_at: Date,
   updated_at: Date
 });
