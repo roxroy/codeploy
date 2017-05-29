@@ -7,14 +7,14 @@ let userCtrl = require('./controllers/user'),
 	  resourceCtrl = require('./controllers/resource'),
 	  jobCtrl = require('./controllers/job');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 // Connect mongoose to our local database
 let dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/codeploy';
 mongoose.connect(dbUri);
 
 // Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static('./client/public'));
 
 app.get('/api', resourceCtrl.index);
 
@@ -30,7 +30,7 @@ app.post('/api/jobs/:id', jobCtrl.update);
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {
-  response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+  response.sendFile(path.resolve(__dirname, '../client/public', 'index.html'));
 });
 
 app.listen(PORT, function () {

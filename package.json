@@ -1,14 +1,16 @@
 {
-  "name": "codepdix",
+  "name": "codeploy",
   "version": "1.0.0",
   "description": "Codeploy of resources for individuals job seeking and learning web development.",
   "engines": {
     "node": "6.9.x"
   },
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "babel-node server/index.js",
-    "client": "babel-node client/start.js",
+    "start": "nodemon --use-strict server/index.js",
+    "bundle": "webpack",
+    "start1": "concurrently \"npm run server\" \"npm run client\"",
+    "server1": "babel-node server/index.js",
+    "client1": "babel-node client/start.js",
     "heroku-postbuild": "cd client/ && npm install --only=dev && npm install && npm run build"
   },
   "cacheDirectories": [
@@ -33,6 +35,16 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "concurrently": "^3.4.0"
+    "babel-core": "^6.14.0",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "concurrently": "^3.4.0",
+    "css-loader": "^0.28.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "nodemon": "^1.11.0",
+    "style-loader": "^0.18.1",
+    "webpack": "^2.6.1",
+    "webpack-combine-loaders": "^2.0.3"
   }
 }
