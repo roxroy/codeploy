@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import Modal from 'react-modal';
 const Navbar = require('./Navbar');
 const SortButton = require('./SortButton');
 const Resources = require('./Resources');
@@ -15,6 +14,7 @@ class App extends Component {
       resources: null,
       loggedIn: true,
       username: null,
+      // Dummy data, change it to null when you want to test fetching!
       jobs: [{"jobPosition": "position1", "companyName": "name1", "dateApplied":"01/dd/yy"},
         {"jobPosition": "position2", "companyName": "name2", "dateApplied":"02/dd/yy"},
         {"jobPosition": "position3", "companyName": "name3", "dateApplied":"03/dd/yy"}]
