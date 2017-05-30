@@ -83,7 +83,7 @@ class Resources extends Component {
       <div className="resources-container">
         <Modal
           contentLabel="resourceModal"
-          isOpen={this.state.resourceModalOpen}  // TODO: Change it when done testing
+          isOpen={this.state.resourceModalOpen}
           onRequestClose={this.handleModalOpen}
           style={modalStyle}
         >
