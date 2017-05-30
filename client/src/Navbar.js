@@ -12,6 +12,7 @@ class Navbar extends Component {
     }
   }
       render() {
+        console.log(this.props.loggedIn);
           return (
             <div className="navbar">
               <div className="container-fluid">

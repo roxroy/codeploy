@@ -4,33 +4,21 @@ class Search extends Component {
   constructor(props){
     super(props);
   
-  this.state = {
-    search: "",
-    searchOpen: false
-  }
-  this.handleClick = this.handleClick.bind(this);
-  this.handleChange = this.handleChange.bind(this);
-  }
-  handleClick (event) {
-    return this.setState({
-      searchOpen: !this.state.searchOpen
-    });
-  }
-  handleChange(event) {
-    let value = event.target.value;
-    
-    return this.setState({
-      search: value
-    });
+    this.state = {
+      searchValue: "",
+      searchOpen: false
+    }
   }
   render() {
+    console.log(this.state.searchValue);
     return (
       <div className="search-container">
-        <a onClick={this.handleClick} href="#" className="search-icon"><i className="fa fa-search"></i></a> 
+        <a onClick={event => this.setState({searchOpen: !this.state.searchOpen})} href="#" className="search-icon"><i className="fa fa-search"></i></a> 
         <input 
-          disabled={!this.state.searchOpen} 
-          onChange={this.handleChange} 
-          className={this.state.searchOpen ? "expanded":null} 
+          disabled={!this.state.searchOpen}
+          value={this.state.searchValue}
+          onChange={event => this.setState({searchValue: event.target.value})}
+          className={this.state.searchOpen ? "expanded" : null} 
           type="search" 
           placeholder="Search..."
         />

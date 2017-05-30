@@ -64,9 +64,20 @@ class Resources extends Component {
       }
     }
     // dummy data, delete to test fetching
-    const resources = [{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url":"https://www.website1.com/", "addedBy":"user1", "name": "name1", "date": "01/dd/yy", "rating": "1/5", "golds": "1" },
-    { "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url":"https://www.website2.com/", "addedBy":"user2", "name": "name2", "date": "02/dd/yy", "rating": "2/5", "golds": "2" },
-    { "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url":"https://www.website3.com/", "addedBy":"user3", "name": "name3", "date": "03/dd/yy", "rating": "3/5", "golds": "3" }];
+    var resources = [{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url":"https://www.website1.com/", "addedBy":"user1", "name": "abcd", "date": "01/03/2016", "rating": "1/5", "golds": "1" },
+    { "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url":"https://www.website2.com/", "addedBy":"user2", "name": "aaab", "date": "02/14/2017", "rating": "2/5", "golds": "2" },
+    { "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url":"https://www.website3.com/", "addedBy":"user3", "name": "name3", "date": "01/01/2017", "rating": "3/5", "golds": "3" }];
+
+    if (this.props.sortByDate === true) {
+
+      resources = resources.sort(sortByDate);
+
+    } else if (this.props.sortByDate === false) {
+
+      resources = resources.sort(sortByAlpha);
+
+    }
+
 
     return (
       <div className="resources-container">
@@ -90,6 +101,22 @@ class Resources extends Component {
       </div>
     );
   }
+}
+
+function sortByAlpha(a, b) {
+  if (a.name < b.name)
+    return -1;
+  if (a.name > b.name)
+    return 1;
+  return 0;
+}
+
+function sortByDate(a,b) {
+  if (a.date < b.date)
+    return -1;
+  if (a.date > b.date)
+    return 1;
+  return 0;
 }
 
 module.exports = Resources;

@@ -12,8 +12,9 @@ class App extends Component {
       fetching: true,
       viewingJobs: false,
       resources: null,
-      loggedIn: false,
+      loggedIn: true,
       username: null,
+      sortByDate: true,
       // Dummy data, change it to null when you want to test fetching!
       jobs: [{"jobPosition": "position1", "companyName": "name1", "dateApplied":"01/dd/yy"},
         {"jobPosition": "position2", "companyName": "name2", "dateApplied":"02/dd/yy"},
@@ -23,6 +24,7 @@ class App extends Component {
     this.viewResources = this.viewResources.bind(this);
     this.logOut = this.logOut.bind(this);
     this.isAuth = this.isAuth.bind(this);
+    this.sortResources = this.sortResources.bind(this);
   }
 
   isAuth() {
@@ -87,6 +89,19 @@ class App extends Component {
       })    
   }
 
+  sortResources(sortStatus) {
+    //if true, sort by date
+    if (sortStatus === true) {
+      this.setState({
+        sortByDate: true
+      });
+    } else if (sortStatus === false) {
+      this.setState({
+        sortByDate: false
+      });
+    }
+  }
+
   render() {
     const isViewingJobs = this.state.viewingJobs;
     return (
@@ -108,15 +123,15 @@ class App extends Component {
                 ? 'Fetching message from API'
                 : this.state.resources}
             </p>
-            <SortButton resources={this.state.resources} />
-            <Resources resources={this.state.resources} />
+            <SortButton sortResources={this.sortResources} />
+            <Resources resources={this.state.resources} sortByDate={this.state.sortByDate} />
             </div>
           )
         }
         <div>
         <a href="/github">Use Github </a> 
         <button onClick={this.logOut}>logout</button>
-        <span>logged in state: {this.state.loggedIn ? " In " : " Out "}</span>
+        <span>logged in state: {this.state.loggedIn ? "true" : "false"}</span>
         </div>
       </div>
     );
