@@ -12,7 +12,7 @@ class App extends Component {
       fetching: true,
       viewingJobs: false,
       resources: null,
-      loggedIn: true,
+      loggedIn: false,
       username: null,
       // Dummy data, change it to null when you want to test fetching!
       jobs: [{"jobPosition": "position1", "companyName": "name1", "dateApplied":"01/dd/yy"},
@@ -22,9 +22,30 @@ class App extends Component {
     this.viewJobs = this.viewJobs.bind(this);
     this.viewResources = this.viewResources.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.isAuth = this.isAuth.bind(this);
+  }
+
+  isAuth() {
+    fetch('/isauth', { method: 'GET', credentials: 'include'})
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('not logged in');
+        }
+        return response.json();
+      })
+      .then(json => {
+        this.setState({
+          loggedIn: true
+        });
+      }).catch(e => {
+        this.setState({
+          loggedIn: false
+        });
+      });
   }
 
   componentDidMount() {
+    this.isAuth();
     fetch('/api')
       .then(response => {
         if (!response.ok) {
@@ -33,7 +54,6 @@ class App extends Component {
         return response.json();
       })
       .then(json => {
-        console.log(json.message);
         this.setState({
           resources: json.message,
           fetching: false
@@ -59,9 +79,12 @@ class App extends Component {
   }
 
   logOut() {
-    this.setState({
-        loggedIn: false
-    });
+    fetch('/logout', { method: 'GET', credentials: 'include'})
+      .then(json => {
+        this.setState({
+          loggedIn: false
+        });
+      })    
   }
 
   render() {
@@ -90,20 +113,14 @@ class App extends Component {
             </div>
           )
         }
+        <div>
+        <a href="/github">Use Github </a> 
+        <button onClick={this.logOut}>logout</button>
+        <span>logged in state: {this.state.loggedIn ? " In " : " Out "}</span>
+        </div>
       </div>
     );
   }
 }
       
-/*class ResourceModal extends React.Component {
-  render() {
-    return (
-    <div>
-      
-    </div>
-    );
-  }
-}*/
-
-
 module.exports = App;
