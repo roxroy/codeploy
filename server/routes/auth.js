@@ -10,21 +10,18 @@ var path = require('path');
 router.get('/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }),
   function(req, res){
- 		console.log('passport.authenticated');
   }
 );
 
 router.get('/github/callback', 
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    console.log('passport.authenticated callback', req.user);
     res.redirect('/');
   }
 );
 
 router.get('/logout', function(req, res) {
   let user = req.user;
-  console.log('passport.logout', user);
   req.logout();
   res.status(200).json({
     status: 'logout successful!'
@@ -50,7 +47,6 @@ function ensureAuthenticated(req, res, next) {
 }
 
 router.get('/isauth', function(req, res){
-console.log('isauth user.data ', req.user, req.isAuthenticated() );
   if (req.isAuthenticated()) {
     res.status(200).json({
         status: 'Login successful!'

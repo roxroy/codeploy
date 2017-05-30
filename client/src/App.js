@@ -28,19 +28,16 @@ class App extends Component {
   isAuth() {
     fetch('/isauth', { method: 'GET', credentials: 'include'})
       .then(response => {
-        console.log('isauth  response', response);
         if (!response.ok) {
           throw new Error('not logged in');
         }
         return response.json();
       })
       .then(json => {
-        console.log('login state', json);
         this.setState({
           loggedIn: true
         });
       }).catch(e => {
-        console.log('login isauth error', e);
         this.setState({
           loggedIn: false
         });
@@ -57,7 +54,6 @@ class App extends Component {
         return response.json();
       })
       .then(json => {
-        console.log(json.message);
         this.setState({
           resources: json.message,
           fetching: false
@@ -85,7 +81,6 @@ class App extends Component {
   logOut() {
     fetch('/logout', { method: 'GET', credentials: 'include'})
       .then(json => {
-        console.log('logout state', json);
         this.setState({
           loggedIn: false
         });
@@ -128,15 +123,4 @@ class App extends Component {
   }
 }
       
-/*class ResourceModal extends React.Component {
-  render() {
-    return (
-    <div>
-      
-    </div>
-    );
-  }
-}*/
-
-
 module.exports = App;
