@@ -52,6 +52,7 @@ class MyJobs extends Component {
               <th>Company Name</th>
               <th>Date Applied</th>
               <th>Relevant Resources</th>
+              <th>Comments</th>
             </tr>
             {this.props.jobs.map((row, i) =>
               <EachJob
