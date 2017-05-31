@@ -19,6 +19,7 @@ class EachJob extends Component {
         <td>{row.companyName}</td>
         <td>{row.dateApplied}</td>
         <td><a onClick={this.handleClick}>View Resources</a></td>
+        <td>{row.comments}</td>
       </tr>
     );
   }

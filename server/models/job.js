@@ -6,6 +6,7 @@ let jobSchema = new Schema({
   company: String,
   description: String,
   date_applied: Date,
+  comments: String,
   created_at: Date,
   updated_at: Date
 });
