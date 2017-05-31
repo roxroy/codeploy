@@ -15,7 +15,8 @@ function ResourceTable(props) {
           {props.resources.map((row, i) => <ResourceRow
             handleResourceModal={props.handleResourceModal}
             row={row}
-            key={i} />)}
+            key={i}
+          />)}
         </tbody>
       </table>
     </div>

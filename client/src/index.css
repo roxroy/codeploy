@@ -57,11 +57,24 @@ button {
 }
 
 .search-container input.expanded {
-  width: 300px;
+  background-color: #606060;
+  width: 20%;
   opacity: 1;
-  background: transparent;
   border: none;
   color: white;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #cccccc;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #cccccc;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #cccccc;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #cccccc;
 }
 
 a.menu-icon {
@@ -102,7 +115,7 @@ table, tbody{
   border-collapse: collapse;
 }
 
-.resources-container img {
+.resource-table img {
   width: 50px;
   height: 50px;
   text-align: center;
@@ -183,4 +196,7 @@ th:first-child {
 p.description {
   margin-top: 10px;
   max-width: 1000px;
+}
+h2 {
+  text-align: center;
 }
