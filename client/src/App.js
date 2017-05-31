@@ -48,7 +48,7 @@ class App extends Component {
         });
       }).catch(e => {
         this.setState({
-          loggedIn: true
+          loggedIn: false
         });
       });
   }
