@@ -6,20 +6,20 @@ const Resources = require('./Resources');
 const MyJobs = require('./MyJobs');
 
 // dummy data, delete to test fetching
-const resources = [{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url":"https://www.website1.com/", "addedBy":"user1", "name": "abcd", "date": "01/03/2016", "rating": "1/5", "golds": "1" },
-{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url":"https://www.website2.com/", "addedBy":"user2", "name": "aaab", "date": "02/14/2017", "rating": "2/5", "golds": "2" },
-{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url":"https://www.website3.com/", "addedBy":"user3", "name": "name3", "date": "01/01/2017", "rating": "3/5", "golds": "3" }];
-const jobs = [{"jobPosition": "position1", "companyName": "name1", "dateApplied":"01/dd/yy", "resources":resources, "comments": "sent thank you note. received no response."},
-{"jobPosition": "position2", "companyName": "name2", "dateApplied":"02/dd/yy", "resources":resources, "comments": "sent thank you note. received no response."},
-{"jobPosition": "position3", "companyName": "name3", "dateApplied":"03/dd/yy", "resources":resources, "comments": "sent thank you note. received no response."}]
+const resources = [{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website1.com/", "addedBy": "user1", "name": "abcd", "date": "01/03/2016", "rating": "1/5", "golds": "1" },
+{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website2.com/", "addedBy": "user2", "name": "aaab", "date": "02/14/2017", "rating": "2/5", "golds": "2" },
+{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website3.com/", "addedBy": "user3", "name": "name3", "date": "01/01/2017", "rating": "3/5", "golds": "3" }];
+const jobs = [{ "jobPosition": "position1", "companyName": "name1", "dateApplied": "01/dd/yy", "resources": resources, "comments": "sent thank you note. received no response." },
+{ "jobPosition": "position2", "companyName": "name2", "dateApplied": "02/dd/yy", "resources": resources, "comments": "sent thank you note. received no response." },
+{ "jobPosition": "position3", "companyName": "name3", "dateApplied": "03/dd/yy", "resources": resources, "comments": "sent thank you note. received no response." }]
 
-class App extends Component {  
+class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       fetching: true,
-      viewingJobs: true,  // TODO change it back after testing jobs
+      viewingJobs: false,
       resources: null,
       loggedIn: true,
       username: null,
@@ -32,10 +32,11 @@ class App extends Component {
     this.logOut = this.logOut.bind(this);
     this.isAuth = this.isAuth.bind(this);
     this.sortResources = this.sortResources.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   isAuth() {
-    fetch('/isauth', { method: 'GET', credentials: 'include'})
+    fetch('/isauth', { method: 'GET', credentials: 'include' })
       .then(response => {
         if (!response.ok) {
           throw new Error('not logged in');
@@ -77,23 +78,23 @@ class App extends Component {
 
   viewJobs() {
     this.setState({
-        viewingJobs: true
+      viewingJobs: true
     });
   }
 
   viewResources() {
     this.setState({
-        viewingJobs: false
+      viewingJobs: false
     });
   }
 
   logOut() {
-    fetch('/logout', { method: 'GET', credentials: 'include'})
+    fetch('/logout', { method: 'GET', credentials: 'include' })
       .then(json => {
         this.setState({
           loggedIn: true
         });
-      })    
+      })
   }
 
   sortResources(sortStatus) {
@@ -108,41 +109,49 @@ class App extends Component {
       });
     }
   }
-
+  handleSearch() {
+    console.log('do search');
+  }
   render() {
     const isViewingJobs = this.state.viewingJobs;
     return (
       <div className="App">
-        <Navbar loggedIn={this.state.loggedIn} viewJobs={this.viewJobs} viewResources={this.viewResources} logOut={this.logOut} />
+        <Navbar
+          handleSearch={this.handleSearch}
+          loggedIn={this.state.loggedIn}
+          viewJobs={this.viewJobs}
+          viewResources={this.viewResources}
+          logOut={this.logOut}
+        />
         {isViewingJobs ? (
-            <div>
+          <div>
             <p className="App-intro">
               {this.state.fetching
                 ? 'Fetching message from API'
                 : this.state.resources}
             </p>
             <MyJobs jobs={this.state.jobs} />
-            </div>
-          ) : (
+          </div>
+        ) : (
             <div>
-            <p className="App-intro">
-              {this.state.fetching
-                ? 'Fetching message from API'
-                : this.state.resources}
-            </p>
-            <SortButton sortResources={this.sortResources} />
-            <Resources resources={this.state.resources} sortByDate={this.state.sortByDate} />
+              <p className="App-intro">
+                {this.state.fetching
+                  ? 'Fetching message from API'
+                  : this.state.resources}
+              </p>
+              <SortButton sortResources={this.sortResources} />
+              <Resources resources={this.state.resources} sortByDate={this.state.sortByDate} />
             </div>
           )
         }
         <div>
-        <a href="/github">Use Github </a> 
-        <button onClick={this.logOut}>logout</button>
-        <span>logged in state: {this.state.loggedIn ? "true" : "false"}</span>
+          <a href="/github">Use Github </a>
+          <button onClick={this.logOut}>logout</button>
+          <span>logged in state: {this.state.loggedIn ? "true" : "false"}</span>
         </div>
       </div>
     );
   }
 }
-      
+
 module.exports = App;
