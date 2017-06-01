@@ -110,7 +110,12 @@ class App extends Component {
     }
   }
   handleSearch() {
+    // TODO
+    //  on search replaces this.state.resources with array of objects that pass regex
     console.log('do search');
+    this.setState({
+      viewingJobs: false
+    });
   }
   render() {
     const isViewingJobs = this.state.viewingJobs;

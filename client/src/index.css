@@ -108,6 +108,9 @@ i.fa.fa-bars::before {
   justify-content: center;
 
 }
+.resource-table a {
+  cursor: pointer;
+}
 
 table, tbody{
   margin-top: 10px;
@@ -139,7 +142,6 @@ th, td {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  cursor: pointer;
   text-align: center;
 }
 
@@ -181,7 +183,7 @@ th:first-child {
 
 .resource-modal img {
   display: block;
-  min-height: 250px;
+  max-height: 250px;
   min-width: auto;
 }
 
