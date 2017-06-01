@@ -11,6 +11,7 @@ function ResourceTable(props) {
             <th>Date Added</th>
             <th>Rating</th>
             <th>Gold Stars</th>
+            <th>Additional Information</th>
           </tr>
           {props.resources.map((row, i) => <ResourceRow
             handleResourceModal={props.handleResourceModal}
