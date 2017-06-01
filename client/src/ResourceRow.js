@@ -14,12 +14,13 @@ class ResourceRow extends Component {
     let row = this.props.row;
 
     return (
-      <tr onClick={this.handleClick}>
+      <tr>
         <td><img src={row.image} alt="resource-icon"/></td>
         <td>{row.name}</td>
         <td>{row.date}</td>
         <td>{row.rating}</td>
         <td>{row.golds}</td>
+        <td><a onClick={this.handleClick}>View More Information</a></td>
       </tr>
     );
   }

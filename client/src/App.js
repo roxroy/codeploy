@@ -5,6 +5,7 @@ const SortButton = require('./SortButton');
 const Resources = require('./Resources');
 const MyJobs = require('./MyJobs');
 
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -117,8 +118,22 @@ class App extends Component {
       });
     }
   }
-  handleSearch() {
-    console.log('do search');
+  handleSearch(value) {
+    // TODO
+    //  on search replaces this.state.resources with array of objects that pass regex
+    //  if none found, console log and show search not found
+    let searchedArray = [];
+    let re = value;
+    re = new RegExp(re, "im");
+
+    if (!resources) return;
+    for (let cObj of resources) {
+      if (re.test(cObj.name) || re.test(cObj.addedBy) || re.test(cObj.description)) searchedArray.push(cObj);
+    }
+    console.log("searchedArray: ", searchedArray);
+    this.setState({
+      viewingJobs: false
+    });
   }
   render() {
     const isViewingJobs = this.state.viewingJobs;
