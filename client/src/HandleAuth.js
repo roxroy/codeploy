@@ -4,8 +4,8 @@ class HandleAuth extends Component {
   render() {
     return (
       <div className="auth-buttons">
-        <button className="modal-button">Log in with Github</button>
-        <button className="modal-button">Log in with Slack</button>
+      	<a className="btn modal-button" href="/github">Log in with Github </a>
+      	<a className="btn modal-button" href="/stack">Log in with Slack </a>
       </div>
     );
   }

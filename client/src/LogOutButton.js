@@ -5,9 +5,11 @@ class LogOutButton extends Component {
     super(props);
     this.logOut = this.logOut.bind(this);
   }
+
   logOut() {
     this.props.logOut();
   }
+
   render() {
     return (
       <div>

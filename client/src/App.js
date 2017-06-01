@@ -100,7 +100,7 @@ class App extends Component {
     fetch('/logout', { method: 'GET', credentials: 'include' })
       .then(json => {
         this.setState({
-          loggedIn: true
+          loggedIn: false
         });
       })
   }
@@ -152,14 +152,10 @@ class App extends Component {
             </div>
           )
         }
-        <div>
-          <a href="/github">Use Github </a>
-          <button onClick={this.logOut}>logout</button>
-          <span>logged in state: {this.state.loggedIn ? "true" : "false"}</span>
-        </div>
       </div>
     );
   }
 }
 
 module.exports = App;
+
