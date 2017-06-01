@@ -4,7 +4,7 @@ module.exports.all = (req, res) => {
 	Resource.find({}, function(err, resources) {
 	  if (err) throw err;
 
-	  console.log(resources);
+	  res.status(200).send(resources);
 	});
 };
 

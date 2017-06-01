@@ -5,14 +5,6 @@ const SortButton = require('./SortButton');
 const Resources = require('./Resources');
 const MyJobs = require('./MyJobs');
 
-// dummy data, delete to test fetching
-const loremipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida est sit amet mi egestas, a pharetra sem hendrerit. Ut sit amet lacinia ex, vel pellentesque metus. In placerat, lacus eget porttitor imperdiet, sem nibh faucibus turpis, ultricies ultricies turpis orci in augue. Integer ut posuere ante. Pellentesque blandit purus at tortor malesuada porttitor venenatis sed lacus.";
-let resources = [{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website1.com/", "addedBy": "user1", "name": "abcd", "date": "01/03/2016", "rating": "1/5", "golds": "1", "description": loremipsum },
-{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website2.com/", "addedBy": "user2", "name": "aaab", "date": "02/14/2017", "rating": "2/5", "golds": "2", "description": loremipsum },
-{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website3.com/", "addedBy": "user3", "name": "name3", "date": "01/01/2017", "rating": "3/5", "golds": "3", "description": loremipsum }];
-const jobs = [{ "jobPosition": "position1", "companyName": "name1", "dateApplied": "01/dd/yy", "resources": resources, "comments": "sent thank you note. received no response." },
-{ "jobPosition": "position2", "companyName": "name2", "dateApplied": "02/dd/yy", "resources": resources, "comments": "sent thank you note. received no response." },
-{ "jobPosition": "position3", "companyName": "name3", "dateApplied": "03/dd/yy", "resources": resources, "comments": "sent thank you note. received no response." }]
 
 class App extends Component {
   constructor(props) {
@@ -25,8 +17,7 @@ class App extends Component {
       loggedIn: true,
       username: null,
       sortByDate: true,
-      // Dummy data, change it to null when you want to test fetching!
-      jobs: jobs
+      jobs: null,
     };
     this.viewJobs = this.viewJobs.bind(this);
     this.viewResources = this.viewResources.bind(this);
@@ -34,6 +25,22 @@ class App extends Component {
     this.isAuth = this.isAuth.bind(this);
     this.sortResources = this.sortResources.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+  }
+
+  getJobs() {
+    fetch('/api/jobs')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`status ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(json => {
+        this.setState({
+          jobs: json,
+        });
+      }).catch(e => {
+      })
   }
 
   isAuth() {
@@ -57,6 +64,7 @@ class App extends Component {
 
   componentDidMount() {
     this.isAuth();
+    this.getJobs();
     fetch('/api')
       .then(response => {
         if (!response.ok) {
@@ -93,7 +101,7 @@ class App extends Component {
     fetch('/logout', { method: 'GET', credentials: 'include' })
       .then(json => {
         this.setState({
-          loggedIn: true
+          loggedIn: false
         });
       })
   }
@@ -159,14 +167,10 @@ class App extends Component {
             </div>
           )
         }
-        <div>
-          <a href="/github">Use Github </a>
-          <button onClick={this.logOut}>logout</button>
-          <span>logged in state: {this.state.loggedIn ? "true" : "false"}</span>
-        </div>
       </div>
     );
   }
 }
 
 module.exports = App;
+
