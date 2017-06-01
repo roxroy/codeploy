@@ -5,14 +5,6 @@ const SortButton = require('./SortButton');
 const Resources = require('./Resources');
 const MyJobs = require('./MyJobs');
 
-// dummy data, delete to test fetching
-const resources = [{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website1.com/", "addedBy": "user1", "name": "abcd", "date": "01/03/2016", "rating": "1/5", "golds": "1" },
-{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website2.com/", "addedBy": "user2", "name": "aaab", "date": "02/14/2017", "rating": "2/5", "golds": "2" },
-{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website3.com/", "addedBy": "user3", "name": "name3", "date": "01/01/2017", "rating": "3/5", "golds": "3" }];
-const jobs = [{ "jobPosition": "position1", "companyName": "name1", "dateApplied": "01/dd/yy", "resources": resources, "comments": "sent thank you note. received no response." },
-{ "jobPosition": "position2", "companyName": "name2", "dateApplied": "02/dd/yy", "resources": resources, "comments": "sent thank you note. received no response." },
-{ "jobPosition": "position3", "companyName": "name3", "dateApplied": "03/dd/yy", "resources": resources, "comments": "sent thank you note. received no response." }]
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -24,8 +16,7 @@ class App extends Component {
       loggedIn: true,
       username: null,
       sortByDate: true,
-      // Dummy data, change it to null when you want to test fetching!
-      jobs: jobs
+      jobs: null,
     };
     this.viewJobs = this.viewJobs.bind(this);
     this.viewResources = this.viewResources.bind(this);
@@ -33,6 +24,22 @@ class App extends Component {
     this.isAuth = this.isAuth.bind(this);
     this.sortResources = this.sortResources.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+  }
+
+  getJobs() {
+    fetch('/api/jobs')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`status ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(json => {
+        this.setState({
+          jobs: json,
+        });
+      }).catch(e => {
+      })
   }
 
   isAuth() {
@@ -56,6 +63,7 @@ class App extends Component {
 
   componentDidMount() {
     this.isAuth();
+    this.getJobs();
     fetch('/api')
       .then(response => {
         if (!response.ok) {
