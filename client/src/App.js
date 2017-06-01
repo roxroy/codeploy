@@ -6,9 +6,10 @@ const Resources = require('./Resources');
 const MyJobs = require('./MyJobs');
 
 // dummy data, delete to test fetching
-const resources = [{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website1.com/", "addedBy": "user1", "name": "abcd", "date": "01/03/2016", "rating": "1/5", "golds": "1" },
-{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website2.com/", "addedBy": "user2", "name": "aaab", "date": "02/14/2017", "rating": "2/5", "golds": "2" },
-{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website3.com/", "addedBy": "user3", "name": "name3", "date": "01/01/2017", "rating": "3/5", "golds": "3" }];
+const loremipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida est sit amet mi egestas, a pharetra sem hendrerit. Ut sit amet lacinia ex, vel pellentesque metus. In placerat, lacus eget porttitor imperdiet, sem nibh faucibus turpis, ultricies ultricies turpis orci in augue. Integer ut posuere ante. Pellentesque blandit purus at tortor malesuada porttitor venenatis sed lacus.";
+let resources = [{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website1.com/", "addedBy": "user1", "name": "abcd", "date": "01/03/2016", "rating": "1/5", "golds": "1", "description": loremipsum },
+{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website2.com/", "addedBy": "user2", "name": "aaab", "date": "02/14/2017", "rating": "2/5", "golds": "2", "description": loremipsum },
+{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website3.com/", "addedBy": "user3", "name": "name3", "date": "01/01/2017", "rating": "3/5", "golds": "3", "description": loremipsum }];
 const jobs = [{ "jobPosition": "position1", "companyName": "name1", "dateApplied": "01/dd/yy", "resources": resources, "comments": "sent thank you note. received no response." },
 { "jobPosition": "position2", "companyName": "name2", "dateApplied": "02/dd/yy", "resources": resources, "comments": "sent thank you note. received no response." },
 { "jobPosition": "position3", "companyName": "name3", "dateApplied": "03/dd/yy", "resources": resources, "comments": "sent thank you note. received no response." }]
@@ -109,10 +110,19 @@ class App extends Component {
       });
     }
   }
-  handleSearch() {
+  handleSearch(value) {
     // TODO
     //  on search replaces this.state.resources with array of objects that pass regex
-    console.log('do search');
+    //  if none found, console log and show search not found
+    let searchedArray = [];
+    let re = value;
+    re = new RegExp(re, "im");
+
+    if (!resources) return;
+    for (let cObj of resources) {
+      if (re.test(cObj.name) || re.test(cObj.addedBy) || re.test(cObj.description)) searchedArray.push(cObj);
+    }
+    console.log("searchedArray: ", searchedArray);
     this.setState({
       viewingJobs: false
     });

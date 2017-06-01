@@ -106,7 +106,6 @@ i.fa.fa-bars::before {
 .resources-container, .resource-table, .job-list-container {
   display: flex;
   justify-content: center;
-
 }
 .resource-table a {
   cursor: pointer;
