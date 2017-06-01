@@ -126,7 +126,6 @@ class App extends Component {
   handleSearch(value) {
     // TODO
     //  on search replaces this.state.resources with array of objects that pass regex
-    //  if none found, console log and show search not found
     let searchedArray = [];
     let re = value;
     re = new RegExp(re, "im");
@@ -135,7 +134,11 @@ class App extends Component {
     for (let cObj of resources) {
       if (re.test(cObj.name) || re.test(cObj.addedBy) || re.test(cObj.description)) searchedArray.push(cObj);
     }
-    console.log("searchedArray: ", searchedArray);
+    if (searchedArray.length === 0) {
+      console.log("No results found: ", searchedArray);
+    } else {
+      console.log("Found: ", searchedArray);
+    }
     this.setState({
       viewingJobs: false
     });
