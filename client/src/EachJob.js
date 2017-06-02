@@ -14,7 +14,7 @@ class EachJob extends Component {
     let row = this.props.row;
 
     return (
-      <tr onClick={this.handleClick}>
+      <tr>
         <td>{row.jobPosition}</td>
         <td>{row.companyName}</td>
         <td>{row.dateApplied}</td>

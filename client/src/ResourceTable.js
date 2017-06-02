@@ -11,10 +11,11 @@ function ResourceTable(props) {
             <th>Date Added</th>
             <th>Rating</th>
             <th>Gold Stars</th>
-            <th>Additional Information</th>
+            {(props.fromJobModal)?<th>Link to Resource</th>:<th>Additional Information</th>}
           </tr>
           {props.resources.map((row, i) => <ResourceRow
             handleResourceModal={props.handleResourceModal}
+            fromJobModal={props.fromJobModal}
             row={row}
             key={i}
           />)}

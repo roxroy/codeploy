@@ -57,7 +57,7 @@ class Resources extends Component {
         background: '#fff',
         overflow: 'auto',
         WebkitOverflowScrolling: 'touch',
-        borderRadius: '4px',
+        borderRadius: '7px',
         outline: 'none',
         padding: '20px'
 
@@ -97,6 +97,7 @@ class Resources extends Component {
         </Modal>
         {/*Generates a table of resources, handles sorting(TODO) and conditional rendering of modal*/}
         <ResourceTable
+          fromJobModal={false}
           resources={resources}
           handleResourceModal={this.handleResourceModal}
         />
