@@ -57,7 +57,7 @@ class Resources extends Component {
         background: '#fff',
         overflow: 'auto',
         WebkitOverflowScrolling: 'touch',
-        borderRadius: '4px',
+        borderRadius: '7px',
         outline: 'none',
         padding: '20px'
 

@@ -7,7 +7,9 @@ body {
 .App {
   text-align: center;
 }
-
+a {
+  cursor: pointer;
+}
 .navbar {
   overflow: hidden;
   background-color: #333;
@@ -107,9 +109,6 @@ i.fa.fa-bars::before {
   display: flex;
   justify-content: center;
 }
-.resource-table a {
-  cursor: pointer;
-}
 
 table, tbody{
   margin-top: 10px;
@@ -199,6 +198,17 @@ p.description {
   margin-top: 10px;
   max-width: 1000px;
 }
-h2 {
+.job-resource-container {
+  height: 80%;
+  width: 80%;
+}
+button.close-resource-modal {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+h3 {
+  padding: 0;
+  margin: -30px 0 10px 0px;
   text-align: center;
 }

@@ -19,7 +19,7 @@ class App extends Component {
       fetching: true,
       viewingJobs: false,
       resources: null,
-      loggedIn: true,
+      loggedIn: false, 
       username: null,
       sortByDate: true,
       jobs: null,
@@ -125,7 +125,7 @@ class App extends Component {
   }
   handleSearch(value) {
     // TODO
-    //  on search replaces this.state.resources with array of objects that pass regex
+    //  on search replaces this.state.resources with the searched array
     let searchedArray = [];
     let re = value;
     re = new RegExp(re, "im");
