@@ -23,12 +23,12 @@ class MyJobs extends Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
   handleViewJob(cJob) {
-    let currentJobResources = 
-    this.setState({
-      viewingJob: true,
-      viewingResource: false,
-      currentJob: cJob
-    });
+    let currentJobResources =
+      this.setState({
+        viewingJob: true,
+        viewingResource: false,
+        currentJob: cJob
+      });
   }
   handleViewResources() {
     this.setState({
