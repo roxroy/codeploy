@@ -20,7 +20,11 @@ class ResourceRow extends Component {
         <td>{row.date}</td>
         <td>{row.rating}</td>
         <td>{row.golds}</td>
-        <td><a onClick={this.handleClick}>View More Information</a></td>
+        {(this.props.fromJobModal)?
+          <td><a href={row.url}>Visit {row.name}</a></td>
+          :
+          <td><a onClick={this.handleClick}>View More Information</a></td>
+        }
       </tr>
     );
   }

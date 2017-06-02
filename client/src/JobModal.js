@@ -46,6 +46,7 @@ function JobModal(props) {
         <h3>Resources for {props.job.jobPosition} at {props.job.companyName}</h3>
         <div className="job-resource-table">
           <ResourceTable
+            fromJobModal={true}
             resources={props.job.resources}
           />
         </div>

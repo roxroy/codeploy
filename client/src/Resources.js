@@ -96,6 +96,7 @@ class Resources extends Component {
         </Modal>
         {/*Generates a table of resources, handles sorting(TODO) and conditional rendering of modal*/}
         <ResourceTable
+          fromJobModal={false}
           resources={resources}
           handleResourceModal={this.handleResourceModal}
         />
