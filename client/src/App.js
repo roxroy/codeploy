@@ -184,7 +184,7 @@ class App extends Component {
                 sortResources={this.sortResources}
                 viewResources={this.viewResources}
                 globalResources={this.globalResources}
-                // todo: change this.resources to this.state.resource when fetching is implemented 
+                // change this.resources to this.state.resource when fetching is implemented 
                 resources={this.resources}
               />
               <Resources resources={this.resources} sortByDate={this.state.sortByDate} />
