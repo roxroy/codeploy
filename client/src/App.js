@@ -100,6 +100,9 @@ class App extends Component {
   }
 
   viewResources() {
+    // todo: change when fetching resources is implemented
+    // change variable assign to state.resource assign
+    this.resources = this.globalResources;
     this.setState({
       viewingJobs: false
     });
@@ -177,7 +180,13 @@ class App extends Component {
                   ? 'Fetching message from API'
                   : this.state.resources}
               </p>
-              <SortButton sortResources={this.sortResources} />
+              <SortButton
+                sortResources={this.sortResources}
+                viewResources={this.viewResources}
+                globalResources={this.globalResources}
+                // todo: change this.resources to this.state.resource when fetching is implemented 
+                resources={this.resources}
+              />
               <Resources resources={this.resources} sortByDate={this.state.sortByDate} />
             </div>
           )
