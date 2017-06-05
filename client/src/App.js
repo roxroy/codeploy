@@ -25,7 +25,7 @@ class App extends Component {
       loggedIn: false,
       username: null,
       jobs: null,
-      "currentSort": ["Resource Name", true]
+      "currentSort": ["resourceName", true]
     };
     this.viewJobs = this.viewJobs.bind(this);
     this.viewResources = this.viewResources.bind(this);
@@ -122,11 +122,11 @@ class App extends Component {
     //if true, sort by date
     if (sortStatus) {
       this.setState({
-        currentSort: ["Date Added", true]
+        currentSort: ["dateAdded", true]
       });
     } else {
       this.setState({
-        currentSort: ["Resource Name", true]
+        currentSort: ["resourceName", true]
       });
     }
   }
@@ -156,7 +156,7 @@ class App extends Component {
   }
   handleSort(event) {
     // order: true==ascending, false==descending
-    const cTH = event.target.textContent;
+    const cTH = event.target.className;
     let order = this.state.currentSort[1];
     
     // if current column is being sorted

@@ -67,24 +67,24 @@ class Resources extends Component {
     let resources = this.props.resources;
     // holds all the functions for handling table sorting
     const sortTable = {
-      "Resource Name"() {
+      "resourceName"() {
         resources = resources.sort((a, b) => {
           // return true if a.name comes after b.name
           return a.name > b.name;
         });
       },
-      "Date Added"() {
+      "dateAdded"() {
         resources = resources.sort((a, b) => {
           return new Date(b.date) - new Date(a.date);
         });
       },
-      "Rating"() {
+      "rating"() {
         resources = resources.sort((a, b) => {
           // return true if a.rating is a larger fraction
           return a.rating > b.rating;
         });
       },
-      "Gold Stars"() {
+      "golds"() {
         resources = resources.sort((a, b) => {
           return a.golds - b.golds;
         });
@@ -92,9 +92,9 @@ class Resources extends Component {
     }
     //handles table sort
     if (this.props.sortByDate) {
-      sortTable["Resource Name"]();
+      sortTable["resourceName"]();
     } else {
-      sortTable["Date Added"]();
+      sortTable["dateAdded"]();
     }
 
     // handles currentSort
@@ -121,6 +121,7 @@ class Resources extends Component {
           resources={resources}
           handleResourceModal={this.handleResourceModal}
           handleSort={this.props.handleSort}
+          currentSort={this.props.currentSort}
         />
       </div>
     );
