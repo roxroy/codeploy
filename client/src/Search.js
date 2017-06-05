@@ -46,17 +46,17 @@ class Search extends Component {
   render() {
     return (
       <div className="search-container">
-        <a onClick={this.handleSearchClick} href="#" className="search-icon"><i className="fa fa-search"></i></a>
+        <a onClick={this.handleSearchClick} href="#" className="search-icon pointer-events"><i className="fa fa-search"></i></a>
         <input
           disabled={!this.state.searchOpen}
           onKeyUp={event => { (event.key === "Enter") && this.handleSearchClick() }}
           value={this.state.searchValue}
           onChange={event => this.setState({ searchValue: event.target.value })}
-          className={this.state.searchOpen ? "expanded" : null}
+          className={this.state.searchOpen ? "expanded pointer-events" : "pointer-events"}
           type="search"
           placeholder="Search..."
         />
-        {this.state.searchOpen && <button onClick={this.handleClearSearch} className="clear-search">X</button>}
+        {this.state.searchOpen && <button onClick={this.handleClearSearch} className="clear-search pointer-events">X</button>}
       </div>
     );
   }
