@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-// todo: add a clear button for the input box
-
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +11,7 @@ class Search extends Component {
     }
     this.handleSearchClick = this.handleSearchClick.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.handleClearSearch = this.handleClearSearch.bind(this);
   }
   componentDidMount() {
     // if click outside searchbox
@@ -28,6 +27,11 @@ class Search extends Component {
     } else {
       this.setState({ searchOpen: !this.state.searchOpen })
     }
+  }
+  handleClearSearch(event){
+    this.setState({
+      searchValue: ""
+    });
   }
   handleClickOutside(event){
     const domNode = ReactDOM.findDOMNode(this);
@@ -52,6 +56,7 @@ class Search extends Component {
           type="search"
           placeholder="Search..."
         />
+        {this.state.searchOpen && <button onClick={this.handleClearSearch} className="clear-search">X</button>}
       </div>
     );
   }

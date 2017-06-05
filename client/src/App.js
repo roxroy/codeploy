@@ -4,7 +4,7 @@ const Navbar = require('./Navbar');
 const SortButton = require('./SortButton');
 const Resources = require('./Resources');
 const MyJobs = require('./MyJobs');
-
+// todo: style search clear button
 class App extends Component {
   constructor(props) {
     super(props);
