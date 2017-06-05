@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 class Search extends Component {
   constructor(props) {
@@ -9,12 +10,37 @@ class Search extends Component {
       searchOpen: false
     }
     this.handleSearchClick = this.handleSearchClick.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.handleClearSearch = this.handleClearSearch.bind(this);
+  }
+  componentDidMount() {
+    // if click outside searchbox
+    document.addEventListener('click', this.handleClickOutside, true);
+  }
+  componentWillUnmount() {
+    // remove eventlisteners here
+    document.removeEventListener('click', this.handleClickOutside, true);
   }
   handleSearchClick(event) {
     if (this.state.searchOpen && this.state.searchValue) {
       this.props.handleSearch(this.state.searchValue);
     } else {
       this.setState({ searchOpen: !this.state.searchOpen })
+    }
+  }
+  handleClearSearch(event){
+    this.setState({
+      searchValue: ""
+    });
+  }
+  handleClickOutside(event){
+    const domNode = ReactDOM.findDOMNode(this);
+    
+    // if clicked target is not found in domNode then close inputbox
+    if ((!domNode || !domNode.contains(event.target))) {
+        this.setState({
+            searchOpen: false
+        });
     }
   }
   render() {
@@ -30,6 +56,7 @@ class Search extends Component {
           type="search"
           placeholder="Search..."
         />
+        {this.state.searchOpen && <button onClick={this.handleClearSearch} className="clear-search">X</button>}
       </div>
     );
   }

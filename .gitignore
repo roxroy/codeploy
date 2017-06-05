@@ -5,7 +5,8 @@ client/public/app.css
 
 # Node build artifacts
 node_modules
-npm-debug.log
+npm-debug.log*
+client/npm-debug.log*
 
 # Local development
 *.env
