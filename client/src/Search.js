@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+// todo: add a clear button for the input box
+
 class Search extends Component {
   constructor(props) {
     super(props);
