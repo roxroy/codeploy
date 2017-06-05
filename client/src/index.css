@@ -47,6 +47,7 @@ button {
 .search-container {
   position: absolute;
   text-align: left;
+  pointer-events: none;
   width: 100%;
 }
 .clear-search, .search-container input {
@@ -59,6 +60,9 @@ button {
   margin: 0px 10px;
   padding: 3px;
   transition: all .5s ease;
+}
+.pointer-events {
+  pointer-events:auto;
 }
 
 .search-container input.expanded {
