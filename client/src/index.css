@@ -159,6 +159,7 @@ th, td {
 th {
   background-color :#404040;
   color: white;
+  cursor: pointer;
 }
 
 th:hover {
@@ -167,10 +168,12 @@ th:hover {
 
 th:first-child {
   border-top-left-radius: 10px;
+  
 }
 
  th:last-child {
   border-top-right-radius: 10px;
+  cursor: default;
 }
 
 .resource-table {

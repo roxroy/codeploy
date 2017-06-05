@@ -7,10 +7,10 @@ function ResourceTable(props) {
       <table>
         <tbody>
           <tr>
-            <th colSpan="2">Resource Name</th>
-            <th>Date Added</th>
-            <th>Rating</th>
-            <th>Gold Stars</th>
+            <th onClick={props.handleSort} colSpan="2">Resource Name</th>
+            <th onClick={props.handleSort}>Date Added</th>
+            <th onClick={props.handleSort}>Rating</th>
+            <th onClick={props.handleSort}>Gold Stars</th>
             {(props.fromJobModal)?<th>Link to Resource</th>:<th>Additional Information</th>}
           </tr>
           {props.resources.map((row, i) => <ResourceRow

@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 TODO:
 when clicked on th, sorts respective column
 when clicked on td, opens modal with more information about respective resource
-  -could give the option to add resource to specific job from job list? (as a button in the modal)
+  -could give the option to add resource to specific job from job list? (as a button on the resource modal)
 */
 
 class Resources extends Component {
@@ -16,7 +16,7 @@ class Resources extends Component {
 
     this.state = {
       "resourceModalOpen": false,
-      "currentResource": null
+      "currentResource": null,
     }
     this.handleResourceModal = this.handleResourceModal.bind(this);
     this.handleModalOpen = this.handleModalOpen.bind(this);
@@ -63,17 +63,43 @@ class Resources extends Component {
 
       }
     }
-    
+
     let resources = this.props.resources;
-    if (this.props.sortByDate === true) {
-      resources = resources.sort(sortByDate);
-
-    } else if (this.props.sortByDate === false) {
-
-      resources = resources.sort(sortByAlpha);
-
+    // holds all the functions for handling table sorting
+    const sortTable = {
+      "Resource Name"() {
+        resources = resources.sort((a, b) => {
+          // return true if a.name comes after b.name
+          return a.name > b.name;
+        });
+      },
+      "Date Added"() {
+        resources = resources.sort((a, b) => {
+          return new Date(b.date) - new Date(a.date);
+        });
+      },
+      "Rating"() {
+        resources = resources.sort((a, b) => {
+          // return true if a.rating is a larger fraction
+          return a.rating > b.rating;
+        });
+      },
+      "Gold Stars"() {
+        resources = resources.sort((a, b) => {
+          return a.golds - b.golds;
+        });
+      }
+    }
+    //handles table sort
+    if (this.props.sortByDate) {
+      sortTable["Resource Name"]();
+    } else {
+      sortTable["Date Added"]();
     }
 
+    // handles currentSort
+    sortTable[this.props.currentSort[0]]();
+    if (this.props.currentSort[1] === false) resources.reverse();
 
     return (
       <div className="resources-container">
@@ -94,22 +120,11 @@ class Resources extends Component {
           fromJobModal={false}
           resources={resources}
           handleResourceModal={this.handleResourceModal}
+          handleSort={this.props.handleSort}
         />
       </div>
     );
   }
-}
-
-function sortByAlpha(a, b) {
-  if (a.name < b.name)
-    return -1;
-  if (a.name > b.name)
-    return 1;
-  return 0;
-}
-
-function sortByDate(a, b) {
-  return new Date(b.date) - new Date(a.date);
 }
 
 module.exports = Resources;
