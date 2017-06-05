@@ -109,11 +109,7 @@ function sortByAlpha(a, b) {
 }
 
 function sortByDate(a, b) {
-  if (a.date < b.date)
-    return -1;
-  if (a.date > b.date)
-    return 1;
-  return 0;
+  return new Date(b.date) - new Date(a.date);
 }
 
 module.exports = Resources;
