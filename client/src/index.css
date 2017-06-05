@@ -45,17 +45,16 @@ button {
 }
 
 .search-container {
-  float: left;
-  padding-bottom: 5px;
+  position: absolute;
+  text-align: left;
+  width: 100%;
 }
-
 .search-container input {
   width: 0px;
   opacity: 0;
-  margin: 17px 10px;
+  margin: 0px 10px;
   padding: 3px;
   transition: all .5s ease;
-  position: absolute;
 }
 
 .search-container input.expanded {
@@ -63,6 +62,7 @@ button {
   width: 20%;
   opacity: 1;
   border: none;
+  padding: 3px;
   color: white;
   border-radius: 5px;
 }
