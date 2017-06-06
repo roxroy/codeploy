@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const bodyParser = require('body-parser');
 let passport = require('passport');
 let github = require('./auth/github');
 var session = require('express-session')
@@ -20,6 +21,8 @@ let dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/codeploy';
 mongoose.connect(dbUri);
 
 app.use(express.static('./client/public'));
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use(session({ secret: 'modern art', resave: true, saveUninitialized: true }));
 // Initialize Passport!  Also use passport.session() middleware, to support
@@ -33,12 +36,12 @@ app.get('/api', resourceCtrl.index);
 app.get('/api/resources', resourceCtrl.all);
 app.get('/api/resources/:id', resourceCtrl.one);
 app.post('/api/resources', resourceCtrl.new);
-app.post('/api/resources/:id', resourceCtrl.update);
+app.put('/api/resources/:id', resourceCtrl.update);
 
 app.get('/api/jobs', jobCtrl.all);
 app.get('/api/jobs/:id', jobCtrl.one);
 app.post('/api/jobs', jobCtrl.new);
-app.post('/api/jobs/:id', jobCtrl.update);
+app.put('/api/jobs/:id', jobCtrl.update);
 
 app.use('/', authRoutes);
 
