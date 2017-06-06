@@ -36,15 +36,22 @@ module.exports.new = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-	Resource.findById(1, function(err, resource) {
+	Resource.findById(req.body._id, function(err, resource) {
 	  if (err) throw err;
 
-	  resource.title = 'New title';
+	  resource.title = req.body.title;
+	  resource.description = req.body.description;
+	  resource.url = req.body.url;
+	  resource.reviews = req.body.reviews;
+	  resource.language = req.body.language;
+	  resource.image = req.body.image;
+	  resource.rating = req.body.rating;
 
 	  resource.save(function(err) {
 	    if (err) throw err;
 
 	    console.log('Resource successfully updated!');
+	  	res.status(200).send(resource);
 	  });
 	});
 };
