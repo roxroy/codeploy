@@ -36,12 +36,12 @@ app.get('/api', resourceCtrl.index);
 app.get('/api/resources', resourceCtrl.all);
 app.get('/api/resources/:id', resourceCtrl.one);
 app.post('/api/resources', resourceCtrl.new);
-app.post('/api/resources/:id', resourceCtrl.update);
+app.put('/api/resources/:id', resourceCtrl.update);
 
 app.get('/api/jobs', jobCtrl.all);
 app.get('/api/jobs/:id', jobCtrl.one);
 app.post('/api/jobs', jobCtrl.new);
-app.post('/api/jobs/:id', jobCtrl.update);
+app.put('/api/jobs/:id', jobCtrl.update);
 
 app.use('/', authRoutes);
 
