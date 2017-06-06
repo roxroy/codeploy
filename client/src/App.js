@@ -24,8 +24,8 @@ class App extends Component {
       resources: null,
       loggedIn: false,
       username: null,
+      sortByDate: true,
       jobs: null,
-      "currentSort": ["resourceName", true]
     };
     this.viewJobs = this.viewJobs.bind(this);
     this.viewResources = this.viewResources.bind(this);
@@ -33,7 +33,7 @@ class App extends Component {
     this.isAuth = this.isAuth.bind(this);
     this.sortResources = this.sortResources.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.handleSort = this.handleSort.bind(this);
+    this.saveResource = this.saveResource.bind(this);
   }
 
   getJobs() {
@@ -120,13 +120,13 @@ class App extends Component {
 
   sortResources(sortStatus) {
     //if true, sort by date
-    if (sortStatus) {
+    if (sortStatus === true) {
       this.setState({
-        currentSort: ["dateAdded", true]
+        sortByDate: true
       });
-    } else {
+    } else if (sortStatus === false) {
       this.setState({
-        currentSort: ["resourceName", true]
+        sortByDate: false
       });
     }
   }
@@ -154,21 +154,11 @@ class App extends Component {
       viewingJobs: false
     });
   }
-  handleSort(event) {
-    // order: true==ascending, false==descending
-    const cTH = event.target.className;
-    let order = this.state.currentSort[1];
-    
-    // if current column is being sorted
-    if (cTH === this.state.currentSort[0]) {
-      order = !order;
-    } else {
-      order = true;
-    };
-
-    this.setState({
-      currentSort: [cTH, order]
-    });
+  saveResource(resource) {
+    var updateresources = this.state.resources;
+    var newResource = resource;
+    updateresources.push(newResource);
+    this.setState({ resources: updateresources })
   }
   render() {
     const isViewingJobs = this.state.viewingJobs;
@@ -180,6 +170,7 @@ class App extends Component {
           viewJobs={this.viewJobs}
           viewResources={this.viewResources}
           logOut={this.logOut}
+          saveResource={this.saveResource}
         />
         {isViewingJobs ? (
           <div>
@@ -204,12 +195,7 @@ class App extends Component {
                 // change this.resources to this.state.resource when fetching is implemented 
                 resources={this.resources}
               />
-              <Resources
-                currentSort={this.state.currentSort}
-                resources={this.resources}
-                sortByDate={this.state.sortByDate}
-                handleSort={this.handleSort}
-              />
+              <Resources resources={this.resources} sortByDate={this.state.sortByDate} />
             </div>
           )
         }

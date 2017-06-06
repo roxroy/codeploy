@@ -11,13 +11,7 @@ class AddResourceButton extends Component {
 
 		this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.save = this.save.bind(this);
 	}
-	save() {
-  	console.log("save");
-
-  	//this saves
-  }
 	openModal() {
     this.setState({
       modalIsOpen: true
@@ -35,7 +29,7 @@ class AddResourceButton extends Component {
       {this.state.modalIsOpen && <AddResourceModal 
       	closeModal={this.closeModal}
       	modalIsOpen={this.state.modalIsOpen}
-      	save={this.save}
+        saveResource={this.props.saveResource}
       />}
       
     </div>
