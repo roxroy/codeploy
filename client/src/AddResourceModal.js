@@ -8,15 +8,16 @@ class AddResourceModal extends Component {
     this.save = this.save.bind(this);
 	}
 	save() {
-  	let resource =
+  	var resource =
       { "image": this.refs.newResourceImg.value, 
         "url": this.refs.newResourceLink.value, 
-        "addedBy": this.props....., 
+        "addedBy": null, 
         "name": this.refs.newResourceName.value, 
-        "date": this.props...., 
-        "rating": , 
+        "date": null, 
+        "rating": null, 
         "golds": null, 
-        "description": this.refs.newResourceReview.value }
+        "description": this.refs.newResourceReview.value 
+      };
     //TODO: confirm no empty entries
     // close modal
     this.props.saveResource(resource);

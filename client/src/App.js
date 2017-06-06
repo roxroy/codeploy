@@ -33,6 +33,7 @@ class App extends Component {
     this.isAuth = this.isAuth.bind(this);
     this.sortResources = this.sortResources.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.saveResource = this.saveResource.bind(this);
   }
 
   getJobs() {
