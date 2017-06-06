@@ -57,7 +57,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.remove = (req, res) => {
-	Resource.find({ id: '55' }, function(err, resource) {
+	Resource.findById(req.body._id, function(err, resource) {
 	  if (err) throw err;
 
 	 	resource.remove(function(err) {

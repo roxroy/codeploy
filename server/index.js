@@ -37,6 +37,7 @@ app.get('/api/resources', resourceCtrl.all);
 app.get('/api/resources/:id', resourceCtrl.one);
 app.post('/api/resources', resourceCtrl.new);
 app.put('/api/resources/:id', resourceCtrl.update);
+app.delete('/api/resources/:id', resourceCtrl.remove);
 
 app.get('/api/jobs', jobCtrl.all);
 app.get('/api/jobs/:id', jobCtrl.one);
