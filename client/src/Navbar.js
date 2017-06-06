@@ -18,7 +18,7 @@ class Navbar extends Component {
               <div className="container-fluid">
                 <Search handleSearch={this.props.handleSearch}/>
                 <h1 className="title">Codeploy</h1>
-                <Menu loggedIn={this.props.loggedIn} viewJobs={this.props.viewJobs} viewResources={this.props.viewResources} logOut={this.props.logOut} />
+                <Menu loggedIn={this.props.loggedIn} viewJobs={this.props.viewJobs} viewResources={this.props.viewResources} logOut={this.props.logOut} saveResource={this.props.saveResource} />
               </div>
             </div>
           );
