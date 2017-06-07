@@ -96,7 +96,7 @@ class Menu extends Component {
           <div className="loggedin-buttons">
             <ResourcesButton viewResources={this.props.viewResources} />
             <MyJobsButton viewJobs={this.props.viewJobs} />
-            <AddResourceButton />
+            <AddResourceButton saveResource={this.props.saveResource} />
             <LogOutButton loggedIn={isLoggedIn} logOut={this.props.logOut}/>
           </div>
         </Modal>

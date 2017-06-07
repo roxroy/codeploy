@@ -15,21 +15,21 @@ class Resources extends Component {
     super(props)
 
     this.state = {
-      "resourceModalOpen": false,
-      "currentResource": null,
+      resourceModalOpen: false,
+      currentResource: null,
     }
     this.handleResourceModal = this.handleResourceModal.bind(this);
     this.handleModalOpen = this.handleModalOpen.bind(this);
   }
   handleResourceModal(i) {
     this.setState({
-      "resourceModalOpen": !this.state.resourceModalOpen,
-      "currentResource": i
+      resourceModalOpen: !this.state.resourceModalOpen,
+      currentResource: i
     });
   }
   handleModalOpen() {
     this.setState({
-      "resourceModalOpen": !this.state.resourceModalOpen
+      resourceModalOpen: !this.state.resourceModalOpen
     });
   }
   render() {
@@ -67,24 +67,24 @@ class Resources extends Component {
     let resources = this.props.resources;
     // holds all the functions for handling table sorting
     const sortTable = {
-      "resourceName"() {
+      resourceName() {
         resources = resources.sort((a, b) => {
           // return true if a.name comes after b.name
-          return a.name > b.name;
+          return a.name.localeCompare(b.name)
         });
       },
-      "dateAdded"() {
+      dateAdded() {
         resources = resources.sort((a, b) => {
           return new Date(b.date) - new Date(a.date);
         });
       },
-      "rating"() {
+      rating() {
         resources = resources.sort((a, b) => {
           // return true if a.rating is a larger fraction
           return a.rating > b.rating;
         });
       },
-      "golds"() {
+      golds() {
         resources = resources.sort((a, b) => {
           return a.golds - b.golds;
         });
@@ -98,8 +98,8 @@ class Resources extends Component {
     }
 
     // handles currentSort
-    sortTable[this.props.currentSort[0]]();
-    if (this.props.currentSort[1] === false) resources.reverse();
+    sortTable[this.props.currentSort[0]];
+    if (!this.props.currentSort[1]) resources.reverse();
 
     return (
       <div className="resources-container">
@@ -117,7 +117,6 @@ class Resources extends Component {
         </Modal>
         {/*Generates a table of resources, handles sorting(TODO) and conditional rendering of modal*/}
         <ResourceTable
-          fromJobModal={false}
           resources={resources}
           handleResourceModal={this.handleResourceModal}
           handleSort={this.props.handleSort}

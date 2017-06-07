@@ -159,7 +159,6 @@ th, td {
 th {
   background-color :#404040;
   color: white;
-  cursor: pointer;
 }
 
 th:hover {
@@ -173,14 +172,18 @@ th:first-child {
 
  th:last-child {
   border-top-right-radius: 10px;
-  cursor: default;
 }
 
 .resource-table {
   width: 100%;
   height: 100%;
 }
-
+.resource-table th {
+  cursor: pointer;
+}
+.resource-table th:last-child {
+  cursor: default;
+}
 .resource-modal {
   display: flex;
   width: 100%;
@@ -213,6 +216,9 @@ th:first-child {
 p.description {
   margin-top: 10px;
   max-width: 1000px;
+}
+.job-list-container th:nth-child(-n+3){
+  cursor: pointer;
 }
 .job-resource-container {
   height: 80%;
