@@ -15,12 +15,14 @@ class MyJobs extends Component {
     this.state = {
       viewingJob: false,
       viewingJobResources: false,
-      currentJob: null
+      currentJob: null,
+      currentSort: ["jobPosition", true]
     };
 
     this.handleViewJob = this.handleViewJob.bind(this);
     this.handleViewResources = this.handleViewResources.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   handleViewJob(cJob) {
     let currentJobResources =
@@ -42,19 +44,68 @@ class MyJobs extends Component {
       viewingJobResources: false
     });
   }
+  handleClick(event) {
+    // order: true==ascending, false==descending
+    const cTH = event.target.className;
+    let order;
+
+    // if current column is being sorted
+    if (cTH === this.state.currentSort[0]) {
+      order = !this.state.currentSort[1];
+    } else {
+      order = true;
+    };
+    this.setState({
+      currentSort: [cTH, order]
+    });
+  }
   render() {
+    const jobSort = {
+      jobPosition(jobs) {
+        return jobs.sort((a, b) => {
+          // return true if a.jobPosition comes after b.jobPosition
+          return a.jobPosition.localeCompare(b.jobPosition);
+        });
+      },
+      companyName(jobs) {
+        return jobs.sort((a, b) => {
+          // return true if a.name comes after b.name
+          return a.companyName.localeCompare(b.companyName);
+        });
+      },
+      dateApplied(jobs) {
+        return jobs.sort((a, b) => {
+          return new Date(b.dateApplied) - new Date(a.dateApplied);
+        });
+      }
+    }
+    let jobs = jobSort[this.state.currentSort[0]](this.props.jobs);
+    if (!this.state.currentSort[1]) jobs.reverse();
+
+    let arrowD = this.state.currentSort[1] ?
+      <i className="fa fa-arrow-up" aria-hidden="true"></i> :
+      <i className="fa fa-arrow-down" aria-hidden="true"></i>;
     return (
       <div className="job-list-container">
         <table>
           <tbody>
             <tr>
-              <th>Job Position</th>
-              <th>Company Name</th>
-              <th>Date Applied</th>
+              <th onClick={this.handleClick} className="jobPosition">
+                {"Job Position "}
+                {(this.state.currentSort[0] === "jobPosition") && arrowD}
+              </th>
+              <th onClick={this.handleClick} className="companyName">
+                {"Company Name "}
+                {(this.state.currentSort[0] === "companyName") && arrowD}
+              </th>
+              <th onClick={this.handleClick} className="dateApplied">
+                {"Date Applied "}
+                {(this.state.currentSort[0] === "dateApplied") && arrowD}
+              </th>
               <th>Relevant Resources</th>
               <th>Comments</th>
             </tr>
-            {this.props.jobs.map((row, i) =>
+            {jobs.map((row, i) =>
               <EachJob
                 row={row}
                 key={i}

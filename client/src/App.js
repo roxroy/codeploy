@@ -24,8 +24,8 @@ class App extends Component {
       resources: null,
       loggedIn: false,
       username: null,
-      sortByDate: true,
       jobs: null,
+      currentSort: ["resourceName", true]
     };
     this.viewJobs = this.viewJobs.bind(this);
     this.viewResources = this.viewResources.bind(this);
@@ -34,6 +34,7 @@ class App extends Component {
     this.sortResources = this.sortResources.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.saveResource = this.saveResource.bind(this);
+    this.handleSort = this.handleSort.bind(this);
   }
 
   getJobs() {
@@ -120,13 +121,13 @@ class App extends Component {
 
   sortResources(sortStatus) {
     //if true, sort by date
-    if (sortStatus === true) {
+    if (sortStatus) {
       this.setState({
-        sortByDate: true
+        currentSort: ["dateAdded", true]
       });
-    } else if (sortStatus === false) {
+    } else {
       this.setState({
-        sortByDate: false
+        currentSort: ["resourceName", true]
       });
     }
   }
@@ -159,6 +160,22 @@ class App extends Component {
     var newResource = resource;
     updateresources.push(newResource);
     this.setState({ resources: updateresources })
+  }
+  handleSort(event) {
+    // order: true==ascending, false==descending
+    const cTH = event.target.className;
+    let order;
+
+    // if current column is being sorted
+    if (cTH === this.state.currentSort[0]) {
+      order = !this.state.currentSort[1];
+    } else {
+      order = true;
+    };
+
+    this.setState({
+      currentSort: [cTH, order]
+    });
   }
   render() {
     const isViewingJobs = this.state.viewingJobs;
@@ -195,7 +212,12 @@ class App extends Component {
                 // change this.resources to this.state.resource when fetching is implemented 
                 resources={this.resources}
               />
-              <Resources resources={this.resources} sortByDate={this.state.sortByDate} />
+              <Resources
+                resources={this.resources}
+                sortByDate={this.state.sortByDate}
+                handleSort={this.handleSort}
+                currentSort={this.state.currentSort}
+              />
             </div>
           )
         }
