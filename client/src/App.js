@@ -25,7 +25,7 @@ class App extends Component {
       loggedIn: false,
       username: null,
       jobs: null,
-      "currentSort": ["resourceName", true]
+      currentSort: ["resourceName", true]
     };
     this.viewJobs = this.viewJobs.bind(this);
     this.viewResources = this.viewResources.bind(this);
@@ -33,6 +33,7 @@ class App extends Component {
     this.isAuth = this.isAuth.bind(this);
     this.sortResources = this.sortResources.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.saveResource = this.saveResource.bind(this);
     this.handleSort = this.handleSort.bind(this);
   }
 
@@ -154,14 +155,20 @@ class App extends Component {
       viewingJobs: false
     });
   }
+  saveResource(resource) {
+    var updateresources = this.state.resources;
+    var newResource = resource;
+    updateresources.push(newResource);
+    this.setState({ resources: updateresources })
+  }
   handleSort(event) {
     // order: true==ascending, false==descending
     const cTH = event.target.className;
-    let order = this.state.currentSort[1];
-    
+    let order;
+
     // if current column is being sorted
     if (cTH === this.state.currentSort[0]) {
-      order = !order;
+      order = !this.state.currentSort[1];
     } else {
       order = true;
     };
@@ -180,6 +187,7 @@ class App extends Component {
           viewJobs={this.viewJobs}
           viewResources={this.viewResources}
           logOut={this.logOut}
+          saveResource={this.saveResource}
         />
         {isViewingJobs ? (
           <div>
@@ -205,10 +213,10 @@ class App extends Component {
                 resources={this.resources}
               />
               <Resources
-                currentSort={this.state.currentSort}
                 resources={this.resources}
                 sortByDate={this.state.sortByDate}
                 handleSort={this.handleSort}
+                currentSort={this.state.currentSort}
               />
             </div>
           )
