@@ -24,6 +24,9 @@ a {
 button {
   cursor: pointer;
 }
+button.close {
+  color: white;
+}
 
 .navbar .title {
   display: inline-block;
@@ -95,6 +98,11 @@ button {
 
 a.menu-icon {
   float: right;
+}
+
+.auth-buttons {
+  display: flex;
+  justify-content: center;
 }
 
 i.fa.fa-bars::before {

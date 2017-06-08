@@ -52,6 +52,9 @@ a {
 button {
   cursor: pointer;
 }
+button.close {
+  color: white;
+}
 
 .navbar .title {
   display: inline-block;
@@ -123,6 +126,11 @@ button {
 
 a.menu-icon {
   float: right;
+}
+
+.auth-buttons {
+  display: flex;
+  justify-content: center;
 }
 
 i.fa.fa-bars::before {
@@ -252,32 +260,13 @@ p.description {
   height: 80%;
   width: 80%;
 }
-
 button.close-resource-modal {
   position: absolute;
   right: 20px;
   top: 20px;
 }
-
 h3 {
   padding: 0;
   margin: -30px 0 10px 0px;
   text-align: center;
-}
-
-.close {
-  float: right;
-  font-size: 9px;
-  text-align: right;
-}
-
-.save-resource {
-  width: 150px;
-  padding: 10px;
-  padding-top: 2px;
-  text-align: center;
-  font-size: 16px;
-  margin: 0 auto;
-  margin-top: 8px;
-  display: block;
 }
