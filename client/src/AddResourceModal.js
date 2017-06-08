@@ -47,7 +47,7 @@ class AddResourceModal extends Component {
 						</form>
 	          <h4>Review/Comments</h4>
 	          <textarea ref="newResourceReview" placeholder="Provide some additional details..."></textarea>
-	          <button onClick={this.props.save}>Save</button>
+	          <button onClick={this.save}>Save</button>
 	      </Modal>
 		);
 	}

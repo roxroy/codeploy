@@ -156,10 +156,12 @@ class App extends Component {
     });
   }
   saveResource(resource) {
-    var updateresources = this.state.resources;
-    var newResource = resource;
+    console.log("inside saveresource");
+    var updateresources = this.globalResources,
+    newResource = resource;
     updateresources.push(newResource);
-    this.setState({ resources: updateresources })
+    console.log(this.globalResources);
+    //this.setState({ resources: updateresources })
   }
   handleSort(event) {
     // order: true==ascending, false==descending
