@@ -160,8 +160,10 @@ class App extends Component {
     var updateresources = this.globalResources,
     newResource = resource;
     updateresources.push(newResource);
+    this.resources = this.globalResources;
     console.log(this.globalResources);
-    //this.setState({ resources: updateresources })
+    
+    this.setState({ /*resources: updateresources*/ })
   }
   handleSort(event) {
     // order: true==ascending, false==descending
@@ -215,7 +217,7 @@ class App extends Component {
                 resources={this.resources}
               />
               <Resources
-                resources={this.globalResources}
+                resources={this.resources}
                 sortByDate={this.state.sortByDate}
                 handleSort={this.handleSort}
                 currentSort={this.state.currentSort}
