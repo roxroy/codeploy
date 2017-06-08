@@ -7,6 +7,7 @@ class LogOutButton extends Component {
   }
 
   logOut() {
+    this.props.closeResourceModal();
     this.props.logOut();
   }
 

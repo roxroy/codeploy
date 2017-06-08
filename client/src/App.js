@@ -215,7 +215,7 @@ class App extends Component {
                 resources={this.resources}
               />
               <Resources
-                resources={this.resources}
+                resources={this.globalResources}
                 sortByDate={this.state.sortByDate}
                 handleSort={this.handleSort}
                 currentSort={this.state.currentSort}

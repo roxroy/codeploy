@@ -8,6 +8,7 @@ class AddResourceModal extends Component {
     this.save = this.save.bind(this);
 	}
 	save() {
+		this.props.closeResourceModal();
   	var resource =
       { "image": this.refs.newResourceImg.value, 
         "url": this.refs.newResourceLink.value, 
@@ -19,36 +20,66 @@ class AddResourceModal extends Component {
         "description": this.refs.newResourceReview.value 
       };
     //TODO: confirm no empty entries
-    // close modal
     this.props.saveResource(resource);
   }
 	render() {
+		const addResourceStyle = {
+      overlay: {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(255, 255, 255, 0.75)'
+      },
+      content: {
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        position: 'absolute',
+        maxWidth: "80%",
+        maxHeight: "80%",
+        top: '40px',
+        left: '0',
+        right: '0',
+        margin: "0 auto",
+        bottom: '40px',
+        border: '1px solid #ccc',
+        background: '#fff',
+        overflow: 'auto',
+        WebkitOverflowScrolling: 'touch',
+        borderRadius: '7px',
+        outline: 'none',
+        padding: '20px'
+
+      }
+  }
 		return (
 			<Modal
-	          isOpen={this.props.modalIsOpen}
-	          onRequestClose={this.props.closeModal}
-
-	          contentLabel="Add a Resource"
-	        >
-	          <button className="close" onClick={this.props.closeModal}>X</button>
-	          <h4>Name</h4>
-	          <textarea ref="newResourceName" placeholder="Name of the resource"></textarea>
-	          <h4>Link</h4>
-	          <textarea ref="newResourceLink" placeholder="Paste URL"></textarea>
-	          <h4>Image Link</h4>
-	          <textarea ref="newResourceImg" placeholder="Paste image URL"></textarea>
-	          <h4>Rating</h4>
-	          <form className="stars">
-						  <input type="radio" ref="one" />&#9733;
-						  <input type="radio" ref="two" />&#9733; &#9733;
-						  <input type="radio" ref="three" />&#9733; &#9733; &#9733;
-						  <input type="radio" ref="four" />&#9733; &#9733; &#9733; &#9733;
-						  <input type="radio" ref="five" />&#9733; &#9733; &#9733; &#9733; &#9733;
-						</form>
-	          <h4>Review/Comments</h4>
-	          <textarea ref="newResourceReview" placeholder="Provide some additional details..."></textarea>
-	          <button onClick={this.save}>Save</button>
-	      </Modal>
+        isOpen={this.props.modalIsOpen}
+        onRequestClose={this.props.closeModal}
+        style={addResourceStyle}
+        contentLabel="Add a Resource"
+      >
+        <button className="close" onClick={this.props.closeModal}>X</button>
+        <h4>Name</h4>
+        <textarea ref="newResourceName" placeholder="Name of the resource"></textarea>
+        <h4>Link</h4>
+        <textarea ref="newResourceLink" placeholder="Paste URL"></textarea>
+        <h4>Image Link</h4>
+        <textarea ref="newResourceImg" placeholder="Paste image URL"></textarea>
+        <h4>Rating</h4>
+        <form className="stars">
+				  <input type="radio" ref="one" />&#9733; <br/>
+				  <input type="radio" ref="two" />&#9733; &#9733; <br/>
+				  <input type="radio" ref="three" />&#9733; &#9733; &#9733; <br/>
+				  <input type="radio" ref="four" />&#9733; &#9733; &#9733; &#9733; <br/>
+				  <input type="radio" ref="five" />&#9733; &#9733; &#9733; &#9733; &#9733;
+				</form>
+        <h4>Review/Comments</h4>
+        <textarea ref="newResourceReview" placeholder="Provide some additional details..."></textarea>
+        <button className="save-resource" onClick={this.save}>Save</button>
+	    </Modal>
 		);
 	}
 }

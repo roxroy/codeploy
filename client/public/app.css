@@ -1,0 +1,283 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.App a {
+  color: #f60;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.App {
+  text-align: center;
+}
+a {
+  cursor: pointer;
+}
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  width: 100%;
+  display: block;
+  border: none;
+  -webkit-box-shadow: 7px 6px 5px 0px rgba(31,25,24,0.32);
+  -moz-box-shadow: 7px 6px 5px 0px rgba(31,25,24,0.32);
+  box-shadow: 7px 6px 5px 0px rgba(31,25,24,0.32);
+}
+
+button {
+  cursor: pointer;
+}
+
+.navbar .title {
+  display: inline-block;
+  text-align: center;
+  font-size: 1.7em;
+  color: white;
+}
+
+.navbar a {
+  display: inline-block;
+  padding-top: 16px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 24px;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+.search-container {
+  position: absolute;
+  text-align: left;
+  pointer-events: none;
+  width: 100%;
+}
+.clear-search, .search-container input {
+  position: relative;
+  top: -5px;
+}
+.search-container input {
+  width: 0px;
+  opacity: 0;
+  margin: 0px 10px;
+  padding: 3px;
+  transition: all .5s ease;
+}
+.pointer-events {
+  pointer-events:auto;
+}
+
+.search-container input.expanded {
+  background-color: #606060;
+  width: 20%;
+  opacity: 1;
+  border: none;
+  padding: 3px;
+  color: white;
+  border-radius: 5px;
+}
+
+.clear-search {
+  border-radius: 50%;
+  z-index: 10;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #cccccc;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #cccccc;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #cccccc;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #cccccc;
+}
+
+a.menu-icon {
+  float: right;
+}
+
+i.fa.fa-bars::before {
+  float: right;
+}
+
+.null {
+  display: inline-block;
+  float: right;
+  padding: 0;
+  margin: 0;
+}
+
+.content {
+  margin-top: 20px;
+}
+
+.modal-button {
+  background: transparent;
+  color: white;
+  border: none;
+}
+
+.resources-container, .resource-table, .job-list-container {
+  display: flex;
+  justify-content: center;
+}
+
+table, tbody{
+  margin-top: 10px;
+  width: 80%;
+  height: 100%;
+  border-collapse: collapse;
+}
+
+.resource-table img {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+}
+
+.sortbutton {
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  background: #333;
+  color: white;
+  margin-bottom: 12px;
+}
+
+tr:hover {
+  background-color: #f5f5f5
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color :#404040;
+  color: white;
+}
+
+th:hover {
+  background-color: #202020;
+}
+
+th:first-child {
+  border-top-left-radius: 10px;
+  
+}
+
+ th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.resource-table {
+  width: 100%;
+  height: 100%;
+}
+.resource-table th {
+  cursor: pointer;
+}
+.resource-table th:last-child {
+  cursor: default;
+}
+.resource-modal {
+  display: flex;
+  width: 100%;
+  padding: 50px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.resource-modal button{
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.resource-modal img {
+  display: block;
+  max-height: 250px;
+  min-width: auto;
+}
+
+.resource-form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 20px 50px;
+  padding: 10px;
+  border-left: thick solid #808080;
+}
+
+p.description {
+  margin-top: 10px;
+  max-width: 1000px;
+}
+.job-list-container th:nth-child(-n+3){
+  cursor: pointer;
+}
+.job-resource-container {
+  height: 80%;
+  width: 80%;
+}
+
+button.close-resource-modal {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+h3 {
+  padding: 0;
+  margin: -30px 0 10px 0px;
+  text-align: center;
+}
+
+.close {
+  float: right;
+  font-size: 9px;
+  text-align: right;
+}
+
+.save-resource {
+  width: 150px;
+  padding: 10px;
+  padding-top: 2px;
+  text-align: center;
+  font-size: 16px;
+  margin: 0 auto;
+  margin-top: 8px;
+  display: block;
+}
