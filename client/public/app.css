@@ -52,6 +52,15 @@ a {
 button {
   cursor: pointer;
 }
+button.close {
+  color: #A9A9A9;
+  position: absolute;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+}
 
 .navbar .title {
   display: inline-block;
@@ -123,6 +132,11 @@ button {
 
 a.menu-icon {
   float: right;
+}
+
+.auth-buttons {
+  display: flex;
+  justify-content: center;
 }
 
 i.fa.fa-bars::before {
@@ -252,32 +266,44 @@ p.description {
   height: 80%;
   width: 80%;
 }
-
 button.close-resource-modal {
   position: absolute;
   right: 20px;
   top: 20px;
 }
-
 h3 {
   padding: 0;
   margin: -30px 0 10px 0px;
   text-align: center;
 }
 
-.close {
-  float: right;
-  font-size: 9px;
-  text-align: right;
+.add-resource-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  height: 550px;
 }
-
-.save-resource {
-  width: 150px;
-  padding: 10px;
-  padding-top: 2px;
-  text-align: center;
-  font-size: 16px;
-  margin: 0 auto;
-  margin-top: 8px;
-  display: block;
+.add-resource-container textarea {
+  min-height: 35px;
+  padding: 5px;
+}
+textarea.additional-details {
+  min-height: 70px;
+}
+.save-button-container {
+  display: flex;
+  justify-content: center;
+}
+button.save-resource {
+  max-height: 35px;
+  max-width: 150px;
+  min-height: 35px;
+  min-width: 150px;
+  padding: 5px;
+  margin: 15px;
+  border-radius: 5px;
+}
+button.save-resource:active {
+  transform: translateY(2px);
 }
