@@ -187,8 +187,19 @@ table, tbody{
   margin-right: 19px;
   font-size: 11px;
 }
-.sortbutton:hover {
+.sortbutton:hover, .addjobbutton:hover {
   background: #2e075a;
+}
+.addjobbutton {
+  padding: 12px;
+  text-align: center;
+  border-radius: 10px;
+  border: none;
+  background: #845af4;
+  color: #f5f5f5;
+  margin-bottom: 12px;
+  margin-right: 19px;
+  font-size: 12px;
 }
 
 tr:hover {
@@ -312,5 +323,32 @@ button.save-resource {
   border-radius: 5px;
 }
 button.save-resource:active {
+  transform: translateY(2px);
+}
+
+.add-job-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  height: 550px;
+}
+.add-job-container textarea {
+  min-height: 35px;
+  padding: 5px;
+}
+textarea.additional-details {
+  min-height: 70px;
+}
+button.save-job {
+  max-height: 35px;
+  max-width: 150px;
+  min-height: 35px;
+  min-width: 150px;
+  padding: 5px;
+  margin: 15px;
+  border-radius: 5px;
+}
+button.save-job:active {
   transform: translateY(2px);
 }

@@ -168,6 +168,13 @@ class App extends Component {
     
     this.setState({ /*resources: updateresources*/ })
   }
+  saveJob(job) {
+    console.log("inside savejob");
+    let updatejobs = this.state.jobs;
+    let newJob = job;
+    updatejobs.push(newJob);
+    this.setState({ jobs: updatejobs });
+  }
   handleSort(event) {
     // order: true==ascending, false==descending
     const cTH = event.target.id;
@@ -201,7 +208,7 @@ class App extends Component {
                 ? 'Fetching message from API'
                 : this.state.resources}
             </p>
-            <MyJobs jobs={this.state.jobs} />
+            <MyJobs jobs={this.state.jobs} saveJob={this.saveJob} />
           </div>
         ) : (
             <div>
