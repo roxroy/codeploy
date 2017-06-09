@@ -16,6 +16,14 @@ function ResourceTable(props) {
                   <i id="resourceName" className="fa fa-arrow-down" aria-hidden="true"></i>
               )}
             </th>
+            <th id="language" onClick={props.handleSort}>
+              {"Language"}
+              {(props.currentSort[0] === "language") && (
+                props.currentSort[1] ?
+                  <i id="language" className="fa fa-arrow-up" aria-hidden="true"></i> :
+                  <i id="language" className="fa fa-arrow-down" aria-hidden="true"></i>
+              )}
+            </th>
             <th id="dateAdded" onClick={props.handleSort}>
               {"Date Added "}
               {(props.currentSort[0] === "dateAdded") && (

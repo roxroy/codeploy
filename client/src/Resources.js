@@ -88,6 +88,12 @@ class Resources extends Component {
         resources = resources.sort((a, b) => {
           return a.golds - b.golds;
         });
+      },
+      language() {
+        resources = resources.sort((a, b) => {
+          // return true if a.name comes after b.name
+          return a.language.localeCompare(b.language)
+        });
       }
     }
     //handles table sort
