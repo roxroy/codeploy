@@ -170,9 +170,8 @@ class App extends Component {
   }
   handleSort(event) {
     // order: true==ascending, false==descending
-    const cTH = event.target.className;
+    const cTH = event.target.id;
     let order;
-
     // if current column is being sorted
     if (cTH === this.state.currentSort[0]) {
       order = !this.state.currentSort[1];

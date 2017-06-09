@@ -98,7 +98,7 @@ class Resources extends Component {
     }
 
     // handles currentSort
-    if (sortTable[this.props.currentSort[0]]()) sortTable[this.props.currentSort[0]]();
+    sortTable[this.props.currentSort[0]]();
     if (!this.props.currentSort[1]) resources.reverse();
 
     return (

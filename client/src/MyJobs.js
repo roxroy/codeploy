@@ -46,7 +46,7 @@ class MyJobs extends Component {
   }
   handleClick(event) {
     // order: true==ascending, false==descending
-    const cTH = event.target.className;
+    const cTH = event.target.id;
     let order;
 
     // if current column is being sorted
@@ -82,25 +82,34 @@ class MyJobs extends Component {
     let jobs = jobSort[this.state.currentSort[0]](this.props.jobs);
     if (!this.state.currentSort[1]) jobs.reverse();
 
-    let arrowD = this.state.currentSort[1] ?
-      <i className="fa fa-arrow-up" aria-hidden="true"></i> :
-      <i className="fa fa-arrow-down" aria-hidden="true"></i>;
     return (
       <div className="job-list-container">
         <table>
           <tbody>
             <tr>
-              <th onClick={this.handleClick} className="jobPosition">
+              <th onClick={this.handleClick} id="jobPosition">
                 {"Job Position "}
-                {(this.state.currentSort[0] === "jobPosition") && arrowD}
+                {(this.state.currentSort[0] === "jobPosition") && (
+                  this.state.currentSort[1] ?
+                    <i id="jobPosition" className="fa fa-arrow-up" aria-hidden="true"></i> :
+                    <i id="jobPosition" className="fa fa-arrow-down" aria-hidden="true"></i>
+                )}
               </th>
-              <th onClick={this.handleClick} className="companyName">
+              <th onClick={this.handleClick} id="companyName">
                 {"Company Name "}
-                {(this.state.currentSort[0] === "companyName") && arrowD}
+                {(this.state.currentSort[0] === "companyName") && (
+                  this.state.currentSort[1] ?
+                    <i id="companyName" className="fa fa-arrow-up" aria-hidden="true"></i> :
+                    <i id="companyName" className="fa fa-arrow-down" aria-hidden="true"></i>
+                )}
               </th>
-              <th onClick={this.handleClick} className="dateApplied">
+              <th onClick={this.handleClick} id="dateApplied">
                 {"Date Applied "}
-                {(this.state.currentSort[0] === "dateApplied") && arrowD}
+                {(this.state.currentSort[0] === "dateApplied") && (
+                  this.state.currentSort[1] ?
+                    <i id="dateApplied" className="fa fa-arrow-up" aria-hidden="true"></i> :
+                    <i id="dateApplied" className="fa fa-arrow-down" aria-hidden="true"></i>
+                )}
               </th>
               <th>Relevant Resources</th>
               <th>Comments</th>
