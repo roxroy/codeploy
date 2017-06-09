@@ -158,7 +158,10 @@ class App extends Component {
   saveResource(resource) {
     console.log("inside saveresource");
     var updateresources = this.globalResources,
-    newResource = resource;
+    newResource = resource,
+    today = new Date();
+
+    newResource.date = `${today.getMonth()}/${today.getDay()}/${today.getFullYear()}`
     updateresources.push(newResource);
     this.resources = this.globalResources;
     console.log(this.globalResources);
@@ -176,7 +179,6 @@ class App extends Component {
     } else {
       order = true;
     };
-
     this.setState({
       currentSort: [cTH, order]
     });
