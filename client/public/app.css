@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Crete+Round|Exo+2|Josefin+Sans|Mogra|Playfair+Display|Roboto);.App {
+@import url(https://fonts.googleapis.com/css?family=Exo+2|Roboto);.App {
   text-align: center;
 }
 
@@ -34,7 +34,7 @@ body {
 }
 
 h1,h2,h3,h4 {
-  font-family: 'Mogra', cursive;
+  font-family: 'Exo 2', sans-serif;
 }
 
 .App {
