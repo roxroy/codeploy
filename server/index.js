@@ -18,6 +18,7 @@ const PORT = process.env.PORT || 3000;
 
 // Connect mongoose to our local database
 let dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/codeploy';
+mongoose.Promise = Promise;
 mongoose.connect(dbUri);
 
 app.use(express.static('./client/public'));

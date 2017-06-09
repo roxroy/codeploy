@@ -72,6 +72,21 @@ class App extends Component {
       });
   }
 
+  SaveResourceOnServer(resource) {
+    const body = JSON.stringify(resource);
+    fetch('/api/resources', { method: 'POST', credentials: 'include',
+       body : body,
+       headers: {'Content-Type': 'application/json'}
+      })
+      .then(response => {        
+        return response.json();
+      })
+      .then(json => {
+      }).catch(e => {
+        console.log("SaveResourceOnServer error", e);
+      });
+  }
+
   componentDidMount() {
     this.isAuth();
     this.getJobs();
@@ -131,6 +146,7 @@ class App extends Component {
       });
     }
   }
+
   handleSearch(value) {
     // TODO
     //  on search replaces this.state.resources with the searched array
@@ -155,11 +171,15 @@ class App extends Component {
       viewingJobs: false
     });
   }
+
   saveResource(resource) {
     console.log("inside saveresource");
     var updateresources = this.globalResources,
-    newResource = resource,
-    today = new Date();
+        newResource = resource,
+        today = new Date();
+
+    newResource.date = today;
+    this.SaveResourceOnServer(newResource);
 
     newResource.date = `${today.getMonth()}/${today.getDay()}/${today.getFullYear()}`
     updateresources.push(newResource);
