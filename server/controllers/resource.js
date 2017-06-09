@@ -63,6 +63,6 @@ module.exports.remove = (req, res) => {
 
 module.exports.index = (req, res) => {
   res.set('Content-Type', 'application/json');
-  let text = `Hello from the backend server @ ${new Date()}`;
+  let text = `Hello, username! Current date and time: ${new Date()}`;
   res.send('{"message":"' + text + '"}');
 };
