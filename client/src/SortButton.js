@@ -21,7 +21,7 @@ class SortButton extends Component {
 	render() {
 		return (
 			<div>
-				{(this.props.resources.length !== this.props.globalResources.length) &&
+				{(this.props.showAllButton) &&
 					<button onClick={this.props.viewResources} className="sortbutton"> View All Resources </button>
 				}
 				<button onClick={this.sortState} className="sortbutton"> Sort by Date | Sort Alphabetically </button>
