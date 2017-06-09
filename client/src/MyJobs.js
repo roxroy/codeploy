@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 const EachJob = require('./EachJob');
 const JobModal = require('./JobModal');
+const AddJobButton = require('./AddJobButton');
 
 /*
 TODO:
@@ -83,6 +84,8 @@ class MyJobs extends Component {
     if (!this.state.currentSort[1]) jobs.reverse();
 
     return (
+      <div>
+      <AddJobButton jobs={this.props.jobs} saveJob={this.props.saveJob} />
       <div className="job-list-container">
         <table>
           <tbody>
@@ -129,6 +132,7 @@ class MyJobs extends Component {
           viewingJob={this.state.viewingJob}
           job={this.state.currentJob}
         />}
+      </div>
       </div>
     );
   }
