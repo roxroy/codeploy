@@ -4,19 +4,18 @@ const Navbar = require('./Navbar');
 const SortButton = require('./SortButton');
 const Resources = require('./Resources');
 const MyJobs = require('./MyJobs');
-// todo: style search clear button
+
 class App extends Component {
   constructor(props) {
     super(props);
 
-    // TODO: dummy data, delete to test fetching
+    // TODO: dummy data, delete loremipsum and this.resources to test fetching
     let loremipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida est sit amet mi egestas, a pharetra sem hendrerit. Ut sit amet lacinia ex, vel pellentesque metus. In placerat, lacus eget porttitor imperdiet, sem nibh faucibus turpis, ultricies ultricies turpis orci in augue. Integer ut posuere ante. Pellentesque blandit purus at tortor malesuada porttitor venenatis sed lacus.";
     this.resources = [{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website1.com/", "addedBy": "user1", "name": "abcd", "date": "01/03/2016", "rating": "1/5", "golds": "1", "description": loremipsum },
     { "image": "https://image.flaticon.com/teams/new/1-freepik.jpg", "url": "https://www.website2.com/", "addedBy": "user2", "name": "aaab", "date": "02/14/2017", "rating": "2/5", "golds": "2", "description": loremipsum },
     { "image": "http://www.freeiconspng.com/uploads/flat-mac-icon-15.png", "url": "https://www.website3.com/", "addedBy": "user3", "name": "name3", "date": "01/01/2017", "rating": "3/5", "golds": "3", "description": loremipsum }];
 
-    // TODO: move to assign after fetch
-    this.globalResources = this.resources;
+    this.allResources;
 
     this.state = {
       fetching: true,
@@ -25,7 +24,8 @@ class App extends Component {
       loggedIn: false,
       username: null,
       jobs: null,
-      currentSort: ["resourceName", true]
+      currentSort: ["resourceName", true],
+      resetSearch: false
     };
     this.viewJobs = this.viewJobs.bind(this);
     this.viewResources = this.viewResources.bind(this);
@@ -74,11 +74,12 @@ class App extends Component {
 
   SaveResourceOnServer(resource) {
     const body = JSON.stringify(resource);
-    fetch('/api/resources', { method: 'POST', credentials: 'include',
-       body : body,
-       headers: {'Content-Type': 'application/json'}
-      })
-      .then(response => {        
+    fetch('/api/resources', {
+      method: 'POST', credentials: 'include',
+      body: body,
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(response => {
         return response.json();
       })
       .then(json => {
@@ -102,6 +103,14 @@ class App extends Component {
           resources: json.message,
           fetching: false
         });
+        // todo: delete bottom function call, when fetching is implemented
+        this.setState({
+          resources: this.resources,
+          fetching: false
+        });
+        console.log(json.message)
+
+        this.allResources = this.state.resources;
       }).catch(e => {
         this.setState({
           resources: `API call failed: ${e}`,
@@ -117,11 +126,10 @@ class App extends Component {
   }
 
   viewResources() {
-    // todo: change when fetching resources is implemented
-    // change variable assign to state.resource assign
-    this.resources = this.globalResources;
     this.setState({
-      viewingJobs: false
+      viewingJobs: false,
+      resetSearch: false,
+      resources: this.allResources
     });
   }
 
@@ -148,14 +156,12 @@ class App extends Component {
   }
 
   handleSearch(value) {
-    // TODO
-    //  on search replaces this.state.resources with the searched array
     let searchedArray = [];
     let re = value;
     re = new RegExp(re, "im");
 
-    if (!this.globalResources) return;
-    for (let cObj of this.globalResources) {
+    if (!this.allResources) return;
+    for (let cObj of this.allResources) {
       if (re.test(cObj.name) || re.test(cObj.addedBy) || re.test(cObj.description)) searchedArray.push(cObj);
     }
     if (searchedArray.length === 0) {
@@ -164,29 +170,24 @@ class App extends Component {
       console.log("Found: ", searchedArray);
     }
 
-    // todo: change when fetching resources is implemented
-    // change variable assign to state.resource assign
-    this.resources = searchedArray;
     this.setState({
-      viewingJobs: false
+      viewingJobs: false,
+      resetSearch: true,
+      resources: searchedArray
     });
   }
 
   saveResource(resource) {
     console.log("inside saveresource");
-    var updateresources = this.globalResources,
-        newResource = resource,
-        today = new Date();
+    var updateresources = this.allResources,
+      newResource = resource,
+      today = new Date();
 
-    newResource.date = today;
+    newResource.date = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`
     this.SaveResourceOnServer(newResource);
-
-    newResource.date = `${today.getMonth()}/${today.getDay()}/${today.getFullYear()}`
     updateresources.push(newResource);
-    this.resources = this.globalResources;
-    console.log(this.globalResources);
-    
-    this.setState({ /*resources: updateresources*/ })
+
+    this.setState({ resources: updateresources })
   }
   saveJob(job) {
     console.log("inside savejob");
@@ -211,50 +212,54 @@ class App extends Component {
   }
   render() {
     const isViewingJobs = this.state.viewingJobs;
-    return (
-      <div className="App">
-        <Navbar
-          handleSearch={this.handleSearch}
-          loggedIn={this.state.loggedIn}
-          viewJobs={this.viewJobs}
-          viewResources={this.viewResources}
-          logOut={this.logOut}
-          saveResource={this.saveResource}
-        />
-        {isViewingJobs ? (
-          <div>
-            <p className="App-intro">
-              {this.state.fetching
-                ? 'Fetching message from API'
-                : this.state.resources}
-            </p>
-            <MyJobs jobs={this.state.jobs} saveJob={this.saveJob} />
-          </div>
-        ) : (
+    if (Array.isArray(this.state.resources)) {
+      return (
+        <div className="App">
+          <Navbar
+            handleSearch={this.handleSearch}
+            loggedIn={this.state.loggedIn}
+            viewJobs={this.viewJobs}
+            viewResources={this.viewResources}
+            logOut={this.logOut}
+            saveResource={this.saveResource}
+          />
+          {isViewingJobs ? (
             <div>
               <p className="App-intro">
                 {this.state.fetching
                   ? 'Fetching message from API'
-                  : this.state.resources}
+                  : /*this.state.resources*/"Fetching Success"}
               </p>
-              <SortButton
-                sortResources={this.sortResources}
-                viewResources={this.viewResources}
-                globalResources={this.globalResources}
-                // change this.resources to this.state.resource when fetching is implemented 
-                resources={this.resources}
-              />
-              <Resources
-                resources={this.resources}
-                sortByDate={this.state.sortByDate}
-                handleSort={this.handleSort}
-                currentSort={this.state.currentSort}
-              />
+              <MyJobs jobs={this.state.jobs} saveJob={this.saveJob} />
             </div>
-          )
-        }
-      </div>
-    );
+          ) : (
+              <div>
+                <p className="App-intro">
+                  {this.state.fetching
+                    ? 'Fetching message from API'
+                    : /*this.state.resources*/"Fetching Success"}
+                </p>
+                <SortButton
+                  sortResources={this.sortResources}
+                  viewResources={this.viewResources}
+                  showAllButton={this.state.resetSearch}
+                  // change this.resources to this.state.resource when fetching is implemented 
+                  resources={this.resources}
+                />
+                <Resources
+                  resources={this.state.resources}
+                  sortByDate={this.state.sortByDate}
+                  handleSort={this.handleSort}
+                  currentSort={this.state.currentSort}
+                />
+              </div>
+            )
+          }
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
