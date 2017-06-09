@@ -243,8 +243,7 @@ class App extends Component {
                   sortResources={this.sortResources}
                   viewResources={this.viewResources}
                   showAllButton={this.state.resetSearch}
-                  // change this.resources to this.state.resource when fetching is implemented 
-                  resources={this.resources}
+                  resources={this.state.resources}
                 />
                 <Resources
                   resources={this.state.resources}
