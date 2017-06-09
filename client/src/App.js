@@ -174,7 +174,6 @@ class App extends Component {
     } else {
       order = true;
     };
-
     this.setState({
       currentSort: [cTH, order]
     });
