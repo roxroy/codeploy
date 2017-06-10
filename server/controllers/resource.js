@@ -41,7 +41,6 @@ module.exports.one = (req, res) => {
 };
 
 module.exports.new = (req, res) => {
- console.log('newResource body', req.body);
 	let newResource = Resource({
 	  name: req.body.name,
 	  description: req.body.description,
@@ -49,10 +48,9 @@ module.exports.new = (req, res) => {
 	  language: req.body.language,
 	  image: req.body.image,
  		rating : req.body.rating,
- 		dateAdded: "01/03/2016",
+ 		dateAdded:  (new Date()) ,
 	  golds: req.body.golds,
 	});
- console.log('newResource', newResource);
 
 	newResource.save(function(err, resource) {
 	  if (err) throw err;
