@@ -28,6 +28,7 @@ class App extends Component {
     this.sortResources = this.sortResources.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.saveResource = this.saveResource.bind(this);
+    this.saveJob = this.saveJob.bind(this);
     this.handleSort = this.handleSort.bind(this);
   }
 
@@ -210,7 +211,7 @@ class App extends Component {
   }
 
   saveJob(job) {
-    console.log("inside saveJob";
+    console.log("inside saveJob");
     let updatejobs = this.state.jobs;
     let newJob = job;
     this.SaveJobOnServer(newJob);
