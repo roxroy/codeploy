@@ -8,17 +8,8 @@ let resourceSchema = new Schema({
   language: String,
   image: String,
   rating: String,
-  created_at: Date,
-  updated_at: Date
-});
-
-resourceSchema.pre('save', function(next) {
-  var currentDate = new Date();
-  this.updated_at = currentDate;
-  if (!this.created_at) {
-    this.created_at = currentDate;
-  }
-  next();
+  gold_stars: String,
+  date_added: Date,
 });
 
 module.exports =  mongoose.model('Resource', resourceSchema);
