@@ -49,7 +49,8 @@ function ensureAuthenticated(req, res, next) {
 router.get('/isauth', function(req, res){
   if (req.isAuthenticated()) {
     res.status(200).json({
-        status: 'Login successful!'
+        status: 'Login successful!',
+        username : req.user.username,
     });
   } else {
     res.status(401).json({

@@ -60,22 +60,30 @@ class App extends Component {
       })
   }
 
-
   isAuth() {
     fetch('/isauth', { method: 'GET', credentials: 'include' })
       .then(response => {
+        this.setState({
+          fetching: true
+        });
+
         if (!response.ok) {
           throw new Error('not logged in');
         }
         return response.json();
       })
       .then(json => {
+        console.log('isAuth', json);
         this.setState({
-          loggedIn: true
+          fetching: false,
+          username: json.username,
+          loggedIn: true,
         });
       }).catch(e => {
         this.setState({
-          loggedIn: false
+          username: null,
+          loggedIn: false,
+          fetching: false,
         });
       });
   }
@@ -108,26 +116,6 @@ class App extends Component {
     this.isAuth();
     this.getJobs();
     this.getResources();
-
-    fetch('/api')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`status ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(json => {
-        this.setState({
-          fetching: false
-        });
-        // todo: delete bottom function call, when fetching is implemented
-        console.log(json.message)
-      }).catch(e => {
-        this.setState({
-          resources: `API call failed: ${e}`,
-          fetching: false
-        });
-      })
   }
 
   viewJobs() {
@@ -239,7 +227,7 @@ class App extends Component {
               <p className="App-intro">
                 {this.state.fetching
                   ? 'Fetching message from API'
-                  : /*this.state.resources*/"Fetching Success"}
+                  : /*this.state.resources*/"Fetching Success: " + this.state.username}
               </p>
               <MyJobs jobs={this.state.jobs} saveJob={this.saveJob} />
             </div>
@@ -248,7 +236,7 @@ class App extends Component {
                 <p className="App-intro">
                   {this.state.fetching
                     ? 'Fetching message from API'
-                    : /*this.state.resources*/"Fetching Success"}
+                    : /*this.state.resources*/"Fetching Success: " + this.state.username}
                 </p>
                 <SortButton
                   sortResources={this.sortResources}
