@@ -9,7 +9,7 @@ function ResourceModal(props) {
       <div className="resource-form">
         <p>Name: {row.name}</p>
         <p>Language: {row.language}</p>
-        <p>Date Added: {row.date}</p>
+        <p>Date Added: {row.dateAdded}</p>
         <p>Link: <a href={row.url}>{row.url}</a></p>
         <p>Added by: {row.addedBy}</p>
         <p>Rating: {row.rating}</p>

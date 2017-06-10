@@ -49,10 +49,8 @@ module.exports.new = (req, res) => {
 	  language: req.body.language,
 	  image: req.body.image,
  		rating : req.body.rating,
-	  rating: "2/5",
-		addedBy: "user1",
- 		date: "01/03/2016",
-	  golds: "1",
+ 		dateAdded: "01/03/2016",
+	  golds: req.body.golds,
 	});
  console.log('newResource', newResource);
 

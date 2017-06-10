@@ -75,7 +75,7 @@ class Resources extends Component {
       },
       dateAdded() {
         resources = resources.sort((a, b) => {
-          return new Date(b.date) - new Date(a.date);
+          return new Date(b.dateAdded) - new Date(a.dateAdded);
         });
       },
       rating() {

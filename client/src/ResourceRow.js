@@ -18,7 +18,7 @@ class ResourceRow extends Component {
         <td><img src={row.image} alt="resource-icon"/></td>
         <td>{row.name}</td>
         <td>{row.language}</td>
-        <td>{row.date}</td>
+        <td>{row.dateAdded}</td>
         <td>{row.rating}</td>
         <td>{row.golds}</td>
         {(this.props.fromJobModal)?

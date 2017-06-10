@@ -8,8 +8,8 @@ let resourceSchema = new Schema({
   language: String,
   image: String,
   rating: String,
-  gold_stars: String,
-  date_added: Date,
+  golds: String,
+  dateAdded: Date,
 });
 
 module.exports =  mongoose.model('Resource', resourceSchema);

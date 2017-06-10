@@ -15,7 +15,7 @@ class AddResourceModal extends Component {
         "url": this.refs.newResourceLink.value,
         "addedBy": null,
         "name": this.refs.newResourceName.value,
-        "date": null,
+        "dateAdded": null,
         "rating": null,
         "golds": null,
         "description": this.refs.newResourceReview.value

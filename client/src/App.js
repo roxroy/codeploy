@@ -182,7 +182,7 @@ class App extends Component {
       newResource = resource,
       today = new Date();
 
-    newResource.date = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`
+    newResource.dateAdded = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`
     this.SaveResourceOnServer(newResource);
     updateresources.push(newResource);
 
