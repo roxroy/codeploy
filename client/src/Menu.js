@@ -59,7 +59,7 @@ class Menu extends Component {
     };
 
     this.openMenuModal = this.openMenuModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.closeResourceModal = this.closeResourceModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
   }
 
@@ -73,7 +73,7 @@ class Menu extends Component {
     //references are now sync'd and can be accessed.
   }
 
-  closeModal() {
+  closeResourceModal() {
     this.setState({
       modalIsOpen: false
     });
@@ -88,27 +88,27 @@ class Menu extends Component {
       modal = <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
+          onRequestClose={this.closeResourceModal}
           style={menuModal}
           contentLabel="Your options"
         >
-        <button className="close" onClick={this.closeModal}>X</button>
+        <button className="close" onClick={this.closeResourceModal}>X</button>
           <div className="loggedin-buttons">
-            <ResourcesButton viewResources={this.props.viewResources} />
-            <MyJobsButton viewJobs={this.props.viewJobs} />
-            <AddResourceButton saveResource={this.props.saveResource} />
-            <LogOutButton loggedIn={isLoggedIn} logOut={this.props.logOut}/>
+            <ResourcesButton viewResources={this.props.viewResources} closeResourceModal={this.closeResourceModal}/>
+            <MyJobsButton viewJobs={this.props.viewJobs} closeResourceModal={this.closeResourceModal}/>
+            <AddResourceButton saveResource={this.props.saveResource} closeResourceModal={this.closeResourceModal}/>
+            <LogOutButton loggedIn={isLoggedIn} logOut={this.props.logOut} closeResourceModal={this.closeResourceModal}/>
           </div>
         </Modal>
     } else if (!isLoggedIn && openModal) {
       modal = <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
+          onRequestClose={this.closeResourceModal}
           style={centerModal}
           contentLabel="Sign in"
         >
-        <button className="close" onClick={this.closeModal}>X</button>
+        <button className="close" onClick={this.closeResourceModal}>X</button>
         <HandleAuth />
         </Modal>
     } else if (!openModal) {

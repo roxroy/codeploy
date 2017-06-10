@@ -16,7 +16,7 @@ class JobModal extends Component {
   }
   handleSort(event) {
     // order: true==ascending, false==descending
-    const cTH = event.target.className;
+    const cTH = event.target.id;
     let order = this.state.resourceSort[1];
 
     // if current column is being sorted
@@ -89,7 +89,7 @@ class JobModal extends Component {
       }
     }
     // handles currentSort
-    sortTable[this.state.resourceSort[0]];
+    sortTable[this.state.resourceSort[0]]();
     if (this.state.resourceSort[1] === false) resources.reverse();
 
     return (

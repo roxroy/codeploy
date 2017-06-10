@@ -7,7 +7,8 @@ class ResourcesButton extends Component {
   }
 
   viewResources() {
-      this.props.viewResources();
+    this.props.closeResourceModal();
+    this.props.viewResources();
   }
 
   render(){

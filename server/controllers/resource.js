@@ -18,15 +18,17 @@ module.exports.one = (req, res) => {
 };
 
 module.exports.new = (req, res) => {
-	const newResource = Resource({
-	  title: req.body.title,
+ console.log('newResource body', req.body);
+	let newResource = Resource({
+	  title: req.body.name,
 	  description: req.body.description,
 	  url: req.body.url,
-	  reviews: req.body.reviews,
-	  language: req.body.language,
+	  //reviews: req.body.reviews,
+	  //language: req.body.language,
 	  image: req.body.image,
-	  rating: req.body.rating,
+	  rating: 2  // parseInt(req.body.rating, 10),
 	});
+ console.log('newResource', newResource);
 
 	newResource.save(function(err, resource) {
 	  if (err) throw err;
@@ -70,6 +72,6 @@ module.exports.remove = (req, res) => {
 
 module.exports.index = (req, res) => {
   res.set('Content-Type', 'application/json');
-  let text = `Hello from the backend server @ ${new Date()}`;
+  let text = `Hello, username! Current date and time: ${new Date()}`;
   res.send('{"message":"' + text + '"}');
 };

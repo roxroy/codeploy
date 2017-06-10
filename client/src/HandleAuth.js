@@ -5,7 +5,6 @@ class HandleAuth extends Component {
     return (
       <div className="auth-buttons">
       	<a className="btn modal-button" href="/github">Log in with Github </a>
-      	<a className="btn modal-button" href="/stack">Log in with Slack </a>
       </div>
     );
   }

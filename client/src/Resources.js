@@ -88,6 +88,12 @@ class Resources extends Component {
         resources = resources.sort((a, b) => {
           return a.golds - b.golds;
         });
+      },
+      language() {
+        resources = resources.sort((a, b) => {
+          // return true if a.name comes after b.name
+          return a.language.localeCompare(b.language)
+        });
       }
     }
     //handles table sort
@@ -98,7 +104,7 @@ class Resources extends Component {
     }
 
     // handles currentSort
-    sortTable[this.props.currentSort[0]];
+    sortTable[this.props.currentSort[0]]();
     if (!this.props.currentSort[1]) resources.reverse();
 
     return (

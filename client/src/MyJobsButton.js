@@ -7,7 +7,8 @@ class MyJobsButton extends Component {
   }
 
   viewJobs() {
-      this.props.viewJobs();
+    this.props.closeResourceModal();
+    this.props.viewJobs();
   }
 
   render(){
