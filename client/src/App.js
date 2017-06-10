@@ -74,7 +74,6 @@ class App extends Component {
         return response.json();
       })
       .then(json => {
-        console.log('isAuth', json);
         this.setState({
           fetching: false,
           username: json.username,
@@ -91,6 +90,7 @@ class App extends Component {
 
   SaveJobOnServer(job) {
     const body = JSON.stringify(job);
+    console.log("SaveJobOnServer error", body);
     fetch('/api/jobs', {
       method: 'POST', credentials: 'include',
       body: body,

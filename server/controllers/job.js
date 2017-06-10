@@ -38,10 +38,10 @@ module.exports.one = (req, res) => {
 };
 
 module.exports.new = (req, res) => {
-	let newJob = Job({
+	let newJob = Jobs({
 	  jobPosition: req.body.jobPosition,
 	  companyName: req.body.companyName,
-	  dateApplied: req.body.dateApplied,
+	  //dateApplied: req.body.dateApplied,
 	  resources: req.body.resources,
 	  comments: req.body.comments,
 	});
