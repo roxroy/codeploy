@@ -2,13 +2,12 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let resourceSchema = new Schema({
-  title: String,
+  name: String,
   description: String,
   url: String,
-  reviews: String,
   language: String,
   image: String,
-  rating: Number,
+  rating: String,
   created_at: Date,
   updated_at: Date
 });
