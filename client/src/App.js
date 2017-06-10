@@ -88,6 +88,28 @@ class App extends Component {
       });
   }
 
+  SaveJobOnServer(job) {
+    const body = JSON.stringify(job);
+    fetch('/api/jobs', {
+      method: 'POST', credentials: 'include',
+      body: body,
+      headers: { 'Content-Type': 'application/json' }
+      })
+      .then(response => {
+        this.setState({
+          fetching: true
+        });
+        return response.json();
+      })
+      .then(json => {
+        this.setState({
+          fetching: false
+        });
+      }).catch(e => {
+        console.log("SaveJobOnServer error", e);
+      });
+  }
+
   SaveResourceOnServer(resource) {
     const body = JSON.stringify(resource);
     fetch('/api/resources', {
@@ -102,9 +124,7 @@ class App extends Component {
         return response.json();
       })
       .then(json => {
-        this.allResources = json;
         this.setState({
-          resources: json,
           fetching: false
         });
       }).catch(e => {
@@ -188,10 +208,12 @@ class App extends Component {
 
     this.setState({ resources: updateresources })
   }
+
   saveJob(job) {
-    console.log("inside savejob");
+    console.log("inside saveJob";
     let updatejobs = this.state.jobs;
     let newJob = job;
+    this.SaveJobOnServer(newJob);
     updatejobs.push(newJob);
     this.setState({ jobs: updatejobs });
   }

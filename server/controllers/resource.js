@@ -12,9 +12,8 @@ module.exports.all = (req, res) => {
 	Resource.find({}, function(err, resources) {
 	  if (err) throw err;
 
-	  // lets add the real data to the Send sample data
+	  // lets add the real data to the sample data : TODO - remove once working
 	  resources.forEach( item => {
-	  	console.log(item);
 	  	myResources.push({
 	  		name :  item.name,
 	  		description: item.description,

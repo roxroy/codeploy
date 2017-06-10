@@ -9,7 +9,7 @@ class AddJobButton extends Component {
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.savejob = this.savejob.bind(this);
+    this.saveJob = this.saveJob.bind(this);
   }
   openModal() {
     this.setState({
@@ -21,7 +21,7 @@ class AddJobButton extends Component {
       modalOpen: false
     });
   }
-  savejob() {
+  saveJob() {
   	let job = { 
   		"jobPosition": this.refs.newJobPosition.value, 
   		"companyName": this.refs.newJobCompany.value, 
@@ -85,7 +85,7 @@ class AddJobButton extends Component {
           <h4>Comments</h4>
           <textarea className="additional-details" ref="newJobComments" placeholder="What is the status of your application?"></textarea>
           <div className="save-button-container">
-          <button className="save-job" onClick={this.savejob}>Save</button>
+          <button className="save-job" onClick={this.saveJob}>Save</button>
           </div>
         </div>
       </Modal>
