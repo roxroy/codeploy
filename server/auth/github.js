@@ -35,7 +35,6 @@ module.exports = function () {
 
 					newUser.id = profile.id;
 					newUser.username = profile.username;
-					newUser.displayName = profile.displayName;
 
 					newUser.save(function (err) {
 						if (err) {
