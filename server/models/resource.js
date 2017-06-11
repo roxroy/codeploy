@@ -9,6 +9,7 @@ let resourceSchema = new Schema({
   image: String,
   rating: String,
   golds: String,
+  addedBy: String,
   dateAdded: Date,
 });
 
