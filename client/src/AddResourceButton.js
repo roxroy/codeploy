@@ -23,6 +23,7 @@ class AddResourceButton extends Component {
     });
   }
   render(){
+    console.log(this.props.username);
     return(
     <div>
       <button className="modal-button" onClick={this.openModal}>Add Resource</button>

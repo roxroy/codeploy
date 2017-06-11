@@ -17,7 +17,7 @@ class ResourceRow extends Component {
       <tr>
         <td><img src={row.image} alt="resource-icon"/></td>
         <td>{row.name}</td>
-        <td>{row.username}</td>
+        <td>{row.addedBy}</td>
         <td>{row.dateAdded}</td>
         <td>{row.rating}</td>
         <td>{row.golds}</td>

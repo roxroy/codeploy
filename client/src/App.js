@@ -146,7 +146,7 @@ class App extends Component {
   }
 
   viewResources() {
-    getResources();
+    this.getResources();
     this.setState({
       viewingJobs: false,
       resetSearch: false,

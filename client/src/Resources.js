@@ -65,6 +65,7 @@ class Resources extends Component {
     }
 
     let resources = this.props.resources;
+    console.log(resources);
     // holds all the functions for handling table sorting
     const sortTable = {
       resourceName() {
@@ -92,7 +93,7 @@ class Resources extends Component {
       addedBy() {
         resources = resources.sort((a, b) => {
           // return true if a.name comes after b.name
-          return a.addedBy.localeCompare(b.addedBy)
+          return a.addedBy.localeCompare(b.addedBy);
         });
       }
     }
