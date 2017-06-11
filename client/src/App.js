@@ -244,22 +244,23 @@ class App extends Component {
             viewResources={this.viewResources}
             logOut={this.logOut}
             saveResource={this.saveResource}
+            username={this.state.username}
           />
           {isViewingJobs ? (
             <div>
               <p className="App-intro">
-                {this.state.fetching
-                  ? 'Fetching message from API'
-                  : /*this.state.resources*/"Fetching Success: " + this.state.username}
+                {this.state.loggedIn === false
+                  ? ''
+                  : /*this.state.resources*/"Hello, " + this.state.username + "!"}
               </p>
               <MyJobs jobs={this.state.jobs} saveJob={this.saveJob} />
             </div>
           ) : (
               <div>
                 <p className="App-intro">
-                  {this.state.fetching
-                    ? 'Fetching message from API'
-                    : /*this.state.resources*/"Fetching Success: " + this.state.username}
+                  {this.state.loggedIn === false
+                    ? ''
+                    : /*this.state.resources*/"Hello, " + this.state.username + "!"}
                 </p>
                 <SortButton
                   sortResources={this.sortResources}
@@ -272,6 +273,7 @@ class App extends Component {
                   sortByDate={this.state.sortByDate}
                   handleSort={this.handleSort}
                   currentSort={this.state.currentSort}
+                  username={this.state.username}
                 />
               </div>
             )

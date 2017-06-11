@@ -13,7 +13,7 @@ class AddResourceModal extends Component {
       {
         "image": this.refs.newResourceImg.value,
         "url": this.refs.newResourceLink.value,
-        "addedBy": null,
+        "addedBy": this.props.username,
         "name": this.refs.newResourceName.value,
         "rating": null,
         "golds": null,
