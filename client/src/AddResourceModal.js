@@ -7,6 +7,23 @@ class AddResourceModal extends Component {
     super(props);
     this.save = this.save.bind(this);
   }
+
+  getSelectedRating() {
+    var rating = "3";
+    if (this.refs.one.checked) 
+      rating = "1";
+    if (this.refs.two.checked) 
+      rating = "2";
+    if (this.refs.three.checked) 
+      rating = "3";
+    if (this.refs.four.checked) 
+      rating = "4";
+    if (this.refs.five.checked) 
+      rating = "5";
+
+    return `${rating}/5`;
+  }
+
   save() {
     this.props.closeResourceModal();
     var resource =
@@ -15,7 +32,7 @@ class AddResourceModal extends Component {
         "url": this.refs.newResourceLink.value,
         "addedBy": this.props.username,
         "name": this.refs.newResourceName.value,
-        "rating": null,
+        "rating": this.getSelectedRating(),
         "golds": null,
         "description": this.refs.newResourceReview.value,
         "dateAdded": null
@@ -72,11 +89,11 @@ class AddResourceModal extends Component {
           <textarea ref="newResourceImg" placeholder="Paste image URL"></textarea>
           <h4>Rating</h4>
           <form className="stars">
-            <input type="radio" ref="one" />&#9733; <br />
-            <input type="radio" ref="two" />&#9733; &#9733; <br />
-            <input type="radio" ref="three" />&#9733; &#9733; &#9733; <br />
-            <input type="radio" ref="four" />&#9733; &#9733; &#9733; &#9733; <br />
-            <input type="radio" ref="five" />&#9733; &#9733; &#9733; &#9733; &#9733;
+            <input type="radio" name="stars" ref="one" />&#9733; <br />
+            <input type="radio" name="stars" ref="two" />&#9733; &#9733; <br />
+            <input type="radio" name="stars" ref="three" />&#9733; &#9733; &#9733; <br />
+            <input type="radio" name="stars" ref="four" />&#9733; &#9733; &#9733; &#9733; <br />
+            <input type="radio" name="stars" ref="five" />&#9733; &#9733; &#9733; &#9733; &#9733;
 				</form>
           <h4>Review/Comments</h4>
           <textarea className="additional-details" ref="newResourceReview" placeholder="Provide some additional details..."></textarea>
