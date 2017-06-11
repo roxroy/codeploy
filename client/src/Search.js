@@ -30,7 +30,8 @@ class Search extends Component {
   }
   handleClearSearch(event){
     this.setState({
-      searchValue: ""
+      searchValue: "",
+      searchOpen: false
     });
   }
   handleClickOutside(event){
