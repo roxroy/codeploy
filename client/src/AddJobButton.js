@@ -22,6 +22,7 @@ class AddJobButton extends Component {
     });
   }
   saveJob() {
+    this.closeModal();
   	let job = { 
   		"jobPosition": this.refs.newJobPosition.value, 
   		"companyName": this.refs.newJobCompany.value, 
