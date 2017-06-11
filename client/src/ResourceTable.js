@@ -16,12 +16,12 @@ function ResourceTable(props) {
                   <i id="resourceName" className="fa fa-arrow-down" aria-hidden="true"></i>
               )}
             </th>
-            <th id="language" onClick={props.handleSort}>
-              {"Language"}
-              {(props.currentSort[0] === "language") && (
+            <th id="addedBy" onClick={props.handleSort}>
+              {"Added By"}
+              {(props.currentSort[0] === "addedBy") && (
                 props.currentSort[1] ?
-                  <i id="language" className="fa fa-arrow-up" aria-hidden="true"></i> :
-                  <i id="language" className="fa fa-arrow-down" aria-hidden="true"></i>
+                  <i id="addedBy" className="fa fa-arrow-up" aria-hidden="true"></i> :
+                  <i id="addedBy" className="fa fa-arrow-down" aria-hidden="true"></i>
               )}
             </th>
             <th id="dateAdded" onClick={props.handleSort}>

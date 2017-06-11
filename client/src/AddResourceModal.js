@@ -17,7 +17,8 @@ class AddResourceModal extends Component {
         "name": this.refs.newResourceName.value,
         "rating": null,
         "golds": null,
-        "description": this.refs.newResourceReview.value
+        "description": this.refs.newResourceReview.value,
+        "dateAdded": null
       };
     //TODO: confirm no empty entries
     this.props.saveResource(resource);

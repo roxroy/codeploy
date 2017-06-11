@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.allResources = [];
+    //this.allResources = [];
 
     this.state = {
       fetching: true,
@@ -146,10 +146,11 @@ class App extends Component {
   }
 
   viewResources() {
+    getResources();
     this.setState({
       viewingJobs: false,
       resetSearch: false,
-      resources: this.allResources
+      resources: this.state.resources
     });
   }
 
@@ -180,8 +181,8 @@ class App extends Component {
     let re = value;
     re = new RegExp(re, "im");
 
-    if (!this.allResources) return;
-    for (let cObj of this.allResources) {
+    if (!this.state.resources) return;
+    for (let cObj of this.state.resources) {
       if (re.test(cObj.name) || re.test(cObj.addedBy) || re.test(cObj.description)) searchedArray.push(cObj);
     }
     if (searchedArray.length === 0) {
@@ -199,11 +200,11 @@ class App extends Component {
 
   saveResource(resource) {
     console.log("inside saveresource");
-    var updateresources = this.allResources,
-      newResource = resource,
-      today = new Date();
+    var updateresources = this.state.resources,
+    newResource = resource,
+    today = new Date();
 
-    newResource.dateAdded = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`
+    newResource.dateAdded = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`;
     this.SaveResourceOnServer(newResource);
     updateresources.push(newResource);
 

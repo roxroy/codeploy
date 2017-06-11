@@ -31,7 +31,7 @@ class AddResourceButton extends Component {
       	modalIsOpen={this.state.modalOpen}
         saveResource={this.props.saveResource}
         closeResourceModal={this.props.closeResourceModal}
-        username={this.state.username}
+        username={this.props.username}
       />} 
     </div>
     );

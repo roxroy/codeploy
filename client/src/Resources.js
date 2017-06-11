@@ -89,10 +89,10 @@ class Resources extends Component {
           return a.golds - b.golds;
         });
       },
-      language() {
+      addedBy() {
         resources = resources.sort((a, b) => {
           // return true if a.name comes after b.name
-          return a.language.localeCompare(b.language)
+          return a.addedBy.localeCompare(b.addedBy)
         });
       }
     }
