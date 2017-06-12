@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 
 class AddJobButton extends Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       modalOpen: false
@@ -22,18 +22,34 @@ class AddJobButton extends Component {
     });
   }
   saveJob() {
+    let job = {
+      "jobPosition": this.refs.newJobPosition.value,
+      "companyName": this.refs.newJobCompany.value,
+      "dateApplied": this.refs.newJobDate.value,
+      "resources": this.refs.newJobResources.value,
+      "comments": this.refs.newJobComments.value,
+    }
+
+    if (// test for at least 1 letter
+      !/[A-Za-z]/.test(job.jobPosition)) {
+      console.log("Invalid entry for Positon");
+      return;
+    }
+    if (// test for at least 1 letter
+      !/[A-Za-z]/.test(job.companyName)) {
+      console.log("Invalid entry for Company");
+      return;
+    }
+    if (// test for three sets of two digits 01-12/01-31/1900-2000
+      !/^(?:(0[1-9]|1[012])[\/.](0[1-9]|[12][0-9]|3[01])[\/.](19|20)[0-9]{2})$/.test(job.dateApplied)) {
+      console.log("Invalid format for Date Applied. ");
+      return;
+    }
+    this.props.saveJob(job);
     this.closeModal();
-  	let job = { 
-  		"jobPosition": this.refs.newJobPosition.value, 
-  		"companyName": this.refs.newJobCompany.value, 
-  		"dateApplied": this.refs.newJobDate.value, 
-  		"resources": this.refs.newJobResources.value, 
-  		"comments": this.refs.newJobComments.value,      
-  	}
-  	this.props.saveJob(job);
   }
-	render() {
-		const addJobStyle = {
+  render() {
+    const addJobStyle = {
       overlay: {
         position: 'fixed',
         top: 0,
@@ -64,35 +80,35 @@ class AddJobButton extends Component {
 
       }
     }
-		return (
-			<div>
-				<button className="addjobbutton" onClick={this.openModal}>Add Job</button>
-				<Modal
-        isOpen={this.state.modalOpen}
-        onRequestClose={this.closeModal}
-        style={addJobStyle}
-        contentLabel="Add a Job"
-      >
-        <div className="add-job-container">
-          <button className="close" onClick={this.closeModal}>X</button>
-          <h4>Position</h4>
-          <textarea ref="newJobPosition" placeholder="Job Title"></textarea>
-          <h4>Company</h4>
-          <textarea ref="newJobCompany" placeholder="Company Name"></textarea>
-          <h4>Date Applied</h4>
-          <textarea ref="newJobDate" placeholder="Date Application Submitted"></textarea>
-          <h4>Resources</h4>
-          <textarea ref="newJobResources" placeholder="Resources used"></textarea>
-          <h4>Comments</h4>
-          <textarea className="additional-details" ref="newJobComments" placeholder="What is the status of your application?"></textarea>
-          <div className="save-button-container">
-          <button className="save-job" onClick={this.saveJob}>Save</button>
+    return (
+      <div>
+        <button className="addjobbutton" onClick={this.openModal}>Add Job</button>
+        <Modal
+          isOpen={this.state.modalOpen}
+          onRequestClose={this.closeModal}
+          style={addJobStyle}
+          contentLabel="Add a Job"
+        >
+          <div className="add-job-container">
+            <button className="close" onClick={this.closeModal}>X</button>
+            <h4>Position*</h4>
+            <textarea ref="newJobPosition" placeholder="Job Title"></textarea>
+            <h4>Company*</h4>
+            <textarea ref="newJobCompany" placeholder="Company Name"></textarea>
+            <h4>Date Applied*</h4>
+            <textarea ref="newJobDate" placeholder="MM/DD/YYYY"></textarea>
+            <h4>Resources</h4>
+            <textarea ref="newJobResources" placeholder="Resources used"></textarea>
+            <h4>Comments</h4>
+            <textarea className="additional-details" ref="newJobComments" placeholder="What is the status of your application?"></textarea>
+            <div className="save-button-container">
+              <button className="save-job" onClick={this.saveJob}>Save</button>
+            </div>
           </div>
-        </div>
-      </Modal>
-			</div>
-		);
-	}
+        </Modal>
+      </div>
+    );
+  }
 }
 
 module.exports = AddJobButton;
