@@ -53,7 +53,7 @@ module.exports.new = (req, res) => {
 	  jobPosition: req.body.jobPosition,
 	  companyName: req.body.companyName,
 	  addedBy: req.body.addedBy,
-	  //dateApplied: req.body.dateApplied,
+	  dateApplied: req.body.dateApplied,
 	  resources: req.body.resources,
 	  comments: req.body.comments,
 	});
