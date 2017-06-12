@@ -1,12 +1,18 @@
 let Resource = require('../models/resource');
 
+const makeDate = (daysAdjustment) => {
+	let currentTime = new Date();
+	currentTime.setDate(currentTime.getDate()+daysAdjustment);
+	return currentTime;
+}
+
 module.exports.all = (req, res) => {
 
  	const loremipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida est sit amet mi egestas, a pharetra sem hendrerit. Ut sit amet lacinia ex, vel pellentesque metus. In placerat, lacus eget porttitor imperdiet, sem nibh faucibus turpis, ultricies ultricies turpis orci in augue. Integer ut posuere ante. Pellentesque blandit purus at tortor malesuada porttitor venenatis sed lacus.";
  	let myResources = [
-    { "image": "https://www.sololearn.com/Icons/Courses/1024.png", "addedBy":"roxroy", "url": "https://www.website1.com/", "name": "abcd", "dateAdded": "01/03/2016", "rating": "1/5", "golds": "1", "description": loremipsum },
-    { "image": "https://image.flaticon.com/teams/new/1-freepik.jpg", "addedBy":"CClar", "url": "https://www.website2.com/", "name": "aaab", "dateAdded": "02/14/2017", "rating": "2/5", "golds": "2", "description": loremipsum },
-    { "image": "http://www.freeiconspng.com/uploads/flat-mac-icon-15.png", "addedBy":"icartusacrimea", "url": "https://www.website3.com/", "name": "accc", "dateAdded": "01/01/2017", "rating": "3/5", "golds": "3", "description": loremipsum }
+    { "image": "https://www.sololearn.com/Icons/Courses/1024.png", "addedBy":"roxroy", "url": "https://www.website1.com/", "name": "abcd", "dateAdded": makeDate(-2), "rating": "1/5", "golds": "1", "description": loremipsum },
+    { "image": "https://image.flaticon.com/teams/new/1-freepik.jpg", "addedBy":"CClar", "url": "https://www.website2.com/", "name": "aaab", "dateAdded": makeDate(-162), "rating": "2/5", "golds": "2", "description": loremipsum },
+    { "image": "http://www.freeiconspng.com/uploads/flat-mac-icon-15.png", "addedBy":"icartusacrimea", "url": "https://www.website3.com/", "name": "accc", "dateAdded": makeDate(-31), "rating": "3/5", "golds": "3", "description": loremipsum }
  	];
 
 	Resource.find({}, function(err, resources) {
