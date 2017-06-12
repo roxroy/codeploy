@@ -127,6 +127,9 @@ class Resources extends Component {
           handleResourceModal={this.handleResourceModal}
           handleSort={this.props.handleSort}
           currentSort={this.props.currentSort}
+          loggedIn={this.props.loggedIn}
+          username={this.props.username}
+          deleteResource={this.props.deleteResource}
         />
       </div>
     );

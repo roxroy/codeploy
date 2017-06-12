@@ -6,10 +6,17 @@ class ResourceRow extends Component {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
+    this.delete = this.delete.bind(this);
   }    
   handleClick(){
     this.props.handleResourceModal(this.props.row);
     return;
+  }
+  delete(){
+    //let deleteName = this.props.row.name,
+    //deleteAddedBy = this.props.row.addedBy;
+    let row = this.props.row;
+    this.props.deleteResource(row);
   }
   render() {
     let row = this.props.row;
@@ -26,6 +33,13 @@ class ResourceRow extends Component {
           <td><a href={row.url}>Visit {row.name}</a></td>
           :
           <td><a onClick={this.handleClick}>View More Information</a></td>
+        }
+        {(this.props.loggedIn && row.addedBy === this.props.username)?
+          <td>
+            <i onClick={this.delete} className="fa fa-trash-o" aria-hidden="true"></i>
+          </td>
+          :
+          <td></td>
         }
       </tr>
     );

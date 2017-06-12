@@ -49,10 +49,14 @@ function ResourceTable(props) {
               )}
             </th>
             {(props.fromJobModal) ? <th>Link to Resource</th> : <th>Additional Information</th>}
+            <th className="delete-heading"></th>
           </tr>
           {props.resources.map((row, i) => <ResourceRow
             handleResourceModal={props.handleResourceModal}
             fromJobModal={props.fromJobModal}
+            loggedIn={props.loggedIn}
+            username={props.username}
+            deleteResource={props.deleteResource}
             row={row}
             key={i}
           />)}

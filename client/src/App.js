@@ -25,12 +25,17 @@ class App extends Component {
     this.viewResources = this.viewResources.bind(this);
     this.logOut = this.logOut.bind(this);
     this.isAuth = this.isAuth.bind(this);
+    this.getJobs = this.getJobs.bind(this);
+    this.getResources = this.getResources.bind(this);
     this.sortResources = this.sortResources.bind(this);
+    this.handleSort = this.handleSort.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.saveResource = this.saveResource.bind(this);
     this.saveJob = this.saveJob.bind(this);
-    this.handleSort = this.handleSort.bind(this);
-    this.getJobs = this.getJobs.bind(this);
+    this.SaveResourceOnServer = this.SaveResourceOnServer.bind(this);
+    this.SaveJobOnServer = this.SaveJobOnServer.bind(this);
+    this.deleteResource = this.deleteResource.bind(this);
+    this.DeleteResourceOnServer = this.DeleteResourceOnServer.bind(this);
   }
 
   getJobs() {
@@ -133,6 +138,28 @@ class App extends Component {
       });
   }
 
+  DeleteResourceOnServer(resource) {
+    const body = JSON.stringify(resource);
+    fetch('/api/resources/:id', {
+      method: 'DELETE', credentials: 'include',
+      body: body,
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(response => {
+        this.setState({
+          fetching: true
+        });
+        return response.json();
+      })
+      .then(json => {
+        this.setState({
+          fetching: false
+        });
+      }).catch(e => {
+        console.log("DeleteResourceOnServer error", e);
+      });
+  }
+
   componentDidMount() {
     this.isAuth();
     this.getResources();
@@ -173,6 +200,21 @@ class App extends Component {
         currentSort: ["resourceName", true]
       });
     }
+  }
+
+  handleSort(event) {
+    // order: true==ascending, false==descending
+    const cTH = event.target.id;
+    let order;
+    // if current column is being sorted
+    if (cTH === this.state.currentSort[0]) {
+      order = !this.state.currentSort[1];
+    } else {
+      order = true;
+    };
+    this.setState({
+      currentSort: [cTH, order]
+    });
   }
 
   handleSearch(value) {
@@ -220,20 +262,15 @@ class App extends Component {
     updatejobs.push(newJob);
     this.setState({ jobs: updatejobs });
   }
-  handleSort(event) {
-    // order: true==ascending, false==descending
-    const cTH = event.target.id;
-    let order;
-    // if current column is being sorted
-    if (cTH === this.state.currentSort[0]) {
-      order = !this.state.currentSort[1];
-    } else {
-      order = true;
-    };
-    this.setState({
-      currentSort: [cTH, order]
-    });
+  
+  deleteResource(row) {
+    let resourcesArr = this.state.resources;
+    let index = resourcesArr.indexOf(row);
+    resourcesArr.splice(index, 1);
+    //this.DeleteResourceOnServer(row);
+    this.setState({ resources: resourcesArr });
   }
+
   render() {
     const isViewingJobs = this.state.viewingJobs;
     if (Array.isArray(this.state.resources)) {
@@ -275,7 +312,9 @@ class App extends Component {
                   sortByDate={this.state.sortByDate}
                   handleSort={this.handleSort}
                   currentSort={this.state.currentSort}
+                  loggedIn={this.state.loggedIn}
                   username={this.state.username}
+                  deleteResource={this.deleteResource}
                 />
               </div>
             )

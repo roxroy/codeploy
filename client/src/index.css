@@ -230,8 +230,12 @@ th:first-child {
   border-top-left-radius: 10px;
 }
 
-th:last-child {
+th:nth-last-child(2) {
   border-top-right-radius: 10px;
+}
+
+.delete-heading {
+  background: none;
 }
 
 .resource-table {
