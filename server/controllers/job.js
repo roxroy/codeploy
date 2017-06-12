@@ -8,13 +8,17 @@ module.exports.all = (req, res) => {
 		{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website3.com/", "addedBy": "user3", "name": "name3", "date": "01/01/2017", "rating": "3/5", "golds": "3" },
 	];
 	let myJobs = [
-		{ "jobPosition": "position 1", "companyName": "name1", "dateApplied": "01/03/2014", "resources": myResources, "comments": "sent thank you note. received no response." },
-		{ "jobPosition": "position 2", "companyName": "name2", "dateApplied": "02/02/2015", "resources": myResources, "comments": "sent thank you note. received no response." },
-		{ "jobPosition": "position 3", "companyName": "name3", "dateApplied": "03/01/2016", "resources": myResources, "comments": "sent thank you note. received no response." },
-		{ "jobPosition": "position 4", "companyName": "ABC", "dateApplied": "05/31/2017", "resources": myResources, "comments": "Sent references. Waiting on reply." },
+		{ "jobPosition": "position 1", "companyName": "Widget name1", "addedBy":"user1", "dateApplied": "01/03/2014", "resources": myResources, "comments": "sent thank you note. received no response." },
+		{ "jobPosition": "position 2", "companyName": "ABC name2", "addedBy":"user1","dateApplied": "02/02/2015", "resources": myResources, "comments": "sent thank you note. received no response." },
+		{ "jobPosition": "position 3", "companyName": "Net name3 ", "addedBy":"user1", "dateApplied": "03/01/2016", "resources": myResources, "comments": "sent thank you note. received no response." },
+		{ "jobPosition": "position 4", "companyName": "Carter",  "addedBy":"user1", "dateApplied": "05/31/2017", "resources": myResources, "comments": "Sent references. Waiting on reply." },
 	];
 
-	Jobs.find({}, function(err, jobs) {
+	let username = "";
+	if (req.user)
+		username = req.user.username;
+
+	Jobs.find({addedBy : username }, function(err, jobs) {
 	  if (err) throw err;
 
 	  // lets add the real data to the sample data : TODO - remove once working
@@ -23,13 +27,13 @@ module.exports.all = (req, res) => {
 	  		jobPosition :  item.jobPosition,
 	  		companyName: item.companyName,
 	  		dateApplied:  item.dateApplied,
+	  		addedBy:  item.addedBy,
 	  		resources: myResources,
 	  		comments: item.comments,
 	  	});
 	  });
 	  
 	  jobs = myJobs;
-
 		res.status(200).send(jobs);
 	});
 };
@@ -41,6 +45,7 @@ module.exports.new = (req, res) => {
 	let newJob = Jobs({
 	  jobPosition: req.body.jobPosition,
 	  companyName: req.body.companyName,
+	  addedBy: req.body.addedBy,
 	  //dateApplied: req.body.dateApplied,
 	  resources: req.body.resources,
 	  comments: req.body.comments,

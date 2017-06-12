@@ -30,10 +30,11 @@ class App extends Component {
     this.saveResource = this.saveResource.bind(this);
     this.saveJob = this.saveJob.bind(this);
     this.handleSort = this.handleSort.bind(this);
+    this.getJobs = this.getJobs.bind(this);
   }
 
   getJobs() {
-    fetch('/api/jobs')
+    fetch('/api/jobs', { method: 'GET', credentials: 'include' })
       .then(response => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
@@ -90,7 +91,6 @@ class App extends Component {
 
   SaveJobOnServer(job) {
     const body = JSON.stringify(job);
-    console.log("SaveJobOnServer error", body);
     fetch('/api/jobs', {
       method: 'POST', credentials: 'include',
       body: body,
@@ -215,6 +215,7 @@ class App extends Component {
     console.log("inside saveJob");
     let updatejobs = this.state.jobs;
     let newJob = job;
+    newJob.addedBy = this.state.username;      
     this.SaveJobOnServer(newJob);
     updatejobs.push(newJob);
     this.setState({ jobs: updatejobs });
@@ -254,7 +255,7 @@ class App extends Component {
                   ? ''
                   : /*this.state.resources*/"Hello, " + this.state.username + "!"}
               </p>
-              <MyJobs jobs={this.state.jobs} saveJob={this.saveJob} />
+              <MyJobs jobs={this.state.jobs} getJobs={this.getJobs}   saveJob={this.saveJob} />
             </div>
           ) : (
               <div>
@@ -288,4 +289,3 @@ class App extends Component {
 }
 
 module.exports = App;
-
