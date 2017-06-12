@@ -17,7 +17,7 @@ class App extends Component {
       resources: null,
       loggedIn: false,
       username: null,
-      jobs: null,
+      jobs: [],
       currentSort: ["resourceName", true],
       resetSearch: false
     };
@@ -135,7 +135,6 @@ class App extends Component {
 
   componentDidMount() {
     this.isAuth();
-    this.getJobs();
     this.getResources();
   }
 
