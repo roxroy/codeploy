@@ -60,6 +60,12 @@ class MyJobs extends Component {
       currentSort: [cTH, order]
     });
   }
+
+  componentDidMount() {
+    console.log('myjob componentDidMount');
+    this.props.getJobs();
+  }
+
   render() {
     const jobSort = {
       jobPosition(jobs) {
