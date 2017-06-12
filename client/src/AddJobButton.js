@@ -28,7 +28,7 @@ class AddJobButton extends Component {
   		"companyName": this.refs.newJobCompany.value, 
   		"dateApplied": this.refs.newJobDate.value, 
   		"resources": this.refs.newJobResources.value, 
-  		"comments": this.refs.newJobComments.value 
+  		"comments": this.refs.newJobComments.value,      
   	}
   	this.props.saveJob(job);
   }

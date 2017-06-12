@@ -65,7 +65,6 @@ class Resources extends Component {
     }
 
     let resources = this.props.resources;
-    console.log(resources);
     // holds all the functions for handling table sorting
     const sortTable = {
       resourceName() {

@@ -7,6 +7,7 @@ let jobSchema = new Schema({
   resources: String,
   dateApplied: Date,
   comments: String,
+  addedBy: String,
 });
 
 module.exports =  mongoose.model('Job', jobSchema);
