@@ -10,22 +10,23 @@ class AddResourceModal extends Component {
 
   getSelectedRating() {
     var rating = "3";
-    if (this.refs.one.checked) 
+    if (this.refs.one.checked)
       rating = "1";
-    if (this.refs.two.checked) 
+    if (this.refs.two.checked)
       rating = "2";
-    if (this.refs.three.checked) 
+    if (this.refs.three.checked)
       rating = "3";
-    if (this.refs.four.checked) 
+    if (this.refs.four.checked)
       rating = "4";
-    if (this.refs.five.checked) 
+    if (this.refs.five.checked)
       rating = "5";
 
     return `${rating}/5`;
   }
 
   save() {
-    this.props.closeResourceModal();
+    var urlRE = /^((https?|ftp):\/\/)?([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/;
+
     var resource =
       {
         "image": this.refs.newResourceImg.value,
@@ -37,8 +38,26 @@ class AddResourceModal extends Component {
         "description": this.refs.newResourceReview.value,
         "dateAdded": null
       };
-    //TODO: confirm no empty entries
+
+    if (// test for at least 1 letter
+      !/[A-Za-z]/.test(resource.name)) {
+      console.log("Please enter a name for the Resource.");
+      return;
+    }
+    if (!urlRE.test(resource.url)) {
+      console.log("Invalid url for Link to Resource.");
+      return;
+    }
+    if (!/\.(jpeg|jpg|png|svg|ico)$/.test(resource.image)) {
+      console.log("Invalid link to image.");
+      return;
+    }
+    if (!/[A-Za-z]/.test(resource.description)) {
+      console.log("Please enter a description/review.");
+      return;
+    }
     this.props.saveResource(resource);
+    this.props.closeResourceModal();
   }
   render() {
     const addResourceStyle = {
@@ -82,23 +101,23 @@ class AddResourceModal extends Component {
         <div className="add-resource-container">
           <button className="close" onClick={this.props.closeModal}>X</button>
           <h4>Name</h4>
-          <textarea ref="newResourceName" placeholder="Name of the resource"></textarea>
+          <textarea ref="newResourceName" placeholder="Name of the Resource"></textarea>
           <h4>Link to resource</h4>
           <textarea ref="newResourceLink" placeholder="Paste URL"></textarea>
           <h4>Image Link</h4>
-          <textarea ref="newResourceImg" placeholder="Paste image URL"></textarea>
+          <textarea ref="newResourceImg" placeholder="Paste Image URL"></textarea>
           <h4>Rating</h4>
           <form className="stars">
             <input type="radio" name="stars" ref="one" />&#9733; <br />
             <input type="radio" name="stars" ref="two" />&#9733; &#9733; <br />
-            <input type="radio" name="stars" ref="three" />&#9733; &#9733; &#9733; <br />
+            <input type="radio" name="stars" ref="three" defaultChecked="true" />&#9733; &#9733; &#9733; <br />
             <input type="radio" name="stars" ref="four" />&#9733; &#9733; &#9733; &#9733; <br />
             <input type="radio" name="stars" ref="five" />&#9733; &#9733; &#9733; &#9733; &#9733;
 				</form>
-          <h4>Review/Comments</h4>
+          <h4>Review/Description</h4>
           <textarea className="additional-details" ref="newResourceReview" placeholder="Provide some additional details..."></textarea>
           <div className="save-button-container">
-          <button className="save-resource" onClick={this.save}>Save</button>
+            <button className="save-resource" onClick={this.save}>Save</button>
           </div>
         </div>
       </Modal>

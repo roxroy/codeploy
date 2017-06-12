@@ -45,6 +45,8 @@ class AddJobButton extends Component {
       console.log("Invalid format for Date Applied. ");
       return;
     }
+
+    // TODO, instead of console logging errors, add a warning in modal
     this.props.saveJob(job);
     this.closeModal();
   }
