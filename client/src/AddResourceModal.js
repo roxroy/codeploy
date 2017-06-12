@@ -6,6 +6,11 @@ class AddResourceModal extends Component {
   constructor(props) {
     super(props);
     this.save = this.save.bind(this);
+
+    this.state = {
+      errorVisible: "none",
+      errorText: null
+    }
   }
 
   getSelectedRating() {
@@ -38,24 +43,26 @@ class AddResourceModal extends Component {
         "description": this.refs.newResourceReview.value,
         "dateAdded": null
       };
-
+    this.setState({errorVisible: "inline"});
     if (// test for at least 1 letter
       !/[A-Za-z]/.test(resource.name)) {
-      console.log("Please enter a name for the Resource.");
+      this.setState({errorText: "Please enter a name for the Resource."})
       return;
     }
     if (!urlRE.test(resource.url)) {
-      console.log("Invalid url for Link to Resource.");
+      this.setState({errorText: "Invalid url for Link to Resource."})
       return;
     }
     if (!/\.(jpeg|jpg|png|svg|ico)$/.test(resource.image)) {
-      console.log("Invalid link to image.");
+      this.setState({errorText: "Invalid link to image."})
       return;
     }
     if (!/[A-Za-z]/.test(resource.description)) {
-      console.log("Please enter a description/review.");
+      this.setState({errorText: "Please enter a description/review."})
       return;
     }
+
+    this.setState({errorVisible: "none"});
     this.props.saveResource(resource);
     this.props.closeResourceModal();
   }
@@ -100,13 +107,13 @@ class AddResourceModal extends Component {
       >
         <div className="add-resource-container">
           <button className="close" onClick={this.props.closeModal}>X</button>
-          <h4>Name</h4>
+          <h4>Name*</h4>
           <textarea ref="newResourceName" placeholder="Name of the Resource"></textarea>
-          <h4>Link to resource</h4>
+          <h4>Link to resource*</h4>
           <textarea ref="newResourceLink" placeholder="Paste URL"></textarea>
-          <h4>Image Link</h4>
+          <h4>Image Link*</h4>
           <textarea ref="newResourceImg" placeholder="Paste Image URL"></textarea>
-          <h4>Rating</h4>
+          <h4>Rating*</h4>
           <form className="stars">
             <input type="radio" name="stars" ref="one" />&#9733; <br />
             <input type="radio" name="stars" ref="two" />&#9733; &#9733; <br />
@@ -114,8 +121,12 @@ class AddResourceModal extends Component {
             <input type="radio" name="stars" ref="four" />&#9733; &#9733; &#9733; &#9733; <br />
             <input type="radio" name="stars" ref="five" />&#9733; &#9733; &#9733; &#9733; &#9733;
 				</form>
-          <h4>Review/Description</h4>
+          <h4>Review/Description*</h4>
           <textarea className="additional-details" ref="newResourceReview" placeholder="Provide some additional details..."></textarea>
+          <p className="error" style={{display: this.state.errorVisible}}>
+            <i className="fa fa-exclamation-circle"  aria-hidden="true"></i>
+            {" " + this.state.errorText}
+          </p>
           <div className="save-button-container">
             <button className="save-resource" onClick={this.save}>Save</button>
           </div>
