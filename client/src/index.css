@@ -280,6 +280,7 @@ th:nth-last-child(2) {
 p.description {
   margin-top: 10px;
   max-width: 1000px;
+  width: 1000px;
 }
 
 .job-list-container th:nth-child(-n+3){
