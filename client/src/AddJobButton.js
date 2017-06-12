@@ -5,7 +5,9 @@ class AddJobButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalOpen: false
+      modalOpen: false,
+      errorText: null,
+      errorVisible: "none"
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -30,23 +32,24 @@ class AddJobButton extends Component {
       "comments": this.refs.newJobComments.value,
     }
 
+    this.setState({ errorVisible: "inline" });
     if (// test for at least 1 letter
       !/[A-Za-z]/.test(job.jobPosition)) {
-      console.log("Invalid entry for Positon");
+      this.setState({ errorText: "Invalid entry for Positon" })
       return;
     }
     if (// test for at least 1 letter
       !/[A-Za-z]/.test(job.companyName)) {
-      console.log("Invalid entry for Company");
+      this.setState({ errorText: "Invalid entry for Company" })
       return;
     }
     if (// test for three sets of two digits 01-12/01-31/1900-2000
       !/^(?:(0[1-9]|1[012])[\/.](0[1-9]|[12][0-9]|3[01])[\/.](19|20)[0-9]{2})$/.test(job.dateApplied)) {
-      console.log("Invalid format for Date Applied. ");
+      this.setState({ errorText: "Invalid format for Date Applied." })
       return;
     }
 
-    // TODO, instead of console logging errors, add a warning in modal
+    this.setState({ errorVisible: "none" });
     this.props.saveJob(job);
     this.closeModal();
   }
@@ -103,6 +106,10 @@ class AddJobButton extends Component {
             <textarea ref="newJobResources" placeholder="Resources used"></textarea>
             <h4>Comments</h4>
             <textarea className="additional-details" ref="newJobComments" placeholder="What is the status of your application?"></textarea>
+            <p className="error" style={{ display: this.state.errorVisible }}>
+              <i className="fa fa-exclamation-circle" aria-hidden="true"></i>
+              {" " + this.state.errorText}
+            </p>
             <div className="save-button-container">
               <button className="save-job" onClick={this.saveJob}>Save</button>
             </div>
