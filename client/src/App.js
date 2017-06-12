@@ -200,10 +200,9 @@ class App extends Component {
   saveResource(resource) {
     console.log("inside saveresource");
     var updateresources = this.state.resources,
-    newResource = resource,
-    today = new Date();
+        newResource = resource;
+    newResource.dateAdded = new Date();
 
-    newResource.dateAdded = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`;
     this.SaveResourceOnServer(newResource);
     updateresources.push(newResource);
 
@@ -214,7 +213,9 @@ class App extends Component {
     console.log("inside saveJob");
     let updatejobs = this.state.jobs;
     let newJob = job;
-    newJob.addedBy = this.state.username;      
+    newJob.addedBy = this.state.username;
+    newJob.dateApplied =  Date.parse(job.dateApplied);
+
     this.SaveJobOnServer(newJob);
     updatejobs.push(newJob);
     this.setState({ jobs: updatejobs });

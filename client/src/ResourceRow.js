@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import utils from './utils';
 
 class ResourceRow extends Component {
   constructor(props){
@@ -18,7 +19,7 @@ class ResourceRow extends Component {
         <td><img src={row.image} alt="resource-icon"/></td>
         <td>{row.name}</td>
         <td>{row.addedBy}</td>
-        <td>{row.dateAdded}</td>
+        <td>{utils.formattedDate(row.dateAdded)}</td>
         <td>{row.rating}</td>
         <td>{row.golds}</td>
         {(this.props.fromJobModal)?

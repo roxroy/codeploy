@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import utils from './utils';
 
 class EachJob extends Component {
   constructor(props){
@@ -17,7 +18,7 @@ class EachJob extends Component {
       <tr>
         <td>{row.jobPosition}</td>
         <td>{row.companyName}</td>
-        <td>{row.dateApplied}</td>
+        <td>{utils.formattedDate(row.dateApplied)}</td>
         <td><a onClick={this.handleClick}>View Resources</a></td>
         <td>{row.comments}</td>
       </tr>
