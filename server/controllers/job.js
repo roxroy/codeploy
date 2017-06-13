@@ -18,10 +18,10 @@ module.exports.all = (req, res) => {
 		{ "image": "https://www.sololearn.com/Icons/Courses/1024.png", "url": "https://www.website3.com/", "addedBy": "user3", "name": "name3", "date": makeDate(-80), "rating": "3/5", "golds": "3" },
 	];
 	let myJobs = [
-		{ "jobPosition": "position 1", "companyName": "Widget name1", "addedBy": username, "dateApplied": makeDate(-2), "resources": myResources, "comments": "sent thank you note. received no response." },
-		{ "jobPosition": "position 2", "companyName": "ABC name2", "addedBy": username,"dateApplied": makeDate(-132), "resources": myResources, "comments": "sent thank you note. received no response." },
-		{ "jobPosition": "position 3", "companyName": "Net name3 ", "addedBy": username, "dateApplied": makeDate(-52), "resources": myResources, "comments": "sent thank you note. received no response." },
-		{ "jobPosition": "position 4", "companyName": "Carter",  "addedBy": username, "dateApplied": makeDate(-200), "resources": myResources, "comments": "Sent references. Waiting on reply." },
+		{ _id : "1211111d20ab241a7845c2f1", "jobPosition": "position 1", "companyName": "Widget name1", "addedBy": username, "dateApplied": makeDate(-2), "resources": myResources, "comments": "sent thank you note. received no response." },
+		{ _id : "1211111d20ab241a7845c2f2", "jobPosition": "position 2", "companyName": "ABC name2", "addedBy": username,"dateApplied": makeDate(-132), "resources": myResources, "comments": "sent thank you note. received no response." },
+		{ _id : "1211111d20ab241a7845c2f3", "jobPosition": "position 3", "companyName": "Net name3 ", "addedBy": username, "dateApplied": makeDate(-52), "resources": myResources, "comments": "sent thank you note. received no response." },
+		{ _id : "1211111d20ab241a7845c2f4", "jobPosition": "position 4", "companyName": "Carter",  "addedBy": username, "dateApplied": makeDate(-200), "resources": myResources, "comments": "Sent references. Waiting on reply." },
 	];
 
 
@@ -31,6 +31,7 @@ module.exports.all = (req, res) => {
 	  // lets add the real data to the sample data : TODO - remove once working
 	  jobs.forEach( item => {
 	  	myJobs.push({
+	  		ID : item._id,
 	  		jobPosition :  item.jobPosition,
 	  		companyName: item.companyName,
 	  		dateApplied:  item.dateApplied,
