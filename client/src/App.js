@@ -108,6 +108,7 @@ class App extends Component {
         return response.json();
       })
       .then(json => {
+        job.ID = json.ID;
         this.setState({
           fetching: false
         });
@@ -130,6 +131,7 @@ class App extends Component {
         return response.json();
       })
       .then(json => {
+        resource.ID = json.ID;
         this.setState({
           fetching: false
         });
@@ -139,10 +141,8 @@ class App extends Component {
   }
 
   DeleteResourceOnServer(resource) {
-    const body = JSON.stringify(resource);
-    fetch('/api/resources/:id', {
+    fetch('/api/resources/'+resource.ID, {
       method: 'DELETE', credentials: 'include',
-      body: body,
       headers: { 'Content-Type': 'application/json' }
     })
       .then(response => {
@@ -267,7 +267,7 @@ class App extends Component {
     let resourcesArr = this.state.resources;
     let index = resourcesArr.indexOf(row);
     resourcesArr.splice(index, 1);
-    //this.DeleteResourceOnServer(row);
+    this.DeleteResourceOnServer(row);
     this.setState({ resources: resourcesArr });
   }
 
