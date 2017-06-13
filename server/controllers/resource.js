@@ -6,6 +6,19 @@ const makeDate = (daysAdjustment) => {
 	return currentTime;
 }
 
+const mapItem =  (item) => {
+	return {
+	  		ID : item._id,
+	  		name :  item.name,
+	  		description: item.description,
+	  		image:  item.image,
+	  		addedBy: item.addedBy,
+	  		url: item.url,
+	  		rating : item.rating,
+	  		dateAdded : item.dateAdded
+	}
+}
+
 module.exports.all = (req, res) => {
 
  	const loremipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida est sit amet mi egestas, a pharetra sem hendrerit. Ut sit amet lacinia ex, vel pellentesque metus. In placerat, lacus eget porttitor imperdiet, sem nibh faucibus turpis, ultricies ultricies turpis orci in augue. Integer ut posuere ante. Pellentesque blandit purus at tortor malesuada porttitor venenatis sed lacus.";
@@ -15,21 +28,12 @@ module.exports.all = (req, res) => {
     { _id : "1111111d20ab241a7845c2f3", "image": "http://www.freeiconspng.com/uploads/flat-mac-icon-15.png", "addedBy":"icartusacrimea", "url": "https://www.website3.com/", "name": "accc", "dateAdded": makeDate(-31), "rating": "3/5", "golds": "3", "description": loremipsum }
  	];
 
-	Resource.find({}, function(err, resources) {
+	Resource.find({}, (err, resources) => {
 	  if (err) throw err;
 
 	  // lets add the real data to the sample data : TODO - remove once working
 	  resources.forEach( item => {
-	  	myResources.push({
-	  		ID : item._id,
-	  		name :  item.name,
-	  		description: item.description,
-	  		image:  item.image,
-	  		addedBy: item.addedBy,
-	  		url: item.url,
-	  		rating : item.rating,
-	  		dateAdded : item.dateAdded
-	  	});
+	  	myResources.push(mapItem(item));
 	  });
 	  
 	  res.status(200).send(myResources);
@@ -60,7 +64,8 @@ module.exports.new = (req, res) => {
 	newResource.save(function(err, resource) {
 	  if (err) throw err;
 	  console.log('Resource created!');
-	  res.status(200).send(resource);
+
+	  res.status(200).send(mapItem(resource));
 	});
 };
 
@@ -87,16 +92,18 @@ module.exports.update = (req, res) => {
 
 module.exports.remove = (req, res) => {
 	const id = req.params.id;
-  console.log('Resource  deleted: ' + id );
-	Resource.findById(id, function(err, resource) {
-	  if (err) throw err;
+	if (id && id !== 'undefined') {
+	  console.log('Resource  deleted: ' + id );
+		Resource.findById(id, function(err, resource) {
+		  if (err) throw err;
 
-	 	resource.remove(function(err) {
-	    if (err) throw err;
+		 	resource.remove(function(err) {
+		    if (err) throw err;
 
-	    console.log('Resource successfully deleted: ' + id );
-	  });
-	});
+		    console.log('Resource successfully deleted: ' + id );
+		  });
+		});
+	}
 };
 
 module.exports.index = (req, res) => {
