@@ -280,6 +280,7 @@ th:nth-last-child(2) {
 p.description {
   margin-top: 10px;
   max-width: 1000px;
+  width: 1000px;
 }
 
 .job-list-container th:nth-child(-n+3){
@@ -307,7 +308,7 @@ h3 {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
   height: 550px;
 }
 .add-resource-container textarea {
@@ -359,4 +360,11 @@ button.save-job {
 }
 button.save-job:active {
   transform: translateY(2px);
+}
+.error {
+color: #D8000C;
+background-color: #FFBABA;
+margin: 10px;
+padding: 5px;
+border-radius: 10px;
 }
