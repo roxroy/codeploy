@@ -22,7 +22,7 @@ class ResourceRow extends Component {
     let row = this.props.row;
 
     return (
-      <tr>
+      <tr className="resource-row">
         <td><img src={row.image} alt="resource-icon"/></td>
         <td>{row.name}</td>
         <td>{row.addedBy}</td>
@@ -39,7 +39,7 @@ class ResourceRow extends Component {
             <i onClick={this.delete} className="fa fa-trash-o" aria-hidden="true"></i>
           </td>
           :
-          <td></td>
+          <td className="noHover"></td>
         }
       </tr>
     );
