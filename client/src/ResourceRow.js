@@ -39,7 +39,7 @@ class ResourceRow extends Component {
             <i onClick={this.delete} className="fa fa-trash-o" aria-hidden="true"></i>
           </td>
           :
-          <td className="noHover"></td>
+          <td></td>
         }
       </tr>
     );
