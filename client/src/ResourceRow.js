@@ -28,7 +28,7 @@ class ResourceRow extends Component {
         <td>{row.addedBy}</td>
         <td>{utils.formattedDate(row.dateAdded)}</td>
         <td>{row.rating}</td>
-        <td>{row.golds}</td>
+        <td>{(row.golds || "0")}</td>
         {(this.props.fromJobModal)?
           <td><a href={row.url}>Visit {row.name}</a></td>
           :

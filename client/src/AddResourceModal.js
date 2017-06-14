@@ -41,28 +41,34 @@ class AddResourceModal extends Component {
         "rating": this.getSelectedRating(),
         "golds": null,
         "description": this.refs.newResourceReview.value,
-        "dateAdded": null
+        "dateAdded": null,
+        "language": this.refs.newResourceLang.value
       };
-    this.setState({errorVisible: "inline"});
+    this.setState({ errorVisible: "inline" });
     if (// test for at least 1 letter
       !/[A-Za-z]/.test(resource.name)) {
-      this.setState({errorText: "Please enter a name for the Resource."})
+      this.setState({ errorText: "Please enter a name for the Resource." })
+      return;
+    }
+    if (!/[A-Za-z]/.test(resource.language)) {
+      this.setState({ errorText: "Please enter a Programming Language." })
       return;
     }
     if (!urlRE.test(resource.url)) {
-      this.setState({errorText: "Invalid url for Link to Resource."})
+      this.setState({ errorText: "Invalid url for Link to Resource." })
       return;
     }
     if (!/\.(jpeg|jpg|png|svg|ico)$/.test(resource.image)) {
-      this.setState({errorText: "Invalid link to image."})
+      this.setState({ errorText: "Invalid link to image." })
       return;
     }
-    if (!/[A-Za-z]/.test(resource.description)) {
-      this.setState({errorText: "Please enter a description/review."})
+    if (// test if there are more than 5 words
+      !/^\W*(\w+\b\W*){5,}$/.test(resource.description)) {
+      this.setState({ errorText: "Please enter at least a 5 word description/review." })
       return;
     }
 
-    this.setState({errorVisible: "none"});
+    this.setState({ errorVisible: "none" });
     this.props.saveResource(resource);
     this.props.closeResourceModal();
   }
@@ -82,7 +88,7 @@ class AddResourceModal extends Component {
         flexDirection: "column",
         position: 'absolute',
         maxWidth: "400px",
-        maxHeight: "600px",
+        minHeight: "690px",
         top: '40px',
         left: '0',
         right: '0',
@@ -109,6 +115,8 @@ class AddResourceModal extends Component {
           <button className="close" onClick={this.props.closeModal}>X</button>
           <h4>Name*</h4>
           <textarea ref="newResourceName" placeholder="Name of the Resource"></textarea>
+          <h4>Programming Language of Resource*</h4>
+          <textarea ref="newResourceLang" placeholder="Example: C#, Haskell, and/or Javascript."></textarea>
           <h4>Link to resource*</h4>
           <textarea ref="newResourceLink" placeholder="Paste URL"></textarea>
           <h4>Image Link*</h4>
@@ -123,8 +131,8 @@ class AddResourceModal extends Component {
 				</form>
           <h4>Review/Description*</h4>
           <textarea className="additional-details" ref="newResourceReview" placeholder="Provide some additional details..."></textarea>
-          <p className="error" style={{display: this.state.errorVisible}}>
-            <i className="fa fa-exclamation-circle"  aria-hidden="true"></i>
+          <p className="error" style={{ display: this.state.errorVisible }}>
+            <i className="fa fa-exclamation-circle" aria-hidden="true"></i>
             {" " + this.state.errorText}
           </p>
           <div className="save-button-container">

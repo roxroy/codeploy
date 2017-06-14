@@ -9,8 +9,6 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    //this.allResources = [];
-
     this.state = {
       fetching: true,
       viewingJobs: false,
@@ -226,11 +224,11 @@ class App extends Component {
     for (let cObj of this.state.resources) {
       if (re.test(cObj.name) || re.test(cObj.addedBy) || re.test(cObj.description)) searchedArray.push(cObj);
     }
-    if (searchedArray.length === 0) {
-      console.log("No results found: ", searchedArray);
-    } else {
-      console.log("Found: ", searchedArray);
-    }
+    // if (searchedArray.length === 0) {
+    //   console.log("No results found: ", searchedArray);
+    // } else {
+    //   console.log("Found: ", searchedArray);
+    // }
 
     this.setState({
       viewingJobs: false,

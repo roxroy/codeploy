@@ -121,7 +121,7 @@ class Resources extends Component {
             handleModalOpen={this.handleModalOpen}
           />
         </Modal>
-        {/*Generates a table of resources, handles sorting(TODO) and conditional rendering of modal*/}
+        {/*Generates a table of resources, handles sorting and conditional rendering of modal*/}
         <ResourceTable
           resources={resources}
           handleResourceModal={this.handleResourceModal}
