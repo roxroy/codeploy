@@ -1,4 +1,5 @@
 import React from 'react';
+import utils from './utils';
 
 function ResourceModal(props) {
   let row = props.currentResource;
@@ -9,11 +10,11 @@ function ResourceModal(props) {
       <div className="resource-form">
         <p>Name: {row.name}</p>
         <p>Language: {row.language}</p>
-        <p>Date Added: {row.dateAdded}</p>
+        <p>Date Added: {utils.formattedDate(row.dateAdded)}</p>
         <p>Link: <a href={row.url}>{row.url}</a></p>
         <p>Added by: {row.addedBy}</p>
         <p>Rating: {row.rating}</p>
-        <p>Gold Stars: {row.golds}</p>
+        <p>Gold Stars: {(row.golds || "0")}</p>
       </div>
       <p className="description">{row.description}</p>
     </div>
