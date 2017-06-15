@@ -270,6 +270,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.resources);
     const isViewingJobs = this.state.viewingJobs;
     if (Array.isArray(this.state.resources)) {
       return (
