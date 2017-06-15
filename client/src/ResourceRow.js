@@ -10,7 +10,7 @@ class ResourceRow extends Component {
   }    
   handleClick(){
     this.props.handleResourceModal(this.props.row);
-    return;
+    //return;
   }
   delete(){
     //let deleteName = this.props.row.name,
