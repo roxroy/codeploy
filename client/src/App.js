@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       fetching: true,
       viewingJobs: false,
-      resources: null,
+      resources: [],
       loggedIn: false,
       username: null,
       jobs: [],
