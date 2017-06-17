@@ -1,6 +1,6 @@
 import React from 'react';
 import utils from './utils';
-let JobListDropdown = require("./JobListDropdown")
+const JobListDropdown = require("./JobListDropdown")
 
 class ResourceModal extends React.Component {
   constructor(props){
