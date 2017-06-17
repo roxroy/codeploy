@@ -34,6 +34,8 @@ class App extends Component {
     this.SaveJobOnServer = this.SaveJobOnServer.bind(this);
     this.deleteResource = this.deleteResource.bind(this);
     this.DeleteResourceOnServer = this.DeleteResourceOnServer.bind(this);
+    this.deleteJob = this.deleteJob.bind(this);
+    this.DeleteJobOnServer = this.DeleteJobOnServer.bind(this);
   }
 
   getJobs() {
@@ -158,6 +160,26 @@ class App extends Component {
       });
   }
 
+  DeleteJobOnServer(job) {
+    fetch('/api/jobs/'+job.ID, {
+      method: 'DELETE', credentials: 'include',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(response => {
+        this.setState({
+          fetching: true
+        });
+        return response.json();
+      })
+      .then(json => {
+        this.setState({
+          fetching: false
+        });
+      }).catch(e => {
+        console.log("DeleteResourceOnServer error", e);
+      });
+  }
+
   componentDidMount() {
     this.isAuth();
     this.getResources();
@@ -182,7 +204,8 @@ class App extends Component {
     fetch('/logout', { method: 'GET', credentials: 'include' })
       .then(json => {
         this.setState({
-          loggedIn: false
+          loggedIn: false,
+          viewingJobs: false
         });
       })
   }
@@ -260,6 +283,34 @@ class App extends Component {
     updatejobs.push(newJob);
     this.setState({ jobs: updatejobs });
   }
+
+  deleteJob(row) {
+    //console.log("inside delete job");
+    let jobsArr = this.state.jobs;
+    let index = jobsArr.indexOf(row);
+    jobsArr.splice(index, 1);
+    this.DeleteJobOnServer(row);
+
+   /*fetch('/api/jobs/'+row.ID, {
+      method: 'DELETE', credentials: 'include',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(response => {
+        this.setState({
+          fetching: true
+        });
+        return response.json();
+      })
+      .then(json => {
+        this.setState({
+          fetching: false
+        });
+      }).catch(e => {
+        console.log("DeleteResourceOnServer error", e);
+      });*/
+
+      this.setState({ jobs: jobsArr });
+  }
   
   deleteResource(row) {
     let resourcesArr = this.state.resources;
@@ -291,7 +342,7 @@ class App extends Component {
                   ? ''
                   : /*this.state.resources*/"Hello, " + this.state.username + "!"}
               </p>
-              <MyJobs jobs={this.state.jobs} getJobs={this.getJobs}   saveJob={this.saveJob} />
+              <MyJobs jobs={this.state.jobs} getJobs={this.getJobs} saveJob={this.saveJob} deleteJob={this.deleteJob} />
             </div>
           ) : (
               <div>

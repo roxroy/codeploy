@@ -70,4 +70,18 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.remove = (req, res) => {
+	const id = req.params.id;
+	console.log(id);
+	if (id && id !== 'undefined') {
+	  console.log('Job deleted: ' + id );
+		Jobs.findById(id, function(err, job) {
+		  if (err) throw err;
+
+		 	job.remove(function(err) {
+		    if (err) throw err;
+
+		    console.log('Job successfully deleted: ' + id );
+		  });
+		});
+	}
 };

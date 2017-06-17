@@ -128,6 +128,7 @@ class MyJobs extends Component {
                 row={row}
                 key={i}
                 handleViewJob={this.handleViewJob}
+                deleteJob={this.props.deleteJob}
               />
             )}
           </tbody>
