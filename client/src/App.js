@@ -19,6 +19,7 @@ class App extends Component {
       currentSort: ["resourceName", true],
       resetSearch: false
     };
+
     this.viewJobs = this.viewJobs.bind(this);
     this.viewResources = this.viewResources.bind(this);
     this.logOut = this.logOut.bind(this);
@@ -30,13 +31,13 @@ class App extends Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.saveResource = this.saveResource.bind(this);
     this.saveJob = this.saveJob.bind(this);
-    this.SaveResourceOnServer = this.SaveResourceOnServer.bind(this);
+    this.saveResourceOnServer = this.saveResourceOnServer.bind(this);
     this.SaveJobOnServer = this.SaveJobOnServer.bind(this);
     this.deleteResource = this.deleteResource.bind(this);
-    this.DeleteResourceOnServer = this.DeleteResourceOnServer.bind(this);
+    this.deleteResourceOnServer = this.deleteResourceOnServer.bind(this);
     this.addResourceToJob = this.addResourceToJob.bind(this);
     this.deleteJob = this.deleteJob.bind(this);
-    this.DeleteJobOnServer = this.DeleteJobOnServer.bind(this);
+    this.deleteJobOnServer = this.deleteJobOnServer.bind(this);
   }
 
   getJobs() {
@@ -119,7 +120,7 @@ class App extends Component {
       });
   }
 
-  SaveResourceOnServer(resource) {
+  saveResourceOnServer(resource) {
     const body = JSON.stringify(resource);
     fetch('/api/resources', {
       method: 'POST', credentials: 'include',
@@ -138,11 +139,11 @@ class App extends Component {
           fetching: false
         });
       }).catch(e => {
-        console.log("SaveResourceOnServer error", e);
+        console.log("saveResourceOnServer error", e);
       });
   }
 
-  DeleteResourceOnServer(resource) {
+  deleteResourceOnServer(resource) {
     fetch('/api/resources/'+resource.ID, {
       method: 'DELETE', credentials: 'include',
       headers: { 'Content-Type': 'application/json' }
@@ -158,11 +159,11 @@ class App extends Component {
           fetching: false
         });
       }).catch(e => {
-        console.log("DeleteResourceOnServer error", e);
+        console.log("deleteResourceOnServer error", e);
       });
   }
 
-  DeleteJobOnServer(job) {
+  deleteJobOnServer(job) {
     fetch('/api/jobs/'+job.ID, {
       method: 'DELETE', credentials: 'include',
       headers: { 'Content-Type': 'application/json' }
@@ -178,7 +179,7 @@ class App extends Component {
           fetching: false
         });
       }).catch(e => {
-        console.log("DeleteResourceOnServer error", e);
+        console.log("deleteResourceOnServer error", e);
       });
   }
 
@@ -262,7 +263,7 @@ class App extends Component {
         newResource = resource;
     newResource.dateAdded = new Date();
 
-    this.SaveResourceOnServer(newResource);
+    this.saveResourceOnServer(newResource);
     updateresources.push(newResource);
 
     this.setState({ resources: updateresources, viewingJobs: false })
@@ -285,36 +286,18 @@ class App extends Component {
     let jobsArr = this.state.jobs;
     let index = jobsArr.indexOf(row);
     jobsArr.splice(index, 1);
-    this.DeleteJobOnServer(row);
-
-   /*fetch('/api/jobs/'+row.ID, {
-      method: 'DELETE', credentials: 'include',
-      headers: { 'Content-Type': 'application/json' }
-    })
-      .then(response => {
-        this.setState({
-          fetching: true
-        });
-        return response.json();
-      })
-      .then(json => {
-        this.setState({
-          fetching: false
-        });
-      }).catch(e => {
-        console.log("DeleteResourceOnServer error", e);
-      });*/
-
-      this.setState({ jobs: jobsArr });
+    this.deleteJobOnServer(row);
+    this.setState({ jobs: jobsArr });
   }
   
   deleteResource(row) {
     let resourcesArr = this.state.resources;
     let index = resourcesArr.indexOf(row);
     resourcesArr.splice(index, 1);
-    this.DeleteResourceOnServer(row);
+    this.deleteResourceOnServer(row);
     this.setState({ resources: resourcesArr });
   }
+
   addResourceToJob(jobSelected, resourceToAdd){
     let currentJobArray = this.state.jobs;
     
@@ -336,6 +319,7 @@ class App extends Component {
       jobs: currentJobArray
     });
   }
+
   render() {
     const isViewingJobs = this.state.viewingJobs;
     if (Array.isArray(this.state.resources)) {
