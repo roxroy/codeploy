@@ -246,7 +246,7 @@ class App extends Component {
     this.SaveResourceOnServer(newResource);
     updateresources.push(newResource);
 
-    this.setState({ resources: updateresources })
+    this.setState({ resources: updateresources, viewingJobs: false })
   }
 
   saveJob(job) {

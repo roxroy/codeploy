@@ -88,7 +88,7 @@ class AddResourceModal extends Component {
         flexDirection: "column",
         position: 'absolute',
         maxWidth: "420px",
-        maxHeight: "690px",
+        maxHeight: "710px",
         top: '40px',
         left: '0',
         right: '0',
