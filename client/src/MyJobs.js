@@ -121,7 +121,7 @@ class MyJobs extends Component {
                 )}
               </th>
               <th>Relevant Resources</th>
-              <th>Comments</th>
+              <th className="last-jobs-th">Comments</th>
             </tr>
             {jobs.map((row, i) =>
               <EachJob

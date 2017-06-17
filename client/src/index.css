@@ -242,7 +242,13 @@ th:first-child {
   border-top-left-radius: 10px;
 }
 
-th:nth-last-child(2) {
+/*th:nth-last-child(2) {
+  border-top-right-radius: 10px;
+}*/
+.last-resources-th {
+  border-top-right-radius: 10px;
+}
+.last-jobs-th {
   border-top-right-radius: 10px;
 }
 
