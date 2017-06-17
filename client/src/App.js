@@ -322,7 +322,7 @@ class App extends Component {
 
   render() {
     const isViewingJobs = this.state.viewingJobs;
-    if (Array.isArray(this.state.resources)) {
+    
       return (
         <div className="App">
           <Navbar
@@ -371,10 +371,7 @@ class App extends Component {
             )
           }
         </div>
-      );
-    } else {
-      return null;
-    }
+      );   
   }
 }
 

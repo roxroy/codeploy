@@ -25,7 +25,12 @@ class Resources extends Component {
       resourceModalOpen: !this.state.resourceModalOpen
     });
   }
+
   render() {
+    if (!Array.isArray(resources)) {
+      return null;
+    }
+    
     const modalStyle = {
       overlay: {
         position: 'fixed',
