@@ -1,25 +1,40 @@
 import React from 'react';
 import utils from './utils';
+let JobListDropdown = require("./JobListDropdown")
 
-function ResourceModal(props) {
-  let row = props.currentResource;
-  return (
-    <div className="resource-modal">
-      <button className="close close-resource-modal" onClick={props.handleModalOpen}>X</button>
-      <img src={row.image} alt={`icon-of-${row.name}`}/>
-      <div className="resource-form">
-        <p>Name: {row.name}</p>
-        <p>Language: {row.language}</p>
-        <p>Date Added: {utils.formattedDate(row.dateAdded)}</p>
-        <p>Link: <a href={row.url}>{row.url}</a></p>
-        <p>Added by: {row.addedBy}</p>
-        <p>Rating: {row.rating}</p>
-        <p>Gold Stars: {(row.golds || "0")}</p>
-        {()<select name="jobResource"></select>}
+class ResourceModal extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.handleResourceSelect = this.handleResourceSelect.bind(this);
+  }
+  handleResourceSelect(job){
+    this.props.addResourceToJob(job, this.props.currentResource);
+  }
+  render(){
+    let row = this.props.currentResource;
+    return (
+      <div className="resource-modal">
+        <button className="close close-resource-modal" onClick={this.props.handleModalOpen}>X</button>
+        <img src={row.image} alt={`icon-of-${row.name}`}/>
+        <div className="resource-form">
+          <p>Name: {row.name}</p>
+          <p>Language: {row.language}</p>
+          <p>Date Added: {utils.formattedDate(row.dateAdded)}</p>
+          <p>Link: <a href={row.url}>{row.url}</a></p>
+          <p>Added by: {row.addedBy}</p>
+          <p>Rating: {row.rating}</p>
+          <p>Gold Stars: {(row.golds || "0")}</p>
+          {(this.props.loggedIn) && 
+            <JobListDropdown 
+              handleResourceSelect={this.handleResourceSelect}
+              jobs={this.props.jobs}
+            />
+          }
+        </div>
+        <p className="description">{row.description}</p>
       </div>
-      <p className="description">{row.description}</p>
-    </div>
-  )
+    )
+  }
 }
-
 module.exports = ResourceModal;

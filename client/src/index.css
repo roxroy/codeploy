@@ -260,12 +260,6 @@ th:nth-last-child(2) {
   flex-wrap: wrap;
 }
 
-.resource-modal button{
-  position: absolute;
-  right: 20px;
-  top: 20px;
-}
-
 .resource-modal img {
   display: block;
   max-height: 250px;
@@ -371,4 +365,11 @@ background-color: #FFBABA;
 margin: 10px;
 padding: 5px;
 border-radius: 10px;
+}
+
+.job-list-dropdown {
+  display: flex;
+}
+.job-list-dropdown button {
+  margin-left: 10px;
 }

@@ -3,12 +3,6 @@ const EachJob = require('./EachJob');
 const JobModal = require('./JobModal');
 const AddJobButton = require('./AddJobButton');
 
-/*
-TODO:
-when clicked on th, sorts respective column
-when clicked on td, opens modal with job info and a list of related resources
-*/
-
 class MyJobs extends Component {
   constructor(props) {
     super(props);
@@ -63,6 +57,7 @@ class MyJobs extends Component {
 
   componentDidMount() {
     console.log('myjob componentDidMount');
+    (!this.props.jobs) &&
     this.props.getJobs();
   }
 
