@@ -15,6 +15,7 @@ function ResourceModal(props) {
         <p>Added by: {row.addedBy}</p>
         <p>Rating: {row.rating}</p>
         <p>Gold Stars: {(row.golds || "0")}</p>
+        {()<select name="jobResource"></select>}
       </div>
       <p className="description">{row.description}</p>
     </div>

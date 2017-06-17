@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 const ResourceTable = require("./ResourceTable");
 
-//delete after testing
-//{"jobPosition": "position1", "companyName": "name1", "dateApplied":"01/dd/yy", "resources":resources}
-
 class JobModal extends Component {
   constructor(props) {
     super(props)

@@ -224,12 +224,6 @@ class App extends Component {
     for (let cObj of this.state.resources) {
       if (re.test(cObj.name) || re.test(cObj.addedBy) || re.test(cObj.description)) searchedArray.push(cObj);
     }
-    // if (searchedArray.length === 0) {
-    //   console.log("No results found: ", searchedArray);
-    // } else {
-    //   console.log("Found: ", searchedArray);
-    // }
-
     this.setState({
       viewingJobs: false,
       resetSearch: true,
@@ -289,7 +283,7 @@ class App extends Component {
               <p className="App-intro">
                 {this.state.loggedIn === false
                   ? ''
-                  : /*this.state.resources*/"Hello, " + this.state.username + "!"}
+                  : "Hello, " + this.state.username + "!"}
               </p>
               <MyJobs jobs={this.state.jobs} getJobs={this.getJobs}   saveJob={this.saveJob} />
             </div>
@@ -298,7 +292,7 @@ class App extends Component {
                 <p className="App-intro">
                   {this.state.loggedIn === false
                     ? ''
-                    : /*this.state.resources*/"Hello, " + this.state.username + "!"}
+                    : "Hello, " + this.state.username + "!"}
                 </p>
                 <SortButton
                   sortResources={this.sortResources}
