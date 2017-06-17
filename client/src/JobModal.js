@@ -60,6 +60,10 @@ class JobModal extends Component {
       }
     }
     let resources = this.props.job.resources;
+    if (!resources.length) {
+      return null;
+    }
+
     // holds all the functions for handling table sorting
     const sortTable = {
       "resourceName"() {
