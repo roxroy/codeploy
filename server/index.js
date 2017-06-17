@@ -45,6 +45,7 @@ app.get('/api/jobs/:id', jobCtrl.one);
 app.post('/api/jobs', jobCtrl.new);
 app.put('/api/jobs/:id', jobCtrl.update);
 app.delete('/api/jobs/:id', jobCtrl.remove);
+app.post('/api/jobs/resource', jobCtrl.newResource);
 
 app.use('/', authRoutes);
 

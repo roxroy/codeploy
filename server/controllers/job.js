@@ -6,6 +6,9 @@ const makeDate = (daysAdjustment) => {
 	return currentTime;
 }
 
+const myResources = [
+];
+
 const mapItem = (item) => {
 	return {
 	  		ID : item._id,
@@ -13,7 +16,7 @@ const mapItem = (item) => {
 	  		companyName: item.companyName,
 	  		dateApplied:  item.dateApplied,
 	  		addedBy:  item.addedBy,
-	  		resources: item.resources,
+	  		resources: myResources,
 	  		comments: item.comments,
 	}
 }
@@ -36,6 +39,11 @@ module.exports.all = (req, res) => {
 };
 
 module.exports.one = (req, res) => {
+};
+
+
+module.exports.newResource = (req, res) => {
+  console.log("newResource", req.body.jobID, req.body.resourceID );
 };
 
 module.exports.new = (req, res) => {
