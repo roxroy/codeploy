@@ -35,6 +35,11 @@ a {
   padding-bottom: 10px;
 }
 
+.auth-buttons {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
 button {
   cursor: pointer;
 }
@@ -160,6 +165,9 @@ i.fa.fa-bars::before {
   background: transparent;
   color: white;
   border: none;
+}
+.modal-button:hover {
+  color: #ffe78f;
 }
 
 .resources-container, .resource-table, .job-list-container {
