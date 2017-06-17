@@ -28,7 +28,6 @@ class AddJobButton extends Component {
       "jobPosition": this.refs.newJobPosition.value,
       "companyName": this.refs.newJobCompany.value,
       "dateApplied": this.refs.newJobDate.value,
-      "resources": this.refs.newJobResources.value,
       "comments": this.refs.newJobComments.value,
     }
 
@@ -102,8 +101,6 @@ class AddJobButton extends Component {
             <textarea ref="newJobCompany" placeholder="Company Name"></textarea>
             <h4>Date Applied*</h4>
             <textarea ref="newJobDate" placeholder="MM/DD/YYYY"></textarea>
-            <h4>Resources</h4>
-            <textarea ref="newJobResources" placeholder="Resources used"></textarea>
             <h4>Comments</h4>
             <textarea className="additional-details" ref="newJobComments" placeholder="What is the status of your application?"></textarea>
             <p className="error" style={{ display: this.state.errorVisible }}>
