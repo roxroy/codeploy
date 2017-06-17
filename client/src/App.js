@@ -275,6 +275,7 @@ class App extends Component {
     let newJob = job;
     newJob.addedBy = this.state.username;
     newJob.dateApplied =  Date.parse(job.dateApplied);
+    newJob.resources = [];
 
     this.SaveJobOnServer(newJob);
     updatejobs.push(newJob);
