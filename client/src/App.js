@@ -34,6 +34,7 @@ class App extends Component {
     this.SaveJobOnServer = this.SaveJobOnServer.bind(this);
     this.deleteResource = this.deleteResource.bind(this);
     this.DeleteResourceOnServer = this.DeleteResourceOnServer.bind(this);
+    this.addResourceToJob = this.addResourceToJob.bind(this);
     this.deleteJob = this.deleteJob.bind(this);
     this.DeleteJobOnServer = this.DeleteJobOnServer.bind(this);
   }
@@ -85,6 +86,7 @@ class App extends Component {
           username: json.username,
           loggedIn: true,
         });
+        this.getJobs()
       }).catch(e => {
         this.setState({
           username: null,
@@ -247,12 +249,6 @@ class App extends Component {
     for (let cObj of this.state.resources) {
       if (re.test(cObj.name) || re.test(cObj.addedBy) || re.test(cObj.description)) searchedArray.push(cObj);
     }
-    // if (searchedArray.length === 0) {
-    //   console.log("No results found: ", searchedArray);
-    // } else {
-    //   console.log("Found: ", searchedArray);
-    // }
-
     this.setState({
       viewingJobs: false,
       resetSearch: true,
@@ -319,9 +315,28 @@ class App extends Component {
     this.DeleteResourceOnServer(row);
     this.setState({ resources: resourcesArr });
   }
+  addResourceToJob(jobSelected, resourceToAdd){
+    let currentJobArray = this.state.jobs;
+    
+    //todo: delete after db implemented
+    console.log(currentJobArray);
 
+    for (let job of currentJobArray) {
+      if (job.jobPosition == jobSelected) {
+        (job.resources)?job.resources.push(resourceToAdd):job.resources = [resourceToAdd];
+        break;
+      }
+    }
+    
+    //todo: delete after db implemented
+    console.log(currentJobArray);
+
+    // todo: push currentJobArray as the new value in the database
+    this.setState({
+      jobs: currentJobArray
+    });
+  }
   render() {
-    console.log(this.state.resources);
     const isViewingJobs = this.state.viewingJobs;
     if (Array.isArray(this.state.resources)) {
       return (
@@ -340,7 +355,7 @@ class App extends Component {
               <p className="App-intro">
                 {this.state.loggedIn === false
                   ? ''
-                  : /*this.state.resources*/"Hello, " + this.state.username + "!"}
+                  : "Hello, " + this.state.username + "!"}
               </p>
               <MyJobs jobs={this.state.jobs} getJobs={this.getJobs} saveJob={this.saveJob} deleteJob={this.deleteJob} />
             </div>
@@ -349,7 +364,7 @@ class App extends Component {
                 <p className="App-intro">
                   {this.state.loggedIn === false
                     ? ''
-                    : /*this.state.resources*/"Hello, " + this.state.username + "!"}
+                    : "Hello, " + this.state.username + "!"}
                 </p>
                 <SortButton
                   sortResources={this.sortResources}
@@ -358,6 +373,7 @@ class App extends Component {
                   resources={this.state.resources}
                 />
                 <Resources
+                  addResourceToJob={this.addResourceToJob}
                   resources={this.state.resources}
                   sortByDate={this.state.sortByDate}
                   handleSort={this.handleSort}
@@ -365,6 +381,7 @@ class App extends Component {
                   loggedIn={this.state.loggedIn}
                   username={this.state.username}
                   deleteResource={this.deleteResource}
+                  jobs={this.state.jobs}
                 />
               </div>
             )

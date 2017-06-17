@@ -3,13 +3,6 @@ const ResourceTable = require('./ResourceTable');
 const ResourceModal = require('./ResourceModal');
 import Modal from 'react-modal';
 
-/*
-TODO:
-when clicked on th, sorts respective column
-when clicked on td, opens modal with more information about respective resource
-  -could give the option to add resource to specific job from job list? (as a button on the resource modal)
-*/
-
 class Resources extends Component {
   constructor(props) {
     super(props)
@@ -117,8 +110,11 @@ class Resources extends Component {
         >
           {/*handles the information given from clicking on ResourceRow*/}
           <ResourceModal
+            addResourceToJob={this.props.addResourceToJob}
             currentResource={this.state.currentResource}
             handleModalOpen={this.handleModalOpen}
+            loggedIn={this.props.loggedIn}
+            jobs={this.props.jobs}
           />
         </Modal>
         {/*Generates a table of resources, handles sorting and conditional rendering of modal*/}
