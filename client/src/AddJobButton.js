@@ -25,7 +25,7 @@ class AddJobButton extends Component {
   }
   saveJob() {
     let job = {
-      "jobPosition": this.refs.newJobPosition.value,
+      "jobPosition": this.refs.newJobPosition.value.trim(),
       "companyName": this.refs.newJobCompany.value,
       "dateApplied": this.refs.newJobDate.value,
       "comments": this.refs.newJobComments.value,

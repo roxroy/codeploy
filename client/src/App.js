@@ -299,21 +299,36 @@ class App extends Component {
     this.setState({ resources: resourcesArr });
   }
 
+  saveResourceToJobOnServer(jobID, resourceID) {
+    const body = JSON.stringify({jobID, resourceID});
+    fetch('/api/jobs/resource', {
+      method: 'POST', credentials: 'include',
+      body: body,
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(response => {
+        this.setState({
+          fetching: true
+        });
+        return response.json();
+      })
+      .then(json => {
+        this.setState({
+          fetching: false
+        });
+      }).catch(e => {
+        console.log("saveResourceToJobOnServer error", e);
+      });
+  }
+
   addResourceToJob(jobSelected, resourceToAdd){
     let currentJobArray = this.state.jobs;
     
-    //todo: delete after db implemented
-    console.log(currentJobArray);
-
-    for (let job of currentJobArray) {
-      if (job.jobPosition == jobSelected) {
+    const job = currentJobArray.find( job => job.jobPosition === jobSelected);
+    if (job) {
         (job.resources)?job.resources.push(resourceToAdd):job.resources = [resourceToAdd];
-        break;
-      }
+        this.saveResourceToJobOnServer(job.ID, resourceToAdd.ID);
     }
-    
-    //todo: delete after db implemented
-    console.log(currentJobArray);
 
     // todo: push currentJobArray as the new value in the database
     this.setState({
