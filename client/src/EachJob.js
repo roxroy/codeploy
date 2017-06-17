@@ -6,10 +6,16 @@ class EachJob extends Component {
     super(props)
 
     this.handleClick = this.handleClick.bind(this);
+    this.delete = this.delete.bind(this);
   }
   handleClick(){
     this.props.handleViewJob(this.props.row);
     return;
+  }
+  delete(){
+    console.log("delete job");
+    let row = this.props.row;
+    this.props.deleteJob(row);
   }
   render() {
     let row = this.props.row;
@@ -21,6 +27,9 @@ class EachJob extends Component {
         <td>{utils.formattedDate(row.dateApplied)}</td>
         <td><a onClick={this.handleClick}>View Resources</a></td>
         <td>{row.comments}</td>
+        <td>
+          <i onClick={this.delete} className="fa fa-trash-o" aria-hidden="true"></i>
+        </td>
       </tr>
     );
   }

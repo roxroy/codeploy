@@ -35,6 +35,11 @@ a {
   padding-bottom: 10px;
 }
 
+.auth-buttons {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
 button {
   cursor: pointer;
 }
@@ -161,6 +166,9 @@ i.fa.fa-bars::before {
   color: white;
   border: none;
 }
+.modal-button:hover {
+  color: #ffe78f;
+}
 
 .resources-container, .resource-table, .job-list-container {
   display: flex;
@@ -234,7 +242,13 @@ th:first-child {
   border-top-left-radius: 10px;
 }
 
-th:nth-last-child(2) {
+/*th:nth-last-child(2) {
+  border-top-right-radius: 10px;
+}*/
+.last-resources-th {
+  border-top-right-radius: 10px;
+}
+.last-jobs-th {
   border-top-right-radius: 10px;
 }
 
@@ -306,7 +320,7 @@ h3 {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 0px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
   height: 100%;
 }
 .add-resource-container textarea {

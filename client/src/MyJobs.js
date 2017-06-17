@@ -116,13 +116,14 @@ class MyJobs extends Component {
                 )}
               </th>
               <th>Relevant Resources</th>
-              <th>Comments</th>
+              <th className="last-jobs-th">Comments</th>
             </tr>
             {jobs.map((row, i) =>
               <EachJob
                 row={row}
                 key={i}
                 handleViewJob={this.handleViewJob}
+                deleteJob={this.props.deleteJob}
               />
             )}
           </tbody>

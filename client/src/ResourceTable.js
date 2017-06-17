@@ -48,7 +48,7 @@ function ResourceTable(props) {
                   <i id="golds" className="fa fa-arrow-down" aria-hidden="true"></i>
               )}
             </th>
-            {(props.fromJobModal) ? <th>Link to Resource</th> : <th>Additional Information</th>}
+            {(props.fromJobModal) ? <th className="last-resources-th">Link to Resource</th> : <th className="last-resources-th">Additional Information</th>}
             <th className="delete-heading"></th>
           </tr>
           {props.resources.map((row, i) => <ResourceRow

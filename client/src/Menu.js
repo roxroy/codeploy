@@ -17,7 +17,7 @@ const menuModal = {
   },
   content: {
     width: '350px',
-    background: '#000',
+    background: '#2e075a',
     color: '#FFDC4C',
     top: '20%',
     left: '85%',
@@ -39,7 +39,7 @@ const centerModal = {
   },
   content: {
     width: '350px',
-    background: '#000',
+    background: '#2e075a',
     color: '#FFDC4C',
     top: '45%',
     left: '50%',

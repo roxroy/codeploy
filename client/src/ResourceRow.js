@@ -13,8 +13,6 @@ class ResourceRow extends Component {
     //return;
   }
   delete(){
-    //let deleteName = this.props.row.name,
-    //deleteAddedBy = this.props.row.addedBy;
     let row = this.props.row;
     this.props.deleteResource(row);
   }
