@@ -44,11 +44,14 @@ module.exports.all = (req, res) => {
 module.exports.one = (req, res) => {
 };
 
-
 module.exports.newResource = (req, res) => {
  
   Jobs.findById(req.body.jobID, function(err, job) {
 	  if (err) throw err;
+
+	  if (!job.resources) {
+  	 job.resources = [];
+  	}
 
 	  job.resources.push(req.body.resourceID);
 	  job.save(function(err) {
