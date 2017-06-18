@@ -17,7 +17,8 @@ class App extends Component {
       username: null,
       jobs: [],
       currentSort: ["resourceName", true],
-      resetSearch: false
+      resetSearch: false,
+      saveResourceJob: ""
     };
 
     this.viewJobs = this.viewJobs.bind(this);
@@ -103,7 +104,7 @@ class App extends Component {
       method: 'POST', credentials: 'include',
       body: body,
       headers: { 'Content-Type': 'application/json' }
-      })
+    })
       .then(response => {
         this.setState({
           fetching: true
@@ -144,7 +145,7 @@ class App extends Component {
   }
 
   deleteResourceOnServer(resource) {
-    fetch('/api/resources/'+resource.ID, {
+    fetch('/api/resources/' + resource.ID, {
       method: 'DELETE', credentials: 'include',
       headers: { 'Content-Type': 'application/json' }
     })
@@ -164,7 +165,7 @@ class App extends Component {
   }
 
   deleteJobOnServer(job) {
-    fetch('/api/jobs/'+job.ID, {
+    fetch('/api/jobs/' + job.ID, {
       method: 'DELETE', credentials: 'include',
       headers: { 'Content-Type': 'application/json' }
     })
@@ -260,7 +261,7 @@ class App extends Component {
   saveResource(resource) {
     console.log("inside saveresource");
     var updateresources = this.state.resources,
-        newResource = resource;
+      newResource = resource;
     newResource.dateAdded = new Date();
 
     this.saveResourceOnServer(newResource);
@@ -274,7 +275,7 @@ class App extends Component {
     let updatejobs = this.state.jobs;
     let newJob = job;
     newJob.addedBy = this.state.username;
-    newJob.dateApplied =  Date.parse(job.dateApplied);
+    newJob.dateApplied = Date.parse(job.dateApplied);
     newJob.resources = [];
 
     this.SaveJobOnServer(newJob);
@@ -290,7 +291,7 @@ class App extends Component {
     this.deleteJobOnServer(row);
     this.setState({ jobs: jobsArr });
   }
-  
+
   deleteResource(row) {
     let resourcesArr = this.state.resources;
     let index = resourcesArr.indexOf(row);
@@ -300,7 +301,7 @@ class App extends Component {
   }
 
   saveResourceToJobOnServer(jobID, resourceID) {
-    const body = JSON.stringify({jobID, resourceID});
+    const body = JSON.stringify({ jobID, resourceID });
     fetch('/api/jobs/resource', {
       method: 'POST', credentials: 'include',
       body: body,
@@ -316,78 +317,86 @@ class App extends Component {
         this.setState({
           fetching: false
         });
+        // updates jobs
+        this.setState({
+          saveResourceJob: "Resource saved."
+        });
+        this.getJobs()
       }).catch(e => {
         console.log("saveResourceToJobOnServer error", e);
       });
   }
 
-  addResourceToJob(jobSelected, resourceToAdd){
+  addResourceToJob(jobSelected, resourceToAdd) {
     let currentJobArray = this.state.jobs;
-    
-    const job = currentJobArray.find( job => job.jobPosition === jobSelected);
-    if (job) {
-        (job.resources)?job.resources.push(resourceToAdd):job.resources = [resourceToAdd];
-        this.saveResourceToJobOnServer(job.ID, resourceToAdd.ID);
-    }
 
-    // todo: push currentJobArray as the new value in the database
-    this.setState({
-      jobs: currentJobArray
-    });
+    const job = currentJobArray.find(job => job.ID === jobSelected);
+    console.log(job);
+    const resourceFound = (job.resources) ? job.resources.find(resource => resource === resourceToAdd.ID) : false;
+
+    if (job && !resourceFound) {
+      (job.resources) ? job.resources.push(resourceToAdd) : job.resources = [resourceToAdd];
+      this.saveResourceToJobOnServer(job.ID, resourceToAdd.ID);
+    } else {
+      this.setState({
+        saveResourceJob: "Resource is already in job"
+      });
+    }
   }
 
   render() {
     const isViewingJobs = this.state.viewingJobs;
-    
-      return (
-        <div className="App">
-          <Navbar
-            handleSearch={this.handleSearch}
-            loggedIn={this.state.loggedIn}
-            viewJobs={this.viewJobs}
-            viewResources={this.viewResources}
-            logOut={this.logOut}
-            saveResource={this.saveResource}
-            username={this.state.username}
-          />
-          {isViewingJobs ? (
+
+    return (
+      <div className="App">
+        <Navbar
+          handleSearch={this.handleSearch}
+          loggedIn={this.state.loggedIn}
+          viewJobs={this.viewJobs}
+          viewResources={this.viewResources}
+          logOut={this.logOut}
+          saveResource={this.saveResource}
+          username={this.state.username}
+        />
+        {isViewingJobs ? (
+          <div>
+            <p className="App-intro">
+              {this.state.loggedIn === false
+                ? ''
+                : "Hello, " + this.state.username + "!"}
+            </p>
+            <MyJobs jobs={this.state.jobs} getJobs={this.getJobs} saveJob={this.saveJob} deleteJob={this.deleteJob} />
+          </div>
+        ) : (
             <div>
               <p className="App-intro">
                 {this.state.loggedIn === false
                   ? ''
                   : "Hello, " + this.state.username + "!"}
               </p>
-              <MyJobs jobs={this.state.jobs} getJobs={this.getJobs} saveJob={this.saveJob} deleteJob={this.deleteJob} />
+              <SortButton
+                sortResources={this.sortResources}
+                viewResources={this.viewResources}
+                showAllButton={this.state.resetSearch}
+                resources={this.state.resources}
+              />
+              <Resources
+                addResourceToJob={this.addResourceToJob}
+                resources={this.state.resources}
+                sortByDate={this.state.sortByDate}
+                handleSort={this.handleSort}
+                currentSort={this.state.currentSort}
+                loggedIn={this.state.loggedIn}
+                username={this.state.username}
+                deleteResource={this.deleteResource}
+                jobs={this.state.jobs}
+                saveResourceJob={this.state.saveResourceJob}
+              />
             </div>
-          ) : (
-              <div>
-                <p className="App-intro">
-                  {this.state.loggedIn === false
-                    ? ''
-                    : "Hello, " + this.state.username + "!"}
-                </p>
-                <SortButton
-                  sortResources={this.sortResources}
-                  viewResources={this.viewResources}
-                  showAllButton={this.state.resetSearch}
-                  resources={this.state.resources}
-                />
-                <Resources
-                  addResourceToJob={this.addResourceToJob}
-                  resources={this.state.resources}
-                  sortByDate={this.state.sortByDate}
-                  handleSort={this.handleSort}
-                  currentSort={this.state.currentSort}
-                  loggedIn={this.state.loggedIn}
-                  username={this.state.username}
-                  deleteResource={this.deleteResource}
-                  jobs={this.state.jobs}
-                />
-              </div>
-            )
-          }
-        </div>
-      );   
+          )
+        }
+      </div>
+    );
   }
 }
 

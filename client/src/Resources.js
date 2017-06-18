@@ -115,6 +115,7 @@ class Resources extends Component {
             handleModalOpen={this.handleModalOpen}
             loggedIn={this.props.loggedIn}
             jobs={this.props.jobs}
+            saveResourceJob={this.props.saveResourceJob}
           />
         </Modal>
         {/*Generates a table of resources, handles sorting and conditional rendering of modal*/}

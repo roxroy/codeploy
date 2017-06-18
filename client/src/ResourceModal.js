@@ -29,8 +29,10 @@ class ResourceModal extends React.Component {
             <JobListDropdown 
               handleResourceSelect={this.handleResourceSelect}
               jobs={this.props.jobs}
+              saveResourceJob={this.props.saveResourceJob}
             />
           }
+          {(this.props.saveResourceJob) && <div>{this.props.saveResourceJob}</div>}
         </div>
         <p className="description">{row.description}</p>
       </div>

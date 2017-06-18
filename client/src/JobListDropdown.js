@@ -21,7 +21,7 @@ class JobListDropdown extends React.Component {
           <option value="default">Your Job Positions</option>
           {
             this.props.jobs.map((job)=>{
-              return <option key={job.ID}>{job.jobPosition}</option>
+              return <option value={job.ID} key={job.ID}>{job.jobPosition}</option>
             })
           }
         </select>
