@@ -1,4 +1,4 @@
-let Resource = require('../models/resource');
+let Resources = require('../models/resource');
 
 const makeDate = (daysAdjustment) => {
 	let currentTime = new Date();
@@ -21,7 +21,7 @@ const mapItem = (item) => {
 
 module.exports.all = (req, res) => {
 
-	Resource.find({}, (err, resources) => {
+	Resources.find({}, (err, resources) => {
 	  if (err) throw err;
 
 	  let myResources = [];
@@ -34,7 +34,7 @@ module.exports.all = (req, res) => {
 };
 
 module.exports.one = (req, res) => {
-	Resource.find({ id: req.body.ID }, function(err, resource) {
+	Resources.find({ id: req.body.ID }, function(err, resource) {
 	  if (err) throw err;
 
 	  console.log(resource);
@@ -43,7 +43,7 @@ module.exports.one = (req, res) => {
 };
 
 module.exports.new = (req, res) => {
-	let newResource = Resource({
+	let newResource = Resources({
 	  name: req.body.name,
 	  description: req.body.description,
 	  url: req.body.url,
@@ -63,7 +63,7 @@ module.exports.new = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-	Resource.findById(req.body._id, function(err, resource) {
+	Resources.findById(req.body._id, function(err, resource) {
 	  if (err) throw err;
 
 	  resource.name = req.body.name;
@@ -87,7 +87,7 @@ module.exports.remove = (req, res) => {
 	const id = req.params.id;
 	if (id && id !== 'undefined') {
 	  console.log('Resource  deleted: ' + id );
-		Resource.findById(id, function(err, resource) {
+		Resources.findById(id, function(err, resource) {
 		  if (err) throw err;
 
 		 	resource.remove(function(err) {
