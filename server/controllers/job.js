@@ -26,16 +26,19 @@ module.exports.all = (req, res) => {
 	if (req.user)
 		username = req.user.username;
 
-	Jobs.find({addedBy : username }, function(err, jobs) {
-	  if (err) throw err;
+	Jobs.find({addedBy : username })
+	  .populate('Resource')
+	  .exec(function(err, jobs) {
+		  if (err) throw err;
 
-	  let myJobs = [];
-	  jobs.forEach( item => {
-	  	myJobs.push(mapItem(item));
-	  });
-	  
-		res.status(200).send(myJobs);
-	});
+		  let myJobs = [];
+		  jobs.forEach( item => {
+		  	myJobs.push(mapItem(item));
+		  });
+		  
+			res.status(200).send(myJobs);
+		});
+
 };
 
 module.exports.one = (req, res) => {
@@ -43,7 +46,18 @@ module.exports.one = (req, res) => {
 
 
 module.exports.newResource = (req, res) => {
-  console.log("newResource", req.body.jobID, req.body.resourceID );
+ 
+  Jobs.findById(req.body.jobID, function(err, job) {
+	  if (err) throw err;
+
+	  job.resources.push(req.body.resourceID);
+	  job.save(function(err) {
+	    if (err) throw err;
+
+	    console.log('Job-Resource successfully updated!');
+	  	res.status(200).send(job);
+	  });
+	});
 };
 
 module.exports.new = (req, res) => {
