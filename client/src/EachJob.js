@@ -19,13 +19,20 @@ class EachJob extends Component {
   }
   render() {
     let row = this.props.row;
+    if (row.resources.length >= 0) {
+      console.log("has resources");
+    }
 
     return (
       <tr>
         <td>{row.jobPosition}</td>
         <td>{row.companyName}</td>
         <td>{utils.formattedDate(row.dateApplied)}</td>
-        <td><a onClick={this.handleClick}>View Resources</a></td>
+        {row.resources.length > 0?
+          <td><a onClick={this.handleClick}>View Resources</a></td>
+          :
+          <td></td>
+        }
         <td>{row.comments}</td>
         <td>
           <i onClick={this.delete} className="fa fa-trash-o" aria-hidden="true"></i>
