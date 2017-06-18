@@ -42,7 +42,6 @@ module.exports.one = (req, res) => {
 };
 
 module.exports.newResource = (req, res) => {
- 
  	Jobs.findById(req.body.jobID)
 	  .populate('Resource')
 	  .exec(function(err, job) {
@@ -71,7 +70,7 @@ module.exports.new = (req, res) => {
 	newJob.save(function(err, job) {
 	  if (err) throw err;
 	  console.log('Job created!');
-	  res.status(200).send(job);
+	  res.status(200).send(mapItem(job));
 	});
 };
 

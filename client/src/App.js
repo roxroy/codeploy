@@ -112,9 +112,13 @@ class App extends Component {
         return response.json();
       })
       .then(json => {
+        console.log("SaveJobOnServer",json);
         job.ID = json.ID;
+        let updatejobs = this.state.jobs;
+        updatejobs.push(job);
         this.setState({
-          fetching: false
+          fetching: false,
+          jobs: updatejobs,
         });
       }).catch(e => {
         console.log("SaveJobOnServer error", e);
@@ -272,16 +276,13 @@ class App extends Component {
 
   saveJob(job) {
     console.log("inside saveJob");
-    let updatejobs = this.state.jobs;
     let newJob = job;
     newJob.addedBy = this.state.username;
     newJob.dateApplied = Date.parse(job.dateApplied);
     newJob.resources = [];
 
     this.SaveJobOnServer(newJob);
-    updatejobs.push(newJob);
-    this.setState({ jobs: updatejobs });
-  }
+ }
 
   deleteJob(row) {
     //console.log("inside delete job");
