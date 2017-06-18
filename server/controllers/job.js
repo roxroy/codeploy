@@ -6,9 +6,6 @@ const makeDate = (daysAdjustment) => {
 	return currentTime;
 }
 
-const myResources = [
-];
-
 const mapItem = (item) => {
 	return {
 	  		ID : item._id,
@@ -16,7 +13,7 @@ const mapItem = (item) => {
 	  		companyName: item.companyName,
 	  		dateApplied:  item.dateApplied,
 	  		addedBy:  item.addedBy,
-	  		resources: myResources,
+	  		resources: item.resources,
 	  		comments: item.comments,
 	}
 }
@@ -46,21 +43,19 @@ module.exports.one = (req, res) => {
 
 module.exports.newResource = (req, res) => {
  
-  Jobs.findById(req.body.jobID, function(err, job) {
-	  if (err) throw err;
+ 	Jobs.findById(req.body.jobID)
+	  .populate('Resource')
+	  .exec(function(err, job) {
+		  if (err) throw err;
 
-	  if (!job.resources) {
-  	 job.resources = [];
-  	}
+		  job.resources.push(req.body.resourceID);
+		  job.save(function(err) {
+		    if (err) throw err;
 
-	  job.resources.push(req.body.resourceID);
-	  job.save(function(err) {
-	    if (err) throw err;
-
-	    console.log('Job-Resource successfully updated!');
-	  	res.status(200).send(job);
-	  });
-	});
+		    console.log('Job-Resource successfully updated!');
+		  	res.status(200).send(job);
+		  });
+		});
 };
 
 module.exports.new = (req, res) => {
