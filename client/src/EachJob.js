@@ -19,10 +19,6 @@ class EachJob extends Component {
   }
   render() {
     let row = this.props.row;
-    if (row.resources.length >= 0) {
-      console.log("has resources");
-    }
-
     return (
       <tr>
         <td>{row.jobPosition}</td>
@@ -31,7 +27,7 @@ class EachJob extends Component {
         {row.resources.length > 0?
           <td><a onClick={this.handleClick}>View Resources</a></td>
           :
-          <td></td>
+          <td className="small">No resources added yet.</td>
         }
         <td>{row.comments}</td>
         <td>

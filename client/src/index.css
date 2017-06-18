@@ -38,6 +38,12 @@ a {
 .auth-buttons {
   padding-top: 25px;
   padding-bottom: 25px;
+  text-align: center;
+}
+
+.github {
+  font-size: 20px;
+  font-family: 'Exo 2', sans-serif;
 }
 
 button {
@@ -352,7 +358,7 @@ button.save-resource:active {
   justify-content: center;
   flex-direction: column;
   padding: 20px;
-  height: 550px;
+  height: 480px;
 }
 .add-job-container textarea {
   min-height: 35px;
@@ -386,4 +392,8 @@ border-radius: 10px;
 }
 .job-list-dropdown button {
   margin-left: 10px;
+}
+
+.small {
+  font-size: 9px;
 }

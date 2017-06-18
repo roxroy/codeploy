@@ -30,21 +30,28 @@ class AddJobButton extends Component {
       "dateApplied": this.refs.newJobDate.value,
       "comments": this.refs.newJobComments.value,
     }
+    console.log(job.dateApplied);
 
     this.setState({ errorVisible: "inline" });
     if (// test for at least 1 letter
       !/[A-Za-z]/.test(job.jobPosition)) {
-      this.setState({ errorText: "Invalid entry for Positon" })
+      this.setState({ errorText: "Invalid entry for Positon" });
       return;
     }
     if (// test for at least 1 letter
       !/[A-Za-z]/.test(job.companyName)) {
-      this.setState({ errorText: "Invalid entry for Company" })
+      this.setState({ errorText: "Invalid entry for Company" });
       return;
     }
-    if (// test for three sets of two digits 01-12/01-31/1900-2000
-      !/^(?:(0[1-9]|1[012])[\/.](0[1-9]|[12][0-9]|3[01])[\/.](19|20)[0-9]{2})$/.test(job.dateApplied)) {
-      this.setState({ errorText: "Invalid format for Date Applied." })
+    let today = new Date();
+    if /*(// test for three sets of two digits 01-12/01-31/1900-2000
+      !/^(?:(0[1-9]|1[012])[\/.](0[1-9]|[12][0-9]|3[01])[\/.](19|20)[0-9]{2})$/.test(job.dateApplied)) {*/
+        (job.dateApplied == "" || job.dateApplied > today) {
+      this.setState({ errorText: "Invalid format for Date Applied." });
+      return;
+    }
+    if (job.comments.length > 60) {
+      this.setState({ errorText: "Please limit comment characters to 60."});
       return;
     }
 
@@ -100,7 +107,7 @@ class AddJobButton extends Component {
             <h4>Company*</h4>
             <textarea ref="newJobCompany" placeholder="Company Name"></textarea>
             <h4>Date Applied*</h4>
-            <textarea ref="newJobDate" placeholder="MM/DD/YYYY"></textarea>
+            <input type="date" ref="newJobDate" placeholder="MM/DD/YYYY" required></input>
             <h4>Comments</h4>
             <textarea className="additional-details" ref="newJobComments" placeholder="What is the status of your application?"></textarea>
             <p className="error" style={{ display: this.state.errorVisible }}>
