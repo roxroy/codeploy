@@ -4,7 +4,7 @@ let Schema = mongoose.Schema;
 let jobSchema = new Schema({
   jobPosition: String,
   companyName: String,
-  resources: String,
+  resources: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Resource' }],
   dateApplied: Date,
   comments: String,
   addedBy: String,
