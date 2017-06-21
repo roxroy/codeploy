@@ -7,9 +7,10 @@
   },
   "scripts": {
     "start": "nodemon --use-strict server/index.js",
-    "bundle": "webpack",
-    "heroku-postbuild": "cd client/ && npm install --only=dev && npm install && npm run build",
-    "all": "concurrently -k \"mongod --dbpath=data\" \"npm run bundle\" \"npm run start\" "
+    "bundle": "webpack --watch",
+    "heroku-build": "webpack",
+    "heroku-postbuild": "cd client/ && npm install && cd .. && npm install && npm run heroku-build",
+    "start-all": "concurrently -k \"mongod --dbpath=data\" \"npm run bundle\" \"npm run start\" "
   },
   "cacheDirectories": [
     "node_modules",
@@ -18,7 +19,11 @@
   "dependencies": {
     "babel-cli": "6.14.0",
     "babel-core": "6.14.0",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "body-parser": "^1.17.2",
+    "css-loader": "^0.28.3",
     "dotenv": "^4.0.0",
     "express": "^4.14.1",
     "express-session": "^1.15.3",
@@ -26,7 +31,9 @@
     "passport": "^0.3.2",
     "passport-github2": "^0.1.10",
     "passport-session": "^1.0.2",
-    "passport-slack": "0.0.7"
+    "passport-slack": "0.0.7",
+    "style-loader": "^0.18.1",
+    "webpack": "^2.6.1"
   },
   "repository": {
     "type": "git",
@@ -40,16 +47,9 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.14.0",
-    "babel-loader": "^7.0.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
     "concurrently": "^3.4.0",
-    "css-loader": "^0.28.3",
     "extract-text-webpack-plugin": "^2.1.0",
     "nodemon": "^1.11.0",
-    "style-loader": "^0.18.1",
-    "webpack": "^2.6.1",
     "webpack-combine-loaders": "^2.0.3"
   }
 }
