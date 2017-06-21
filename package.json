@@ -6,11 +6,12 @@
     "node": "6.9.x"
   },
   "scripts": {
-    "start": "nodemon --use-strict server/index.js",
+    "start": "node server/index.js",
+    "start-all": "concurrently -k \"mongod --dbpath=data\" \"npm run bundle\" \"npm run start\" ",
+    "start-server": "nodemon --use-strict server/index.js",
     "bundle": "webpack --watch",
     "heroku-build": "webpack",
-    "heroku-postbuild": "cd client/ && npm install && cd .. && npm install && npm run heroku-build",
-    "start-all": "concurrently -k \"mongod --dbpath=data\" \"npm run bundle\" \"npm run start\" "
+    "heroku-postbuild": "cd client/ && npm install && cd .. && npm install && npm run heroku-build"
   },
   "cacheDirectories": [
     "node_modules",
