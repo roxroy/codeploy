@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2|Roboto');
-
+html, body, #root, .App {
+  height: 100%;
+}
 body {
   margin: 0;
   padding: 0;
@@ -396,4 +398,29 @@ border-radius: 10px;
 
 .small {
   font-size: 9px;
+}
+.about-container {
+  margin: 0 20%;
+  height: 100%;
+}
+.about-container p {
+  font-size: 16px;
+}
+.contributors-container {
+  display: flex;
+  margin: 20px 0px;
+  justify-content: center;
+}
+.contributor img {
+  display: flex;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin: 0px 20px;
+}
+footer{
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
 }
