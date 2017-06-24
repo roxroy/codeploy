@@ -5,6 +5,7 @@ const MyJobsButton = require('./MyJobsButton');
 const AddResourceButton = require('./AddResourceButton');
 const LogOutButton = require('./LogOutButton');
 const HandleAuth = require('./HandleAuth');
+const AboutButton = require('./AboutButton');
 
 const menuModal = {
   overlay : {
@@ -97,7 +98,7 @@ class Menu extends Component {
             <ResourcesButton viewResources={this.props.viewResources} closeResourceModal={this.closeResourceModal}/>
             <MyJobsButton viewJobs={this.props.viewJobs} closeResourceModal={this.closeResourceModal}/>
             <AddResourceButton saveResource={this.props.saveResource} closeResourceModal={this.closeResourceModal} username={this.props.username}/>
-            <AboutButton />
+            <AboutButton viewAbout={this.props.viewAbout} />
             <LogOutButton loggedIn={isLoggedIn} logOut={this.props.logOut} closeResourceModal={this.closeResourceModal}/>
           </div>
         </Modal>

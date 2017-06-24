@@ -42,6 +42,7 @@ class App extends Component {
     this.deleteJobOnServer = this.deleteJobOnServer.bind(this);
     this.getJobResources = this.getJobResources.bind(this);
     this.findResourceFromList = this.findResourceFromList.bind(this);
+    this.viewAbout = this.viewAbout.bind(this);
   }
 
   getJobs() {
@@ -352,25 +353,28 @@ class App extends Component {
     let jobs = this.state.jobs;
     let resourceChecked;
 
-    jobs.map((job)=>{
+    jobs.map((job) => {
       let jobResourcesArray = [];
-      job.resources.map((resourceID)=>{
+      job.resources.map((resourceID) => {
         console.log(job, resourceID);
         resourceChecked = this.findResourceFromList(resourceID);
         if (resourceChecked) {
           jobResourcesArray.push(resourceChecked);
-        } 
+        }
       });
       job.resources = jobResourcesArray;
     });
-    this.setState({jobs: jobs});
+    this.setState({ jobs: jobs });
   }
-  findResourceFromList(id){
+  findResourceFromList(id) {
     const resourcesList = this.state.resources;
-    const resource = resourcesList.find((val)=>{
+    const resource = resourcesList.find((val) => {
       return val.ID == id;
     });
     return resource;
+  }
+  viewAbout() {
+    this.setState({ viewing: "About" });
   }
   render() {
     const isViewing = this.state.viewing;
@@ -385,6 +389,7 @@ class App extends Component {
           logOut={this.logOut}
           saveResource={this.saveResource}
           username={this.state.username}
+          viewAbout={this.viewAbout}
         />
         {isViewing == "Jobs" && (
           <div>
@@ -395,34 +400,34 @@ class App extends Component {
             </p>
             <MyJobs jobs={this.state.jobs} getJobs={this.getJobs} saveJob={this.saveJob} deleteJob={this.deleteJob} />
           </div>
-        ) }
+        )}
         {isViewing == "Resources" && (
-            <div>
-              <p className="App-intro">
-                {this.state.loggedIn === false
-                  ? ''
-                  : "Hello, " + this.state.username + "!"}
-              </p>
-              <SortButton
-                sortResources={this.sortResources}
-                viewResources={this.viewResources}
-                showAllButton={this.state.resetSearch}
-                resources={this.state.resources}
-              />
-              <Resources
-                addResourceToJob={this.addResourceToJob}
-                resources={this.state.resources}
-                sortByDate={this.state.sortByDate}
-                handleSort={this.handleSort}
-                currentSort={this.state.currentSort}
-                loggedIn={this.state.loggedIn}
-                username={this.state.username}
-                deleteResource={this.deleteResource}
-                jobs={this.state.jobs}
-                saveResourceJob={this.state.saveResourceJob}
-              />
-            </div>
-          )
+          <div>
+            <p className="App-intro">
+              {this.state.loggedIn === false
+                ? ''
+                : "Hello, " + this.state.username + "!"}
+            </p>
+            <SortButton
+              sortResources={this.sortResources}
+              viewResources={this.viewResources}
+              showAllButton={this.state.resetSearch}
+              resources={this.state.resources}
+            />
+            <Resources
+              addResourceToJob={this.addResourceToJob}
+              resources={this.state.resources}
+              sortByDate={this.state.sortByDate}
+              handleSort={this.handleSort}
+              currentSort={this.state.currentSort}
+              loggedIn={this.state.loggedIn}
+              username={this.state.username}
+              deleteResource={this.deleteResource}
+              jobs={this.state.jobs}
+              saveResourceJob={this.state.saveResourceJob}
+            />
+          </div>
+        )
         }
         {isViewing == "About" && (
           <About />

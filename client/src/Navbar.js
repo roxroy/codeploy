@@ -24,6 +24,7 @@ class Navbar extends Component {
             logOut={this.props.logOut}
             saveResource={this.props.saveResource}
             username={this.props.username}
+            viewAbout={this.props.viewAbout}
           />
         </div>
       </div>
