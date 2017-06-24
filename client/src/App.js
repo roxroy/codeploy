@@ -4,6 +4,7 @@ const Navbar = require('./Navbar');
 const SortButton = require('./SortButton');
 const Resources = require('./Resources');
 const MyJobs = require('./MyJobs');
+const About = require("./About");
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends Component {
 
     this.state = {
       fetching: true,
-      viewingJobs: false,
+      viewing: "Resources",
       resources: [],
       loggedIn: false,
       username: null,
@@ -198,14 +199,14 @@ class App extends Component {
 
   viewJobs() {
     this.setState({
-      viewingJobs: true
+      viewing: "Jobs"
     });
   }
 
   viewResources() {
     this.getResources();
     this.setState({
-      viewingJobs: false,
+      viewing: "Resources",
       resetSearch: false,
       resources: this.state.resources
     });
@@ -216,7 +217,7 @@ class App extends Component {
       .then(json => {
         this.setState({
           loggedIn: false,
-          viewingJobs: false
+          viewing: "Resources"
         });
       })
   }
@@ -259,7 +260,7 @@ class App extends Component {
       if (re.test(cObj.name) || re.test(cObj.addedBy) || re.test(cObj.description)) searchedArray.push(cObj);
     }
     this.setState({
-      viewingJobs: false,
+      viewing: "Resources",
       resetSearch: true,
       resources: searchedArray
     });
@@ -274,7 +275,7 @@ class App extends Component {
     this.saveResourceOnServer(newResource);
     updateresources.push(newResource);
 
-    this.setState({ resources: updateresources, viewingJobs: false })
+    this.setState({ resources: updateresources, viewing: "Resources" })
   }
 
   saveJob(job) {
@@ -372,7 +373,7 @@ class App extends Component {
     return resource;
   }
   render() {
-    const isViewingJobs = this.state.viewingJobs;
+    const isViewing = this.state.viewing;
 
     return (
       <div className="App">
@@ -385,7 +386,7 @@ class App extends Component {
           saveResource={this.saveResource}
           username={this.state.username}
         />
-        {isViewingJobs ? (
+        {isViewing == "Jobs" && (
           <div>
             <p className="App-intro">
               {this.state.loggedIn === false
@@ -394,7 +395,8 @@ class App extends Component {
             </p>
             <MyJobs jobs={this.state.jobs} getJobs={this.getJobs} saveJob={this.saveJob} deleteJob={this.deleteJob} />
           </div>
-        ) : (
+        ) }
+        {isViewing == "Resources" && (
             <div>
               <p className="App-intro">
                 {this.state.loggedIn === false
@@ -422,6 +424,9 @@ class App extends Component {
             </div>
           )
         }
+        {isViewing == "About" && (
+          <About />
+        )}
       </div>
     );
   }
