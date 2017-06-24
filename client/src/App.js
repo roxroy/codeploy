@@ -39,6 +39,8 @@ class App extends Component {
     this.addResourceToJob = this.addResourceToJob.bind(this);
     this.deleteJob = this.deleteJob.bind(this);
     this.deleteJobOnServer = this.deleteJobOnServer.bind(this);
+    this.getJobResources = this.getJobResources.bind(this);
+    this.findResourceFromList = this.findResourceFromList.bind(this);
   }
 
   getJobs() {
@@ -53,6 +55,7 @@ class App extends Component {
         this.setState({
           jobs: json,
         });
+        this.getJobResources();
       }).catch(e => {
       })
   }
@@ -112,7 +115,7 @@ class App extends Component {
         return response.json();
       })
       .then(json => {
-        console.log("SaveJobOnServer",json);
+        console.log("SaveJobOnServer", json);
         job.ID = json.ID;
         let updatejobs = this.state.jobs;
         updatejobs.push(job);
@@ -282,7 +285,7 @@ class App extends Component {
     newJob.resources = [];
 
     this.SaveJobOnServer(newJob);
- }
+  }
 
   deleteJob(row) {
     //console.log("inside delete job");
@@ -344,7 +347,30 @@ class App extends Component {
       });
     }
   }
+  getJobResources() {
+    let jobs = this.state.jobs;
+    let resourceChecked;
 
+    jobs.map((job)=>{
+      let jobResourcesArray = [];
+      job.resources.map((resourceID)=>{
+        console.log(job, resourceID);
+        resourceChecked = this.findResourceFromList(resourceID);
+        if (resourceChecked) {
+          jobResourcesArray.push(resourceChecked);
+        } 
+      });
+      job.resources = jobResourcesArray;
+    });
+    this.setState({jobs: jobs});
+  }
+  findResourceFromList(id){
+    const resourcesList = this.state.resources;
+    const resource = resourcesList.find((val)=>{
+      return val.ID == id;
+    });
+    return resource;
+  }
   render() {
     const isViewingJobs = this.state.viewingJobs;
 

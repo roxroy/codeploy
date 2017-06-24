@@ -2,7 +2,7 @@ import React from 'react';
 const ResourceRow = require('./ResourceRow');
 
 function ResourceTable(props) {
-
+  
   return (
     <div className="resource-table">
       <table>
