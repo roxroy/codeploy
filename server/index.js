@@ -19,7 +19,11 @@ const PORT = process.env.PORT || 3000;
 // Connect mongoose to our local database
 let dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/codeploy';
 mongoose.Promise = Promise;
-mongoose.connect(dbUri);
+var options = {
+  useMongoClient: true,
+};
+
+mongoose.connect(dbUri, options);
 
 app.use(express.static('./client/public'));
 app.use(bodyParser.json()); // support json encoded bodies

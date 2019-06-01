@@ -1,7 +1,7 @@
 /data/
 
-client/public/app.js
-client/public/app.css
+client/public/*.js
+client/public/*.css
 
 # Node build artifacts
 node_modules
