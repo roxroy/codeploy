@@ -1,7 +1,8 @@
 const path = require('path');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: './client/src/index.js',
   output: {
     path: path.resolve('client/public'),
@@ -10,8 +11,16 @@ module.exports = {
   resolve: {
      extensions: ['.jsx', '.js', '.css'],
 	},
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/, 
         loader: 'babel-loader', 
@@ -19,12 +28,18 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("css-loader")
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it uses publicPath in webpackOptions.output
+              publicPath: '../',
+            },
+          },
+          'css-loader',
+        ],
       }
     ]
   },
-  // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
-  plugins: [
-        new ExtractTextPlugin("app.css")
-  ]
 }
