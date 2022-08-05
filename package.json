@@ -29,7 +29,7 @@
     "express": "^4.17.1",
     "express-session": "^1.16.1",
     "mini-css-extract-plugin": "^0.7.0",
-    "mongoose": "^4.13.18",
+    "mongoose": "^5.7.5",
     "passport": "^0.3.2",
     "passport-github2": "^0.1.11",
     "passport-session": "^1.0.2",
